@@ -1,8 +1,22 @@
-# AI Education Agent for Government Schools
+# 🤖 AI Education Agent for Government Schools
 
 ## 🎯 Project Overview
 
 An intelligent tutoring system designed specifically for government schools that personalizes learning based on students' academic history, generates adaptive worksheets, and provides real-time doubt clearing.
+
+## 🌐 **LIVE DEMO - NOW ONLINE!**
+
+The AI Education Agent is fully functional and online! Experience the complete platform:
+
+- **🚀 Frontend Demo**: [http://localhost:3000/demo.html](http://localhost:3000/demo.html)
+- **🔧 Backend API**: [http://localhost:8000/](http://localhost:8000/)
+- **✅ Status**: AI Online and Connected
+- **🎯 Features**: All AI features working with real-time responses
+
+### **Quick Start - Try It Now:**
+1. Start the servers (see Quick Start section below)
+2. Open [http://localhost:3000/demo.html](http://localhost:3000/demo.html)
+3. Explore the student dashboard, AI doubt clearing, and worksheet generation!
 
 ## 🚀 Key Features
 
@@ -74,33 +88,47 @@ ai-education-agent/
 └── tests/                   # Test suites
 ```
 
-## 🚀 Quick Start
+## 🚀 Quick Start - Get Online in Minutes!
 
-1. **Clone and Setup**
+### **Prerequisites**
+- Node.js (v18 or higher)
+- npm package manager
+
+### **Installation & Launch**
+
+1. **Clone the Repository**
    ```bash
-   git clone <repository-url>
-   cd ai-education-agent
+   git clone https://github.com/giri679/Agent-minds.git
+   cd Agent-minds
    ```
 
-2. **Backend Setup**
-   ```bash
-   cd backend
-   pip install -r requirements.txt
-   uvicorn main:app --reload
-   ```
-
-3. **Frontend Setup**
+2. **Start Frontend Server**
    ```bash
    cd frontend
-   npm install
-   npm run dev
+   node server.js
    ```
+   ✅ Frontend will be available at: `http://localhost:3000`
 
-4. **Database Setup**
+3. **Start Backend API** (in a new terminal)
    ```bash
-   docker-compose up -d postgres redis
-   alembic upgrade head
+   cd backend
+   node simple_server.js
    ```
+   ✅ Backend API will be available at: `http://localhost:8000`
+
+4. **Access the Live Demo**
+   ```bash
+   # Open in your browser:
+   http://localhost:3000/demo.html
+   ```
+   🎉 **The AI Education Agent is now ONLINE and ready to use!**
+
+### **What You'll See:**
+- ✅ **AI Online Status**: Green indicator showing system is connected
+- 🎯 **Student Dashboard**: Complete with performance analytics
+- 💬 **AI Doubt Clearing**: Real-time intelligent responses
+- 📝 **Worksheet Generation**: AI-powered content creation
+- 📊 **Progress Tracking**: Visual performance metrics
 
 ## 📊 Core Algorithms
 
