@@ -1,0 +1,23 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/demo.html",
+      "destination": "/demo.html"
+    }
+  ],
+  "functions": {
+    "api/health.js": {
+      "maxDuration": 10
+    },
+    "api/doubts/ai-ask.js": {
+      "maxDuration": 30
+    },
+    "api/worksheets/ai-generate.js": {
+      "maxDuration": 30
+    }
+  }
+}
