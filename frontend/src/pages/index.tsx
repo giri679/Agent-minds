@@ -15,7 +15,7 @@ export default function Home() {
 
   const checkApiConnection = async () => {
     try {
-      const response = await fetch('http://localhost:8000/');
+      const response = await fetch('/api/health');
       const data = await response.json();
       setSystemInfo(data);
       setApiStatus('connected');
