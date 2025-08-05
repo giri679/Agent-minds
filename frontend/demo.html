@@ -1,0 +1,2469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 AI Education Agent - Government Schools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .feature-interface {
+            transition: all 0.3s ease-in-out;
+        }
+        .feature-interface.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="text-3xl">🤖</div>
+                    <div>
+                        <h1 class="text-2xl font-bold">AI Education Agent</h1>
+                        <p class="text-blue-100 text-sm">Government Schools - Personalized Learning</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div id="api-status" class="px-3 py-1 rounded-full text-sm font-medium bg-green-500 text-white">
+                        ✅ AI Connected
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- System Info Banner -->
+    <div class="bg-blue-500 text-white text-center py-2">
+        <p class="text-sm">
+            🎓 AI Education Agent - Full AI-Powered Version | Version 2.0.0 |
+            OpenAI Status: ✅ Connected
+        </p>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="bg-white shadow">
+        <div class="max-w-7xl mx-auto">
+            <nav class="flex space-x-8" aria-label="Tabs">
+                <button onclick="showTab(0)" id="tab-0" class="py-4 px-1 border-b-2 font-medium text-sm border-blue-500 text-blue-600">
+                    <div class="flex items-center space-x-2">
+                        <span>📚</span>
+                        <span>Student Dashboard</span>
+                    </div>
+                </button>
+                <button onclick="showTab(1)" id="tab-1" class="py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                    <div class="flex items-center space-x-2">
+                        <span>👨‍🏫</span>
+                        <span>Teacher Dashboard</span>
+                    </div>
+                </button>
+                <button onclick="showTab(2)" id="tab-2" class="py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                    <div class="flex items-center space-x-2">
+                        <span>🤖</span>
+                        <span>AI Features</span>
+                    </div>
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div class="px-4 py-6 sm:px-0">
+            <!-- Student Dashboard -->
+            <div id="content-0" class="tab-content">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Student Profile Card -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg shadow-lg text-white p-6">
+                            <div class="text-center">
+                                <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <span class="text-2xl font-bold">P</span>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2">Priya Sharma</h3>
+                                <p class="text-purple-100 mb-1">Grade 8 Student</p>
+                                <p class="text-purple-100 text-sm">Learning Style: Visual</p>
+
+                                <div class="mt-4">
+                                    <p class="text-sm text-purple-100 mb-2">Overall Progress</p>
+                                    <div class="bg-white bg-opacity-20 rounded-full h-3 mb-2">
+                                        <div class="bg-white h-3 rounded-full" style="width: 76%"></div>
+                                    </div>
+                                    <p class="text-sm font-semibold">76%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Insights -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <span class="text-2xl mr-2">🤖</span>
+                                <h3 class="text-lg font-semibold">AI-Powered Insights</h3>
+                                <button onclick="refreshInsights()" class="ml-auto text-blue-500 hover:text-blue-700">
+                                    <span class="text-sm">🔄 Refresh</span>
+                                </button>
+                            </div>
+
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                                <p class="text-green-800 text-sm">
+                                    Great progress, Priya! You're doing well in Mathematics and Science. Keep working on English Grammar and you'll see amazing improvement!
+                                </p>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <h4 class="text-sm font-medium text-blue-600 mb-2">🎯 Strengths</h4>
+                                    <div class="space-x-2">
+                                        <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">⭐ Mathematics</span>
+                                        <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">⭐ Science</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-medium text-orange-600 mb-2">📚 Focus Areas</h4>
+                                    <div class="space-x-2">
+                                        <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full">📝 English Grammar</span>
+                                        <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full">📝 History</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subject Performance -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <h3 class="text-lg font-semibold mb-4">📊 Subject Performance</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Mathematics</span>
+                                        <span class="font-semibold">85%</span>
+                                    </div>
+                                    <div class="bg-gray-200 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Science</span>
+                                        <span class="font-semibold">78%</span>
+                                    </div>
+                                    <div class="bg-gray-200 rounded-full h-2">
+                                        <div class="bg-yellow-500 h-2 rounded-full" style="width: 78%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>English</span>
+                                        <span class="font-semibold">65%</span>
+                                    </div>
+                                    <div class="bg-gray-200 rounded-full h-2">
+                                        <div class="bg-red-500 h-2 rounded-full" style="width: 65%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="lg:col-span-3">
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <h3 class="text-lg font-semibold mb-4">🚀 Quick Actions</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <button onclick="startLearning()" class="bg-blue-500 hover:bg-blue-600 text-white py-4 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md">
+                                    <div class="text-center">
+                                        <div class="w-8 h-8 mx-auto mb-2 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                            <span class="text-white font-bold text-lg">▶</span>
+                                        </div>
+                                        <div class="text-sm font-medium">Start Learning</div>
+                                    </div>
+                                </button>
+                                <button onclick="generateWorksheet()" class="bg-green-500 hover:bg-green-600 text-white py-4 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md">
+                                    <div class="text-center">
+                                        <div class="w-8 h-8 mx-auto mb-2 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                            <span class="text-white font-bold text-sm">📝</span>
+                                        </div>
+                                        <div class="text-sm font-medium">Generate Worksheet</div>
+                                    </div>
+                                </button>
+                                <button onclick="askAI()" class="bg-purple-500 hover:bg-purple-600 text-white py-4 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md">
+                                    <div class="text-center">
+                                        <div class="w-8 h-8 mx-auto mb-2 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                            <span class="text-white font-bold text-xs">🤖</span>
+                                        </div>
+                                        <div class="text-sm font-medium">Ask AI Tutor</div>
+                                    </div>
+                                </button>
+                                <button onclick="viewProgress()" class="bg-orange-500 hover:bg-orange-600 text-white py-4 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md">
+                                    <div class="text-center">
+                                        <div class="w-8 h-8 mx-auto mb-2 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                            <span class="text-white font-bold text-sm">📊</span>
+                                        </div>
+                                        <div class="text-sm font-medium">View Progress</div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teacher Dashboard -->
+            <div id="content-1" class="tab-content hidden">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer" onclick="showStatDetails('students')">
+                        <div class="text-3xl text-blue-500 mb-2">👥</div>
+                        <div class="text-2xl font-bold text-blue-600">25</div>
+                        <div class="text-sm text-gray-600">Total Students</div>
+                        <div class="text-xs text-green-500 mt-1">+2 this week</div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer" onclick="showStatDetails('performance')">
+                        <div class="text-3xl text-green-500 mb-2">📈</div>
+                        <div class="text-2xl font-bold text-green-600">72.5%</div>
+                        <div class="text-sm text-gray-600">Avg Performance</div>
+                        <div class="text-xs text-green-500 mt-1">+3.2% this month</div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer" onclick="showStatDetails('sessions')">
+                        <div class="text-3xl text-blue-500 mb-2">🎓</div>
+                        <div class="text-2xl font-bold text-blue-600">8</div>
+                        <div class="text-sm text-gray-600">Active Sessions</div>
+                        <div class="text-xs text-blue-500 mt-1">Live now</div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer" onclick="showStatDetails('worksheets')">
+                        <div class="text-3xl text-purple-500 mb-2">📝</div>
+                        <div class="text-2xl font-bold text-purple-600">45</div>
+                        <div class="text-sm text-gray-600">Worksheets Done</div>
+                        <div class="text-xs text-orange-500 mt-1">12 today</div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer" onclick="showStatDetails('doubts')">
+                        <div class="text-3xl text-orange-500 mb-2">🤖</div>
+                        <div class="text-2xl font-bold text-orange-600">12</div>
+                        <div class="text-sm text-gray-600">Pending Doubts</div>
+                        <div class="text-xs text-red-500 mt-1">3 urgent</div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-lg font-semibold">👥 Class 8 - Student Overview</h3>
+                        <div class="space-x-2">
+                            <button onclick="addNewStudent()" class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600">+ Add Student</button>
+                            <button onclick="exportClassData()" class="bg-gray-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-600">📥 Export</button>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Student</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Performance</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Strengths</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Focus Areas</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50 cursor-pointer" onclick="showStudentDetails('STU001', 'Priya Sharma')">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold mr-3">P</div>
+                                            <div>
+                                                <div class="text-sm font-medium text-gray-900">Priya Sharma</div>
+                                                <div class="text-sm text-gray-500">STU001</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="text-sm font-medium text-gray-900">76%</div>
+                                        <div class="bg-gray-200 rounded-full h-2 mt-1">
+                                            <div class="bg-yellow-500 h-2 rounded-full" style="width: 76%"></div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full mr-1">Math</span>
+                                        <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Science</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full mr-1">English</span>
+                                        <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full">History</span>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Active</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Features -->
+            <div id="content-2" class="tab-content hidden">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div onclick="selectFeature('doubt')" class="bg-white rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow border-2 border-blue-500">
+                        <div class="text-center">
+                            <div class="text-4xl mb-4">🤖</div>
+                            <h3 class="text-lg font-semibold mb-2">AI Doubt Clearing</h3>
+                            <p class="text-gray-600 text-sm">Ask questions and get personalized explanations</p>
+                        </div>
+                    </div>
+                    <div onclick="selectFeature('worksheet')" class="bg-white rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow border-2 border-transparent">
+                        <div class="text-center">
+                            <div class="text-4xl mb-4">📝</div>
+                            <h3 class="text-lg font-semibold mb-2">Smart Worksheets</h3>
+                            <p class="text-gray-600 text-sm">Generate personalized practice materials</p>
+                        </div>
+                    </div>
+                    <div onclick="selectFeature('session')" class="bg-white rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow border-2 border-transparent">
+                        <div class="text-center">
+                            <div class="text-4xl mb-4">🎓</div>
+                            <h3 class="text-lg font-semibold mb-2">Learning Sessions</h3>
+                            <p class="text-gray-600 text-sm">Start AI-powered personalized lessons</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unique AI Features Row -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div onclick="selectFeature('voice')" class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg shadow-lg p-4 cursor-pointer hover:shadow-xl transition-all transform hover:scale-105 text-white">
+                        <div class="text-center">
+                            <div class="text-3xl mb-2">🎤</div>
+                            <h4 class="text-sm font-semibold mb-1">Voice Learning</h4>
+                            <p class="text-xs opacity-90">Talk to AI tutor</p>
+                        </div>
+                    </div>
+                    <div onclick="selectFeature('emotion')" class="bg-gradient-to-br from-green-500 to-teal-500 rounded-lg shadow-lg p-4 cursor-pointer hover:shadow-xl transition-all transform hover:scale-105 text-white">
+                        <div class="text-center">
+                            <div class="text-3xl mb-2">😊</div>
+                            <h4 class="text-sm font-semibold mb-1">Emotion AI</h4>
+                            <p class="text-xs opacity-90">Mood-based learning</p>
+                        </div>
+                    </div>
+                    <div onclick="selectFeature('gamify')" class="bg-gradient-to-br from-orange-500 to-red-500 rounded-lg shadow-lg p-4 cursor-pointer hover:shadow-xl transition-all transform hover:scale-105 text-white">
+                        <div class="text-center">
+                            <div class="text-3xl mb-2">🎮</div>
+                            <h4 class="text-sm font-semibold mb-1">AI Games</h4>
+                            <p class="text-xs opacity-90">Learn through play</p>
+                        </div>
+                    </div>
+                    <div onclick="selectFeature('predict')" class="bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg shadow-lg p-4 cursor-pointer hover:shadow-xl transition-all transform hover:scale-105 text-white">
+                        <div class="text-center">
+                            <div class="text-3xl mb-2">🔮</div>
+                            <h4 class="text-sm font-semibold mb-1">Future Predictor</h4>
+                            <p class="text-xs opacity-90">Career guidance AI</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Features Interface -->
+                <div id="ai-features-interface" class="bg-white rounded-lg shadow-lg p-6">
+                    <!-- AI Doubt Clearing -->
+                    <div id="doubt-interface" class="feature-interface">
+                        <div class="flex items-center mb-6">
+                            <span class="text-2xl mr-2">🤖</span>
+                            <h3 class="text-lg font-semibold">AI Doubt Clearing</h3>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-md font-medium mb-4">Ask Your Question</h4>
+                                <div class="space-y-4">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <select class="border border-gray-300 rounded-lg px-3 py-2">
+                                            <option>Mathematics</option>
+                                            <option>Science</option>
+                                            <option>English</option>
+                                            <option>History</option>
+                                        </select>
+                                        <input type="text" placeholder="Topic (e.g., Algebra)" class="border border-gray-300 rounded-lg px-3 py-2">
+                                    </div>
+                                    <textarea placeholder="Type your question here... The AI will provide a personalized explanation!"
+                                             class="w-full border border-gray-300 rounded-lg px-3 py-2 h-24 resize-none"></textarea>
+                                    <button onclick="askAIQuestion()" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 px-4 rounded-lg transition-colors">
+                                        🤖 Ask AI Tutor
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="ai-response" class="bg-blue-50 rounded-lg p-4">
+                                <h4 class="text-md font-medium mb-3">🤖 AI Response</h4>
+                                <div class="text-gray-600 text-center py-8">
+                                    <div class="text-4xl mb-4">🤖</div>
+                                    <p>AI Tutor Ready</p>
+                                    <p class="text-sm mt-2">Ask any question and get a personalized explanation adapted to your learning level and style.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Worksheet Generator -->
+                    <div id="worksheet-interface" class="feature-interface hidden">
+                        <div class="flex items-center mb-6">
+                            <span class="text-2xl mr-2">📝</span>
+                            <h3 class="text-lg font-semibold">AI Worksheet Generator</h3>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-md font-medium mb-4">Customize Your Worksheet</h4>
+                                <div class="space-y-4">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <select id="worksheet-subject" class="border border-gray-300 rounded-lg px-3 py-2">
+                                            <option value="mathematics">Mathematics</option>
+                                            <option value="science">Science</option>
+                                            <option value="english">English</option>
+                                            <option value="history">History</option>
+                                        </select>
+                                        <select id="worksheet-difficulty" class="border border-gray-300 rounded-lg px-3 py-2">
+                                            <option value="easy">Easy (60-70%)</option>
+                                            <option value="medium" selected>Medium (70-80%)</option>
+                                            <option value="hard">Hard (80-90%)</option>
+                                        </select>
+                                    </div>
+                                    <input id="worksheet-topic" type="text" placeholder="Specific topic (e.g., Algebra, Fractions)" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <select id="worksheet-questions" class="border border-gray-300 rounded-lg px-3 py-2">
+                                            <option value="5">5 Questions</option>
+                                            <option value="10" selected>10 Questions</option>
+                                            <option value="15">15 Questions</option>
+                                            <option value="20">20 Questions</option>
+                                        </select>
+                                        <select id="worksheet-type" class="border border-gray-300 rounded-lg px-3 py-2">
+                                            <option value="mixed">Mixed Types</option>
+                                            <option value="mcq">Multiple Choice</option>
+                                            <option value="short">Short Answer</option>
+                                            <option value="long">Long Answer</option>
+                                        </select>
+                                    </div>
+                                    <button onclick="generateAIWorksheet()" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 px-4 rounded-lg transition-colors">
+                                        📝 Generate AI Worksheet
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="worksheet-preview" class="bg-green-50 rounded-lg p-4">
+                                <h4 class="text-md font-medium mb-3">📝 Worksheet Preview</h4>
+                                <div class="text-gray-600 text-center py-8">
+                                    <div class="text-4xl mb-4">📝</div>
+                                    <p>AI Worksheet Generator Ready</p>
+                                    <p class="text-sm mt-2">Select your preferences and generate a personalized worksheet adapted to your 76% performance level.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Learning Session -->
+                    <div id="session-interface" class="feature-interface hidden">
+                        <div class="flex items-center mb-6">
+                            <span class="text-2xl mr-2">🎓</span>
+                            <h3 class="text-lg font-semibold">AI Learning Session</h3>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-md font-medium mb-4">Start Your Learning Session</h4>
+                                <div class="space-y-4">
+                                    <select id="session-subject" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                                        <option value="mathematics">Mathematics (Your Strength! 85%)</option>
+                                        <option value="science">Science (Good Progress! 78%)</option>
+                                        <option value="english" selected>English (Focus Area - 65%)</option>
+                                        <option value="history">History (Focus Area)</option>
+                                    </select>
+                                    <select id="session-duration" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                                        <option value="15">15 minutes</option>
+                                        <option value="30" selected>30 minutes</option>
+                                        <option value="45">45 minutes</option>
+                                        <option value="60">1 hour</option>
+                                    </select>
+                                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                                        <p class="text-blue-800 text-sm">
+                                            <strong>AI Recommendation:</strong> Based on your visual learning style and 65% English performance, I suggest starting with Grammar Basics using visual examples.
+                                        </p>
+                                    </div>
+                                    <button onclick="startAISession()" class="w-full bg-purple-500 hover:bg-purple-600 text-white py-3 px-4 rounded-lg transition-colors">
+                                        🎓 Start AI Learning Session
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="session-preview" class="bg-purple-50 rounded-lg p-4">
+                                <h4 class="text-md font-medium mb-3">🎓 Session Preview</h4>
+                                <div class="text-gray-600 text-center py-8">
+                                    <div class="text-4xl mb-4">🎓</div>
+                                    <p>AI Learning Session Ready</p>
+                                    <p class="text-sm mt-2">Start a personalized learning session adapted to your visual learning style and current performance level.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Voice Learning Interface -->
+                    <div id="voice-interface" class="feature-interface hidden">
+                        <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg shadow-lg text-white p-6 mb-6">
+                            <h3 class="text-xl font-bold mb-4">🎤 Voice Learning Assistant</h3>
+                            <p class="text-purple-100">Speak naturally with your AI tutor. Ask questions, practice pronunciation, or have conversations in any subject!</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-white rounded-lg shadow-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 flex items-center">
+                                    <span class="text-2xl mr-2">🗣️</span>
+                                    Voice Chat
+                                </h4>
+
+                                <div class="mb-4">
+                                    <div class="bg-gray-100 rounded-lg p-4 mb-4 min-h-32">
+                                        <div id="voice-conversation" class="space-y-3">
+                                            <div class="flex items-start">
+                                                <div class="bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">AI</div>
+                                                <div class="bg-purple-50 rounded-lg p-3 flex-1">
+                                                    <p class="text-sm">Hello Priya! I'm your voice tutor. What would you like to learn today? You can ask me anything about Mathematics, Science, English, or History!</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex space-x-2">
+                                        <button id="voice-record-btn" onclick="toggleVoiceRecording()" class="flex-1 bg-purple-500 text-white py-3 px-4 rounded-lg hover:bg-purple-600 transition-colors">
+                                            <span id="voice-btn-text">🎤 Start Speaking</span>
+                                        </button>
+                                        <button onclick="clearVoiceChat()" class="bg-gray-300 text-gray-700 py-3 px-4 rounded-lg hover:bg-gray-400">🗑️</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-lg shadow-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 flex items-center">
+                                    <span class="text-2xl mr-2">🎯</span>
+                                    Voice Features
+                                </h4>
+
+                                <div class="space-y-4">
+                                    <div class="bg-blue-50 p-4 rounded-lg">
+                                        <h5 class="font-medium text-blue-800 mb-2">📚 Subject Practice</h5>
+                                        <p class="text-sm text-blue-700">Practice speaking about any subject. AI will correct pronunciation and provide feedback.</p>
+                                        <button onclick="startSubjectPractice()" class="mt-2 bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">Start Practice</button>
+                                    </div>
+
+                                    <div class="bg-green-50 p-4 rounded-lg">
+                                        <h5 class="font-medium text-green-800 mb-2">🌍 Language Learning</h5>
+                                        <p class="text-sm text-green-700">Practice English pronunciation with real-time feedback and accent training.</p>
+                                        <button onclick="startLanguagePractice()" class="mt-2 bg-green-500 text-white px-3 py-1 rounded text-sm hover:bg-green-600">Start English</button>
+                                    </div>
+
+                                    <div class="bg-orange-50 p-4 rounded-lg">
+                                        <h5 class="font-medium text-orange-800 mb-2">🎭 Story Mode</h5>
+                                        <p class="text-sm text-orange-700">Learn through interactive storytelling. AI creates stories based on your curriculum.</p>
+                                        <button onclick="startStoryMode()" class="mt-2 bg-orange-500 text-white px-3 py-1 rounded text-sm hover:bg-orange-600">Tell Story</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Emotion AI Interface -->
+                    <div id="emotion-interface" class="feature-interface hidden">
+                        <div class="bg-gradient-to-br from-green-500 to-teal-500 rounded-lg shadow-lg text-white p-6 mb-6">
+                            <h3 class="text-xl font-bold mb-4">😊 Emotion-Aware Learning</h3>
+                            <p class="text-green-100">AI that understands your mood and adapts learning accordingly. Better mood = better learning!</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-white rounded-lg shadow-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 flex items-center">
+                                    <span class="text-2xl mr-2">🎭</span>
+                                    Mood Detector
+                                </h4>
+
+                                <div class="text-center mb-4">
+                                    <div class="w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-4xl mx-auto mb-3">
+                                        <span id="current-mood">😊</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-2">Current Mood</p>
+                                    <p id="mood-status" class="font-medium text-green-600">Happy & Ready to Learn!</p>
+                                </div>
+
+                                <button onclick="detectMood()" class="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 mb-2">🔍 Detect My Mood</button>
+                                <button onclick="moodBooster()" class="w-full bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600">⚡ Mood Booster</button>
+                            </div>
+
+                            <div class="bg-white rounded-lg shadow-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 flex items-center">
+                                    <span class="text-2xl mr-2">🎨</span>
+                                    Adaptive Content
+                                </h4>
+
+                                <div class="space-y-3">
+                                    <div class="bg-blue-50 p-3 rounded-lg">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-medium">Learning Style</span>
+                                            <span class="text-xs bg-blue-500 text-white px-2 py-1 rounded">Visual</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-green-50 p-3 rounded-lg">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-medium">Energy Level</span>
+                                            <span class="text-xs bg-green-500 text-white px-2 py-1 rounded">High</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-purple-50 p-3 rounded-lg">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-medium">Focus Mode</span>
+                                            <span class="text-xs bg-purple-500 text-white px-2 py-1 rounded">Active</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4">
+                                    <p class="text-sm text-gray-600 mb-2">AI Recommendation:</p>
+                                    <p class="text-sm bg-yellow-50 p-2 rounded border-l-4 border-yellow-500">
+                                        You're in a great mood for challenging problems! Let's try some advanced Mathematics today.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-lg shadow-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 flex items-center">
+                                    <span class="text-2xl mr-2">💝</span>
+                                    Wellness Tools
+                                </h4>
+
+                                <div class="space-y-3">
+                                    <button onclick="startBreathingExercise()" class="w-full bg-blue-500 text-white py-2 px-3 rounded-lg hover:bg-blue-600 text-sm">
+                                        🫁 Breathing Exercise
+                                    </button>
+
+                                    <button onclick="startMotivation()" class="w-full bg-purple-500 text-white py-2 px-3 rounded-lg hover:bg-purple-600 text-sm">
+                                        ⭐ Daily Motivation
+                                    </button>
+
+                                    <button onclick="startMindfulness()" class="w-full bg-green-500 text-white py-2 px-3 rounded-lg hover:bg-green-600 text-sm">
+                                        🧘 Mindfulness Break
+                                    </button>
+
+                                    <button onclick="celebrateAchievement()" class="w-full bg-yellow-500 text-white py-2 px-3 rounded-lg hover:bg-yellow-600 text-sm">
+                                        🎉 Celebrate Success
+                                    </button>
+                                </div>
+
+                                <div class="mt-4 p-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg">
+                                    <p class="text-xs text-center text-gray-600">
+                                        💡 <strong>Tip:</strong> Taking breaks improves learning by 40%!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Games Interface -->
+                    <div id="gamify-interface" class="feature-interface hidden">
+                        <div class="bg-gradient-to-br from-orange-500 to-red-500 rounded-lg shadow-lg text-white p-6 mb-6">
+                            <h3 class="text-xl font-bold mb-4">🎮 AI Learning Games</h3>
+                            <p class="text-orange-100">Transform learning into an adventure! Play AI-powered educational games that adapt to your level.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div class="bg-white rounded-lg shadow-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 flex items-center">
+                                    <span class="text-2xl mr-2">🏆</span>
+                                    Your Gaming Stats
+                                </h4>
+
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center p-3 bg-yellow-50 rounded-lg">
+                                        <span class="text-sm font-medium">Level</span>
+                                        <span class="text-lg font-bold text-yellow-600">Level 8</span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+                                        <span class="text-sm font-medium">XP Points</span>
+                                        <span class="text-lg font-bold text-blue-600">2,450 XP</span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                                        <span class="text-sm font-medium">Achievements</span>
+                                        <span class="text-lg font-bold text-green-600">12 🏅</span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-purple-50 rounded-lg">
+                                        <span class="text-sm font-medium">Streak</span>
+                                        <span class="text-lg font-bold text-purple-600">6 days 🔥</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-lg shadow-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 flex items-center">
+                                    <span class="text-2xl mr-2">🎯</span>
+                                    Daily Challenges
+                                </h4>
+
+                                <div class="space-y-3">
+                                    <div class="p-3 bg-green-50 rounded-lg border-l-4 border-green-500">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-medium">Math Quiz Master</span>
+                                            <span class="text-xs bg-green-500 text-white px-2 py-1 rounded">✅ Complete</span>
+                                        </div>
+                                        <p class="text-xs text-green-700 mt-1">+50 XP earned!</p>
+                                    </div>
+
+                                    <div class="p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-medium">Science Explorer</span>
+                                            <span class="text-xs bg-blue-500 text-white px-2 py-1 rounded">🎯 Active</span>
+                                        </div>
+                                        <p class="text-xs text-blue-700 mt-1">Progress: 3/5 questions</p>
+                                    </div>
+
+                                    <div class="p-3 bg-gray-50 rounded-lg border-l-4 border-gray-300">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-medium">English Word Hunt</span>
+                                            <span class="text-xs bg-gray-500 text-white px-2 py-1 rounded">⏳ Pending</span>
+                                        </div>
+                                        <p class="text-xs text-gray-600 mt-1">Unlock at Level 9</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow cursor-pointer" onclick="startMathGame()">
+                                <div class="text-center">
+                                    <div class="text-4xl mb-3">🧮</div>
+                                    <h5 class="font-semibold mb-2">Math Adventure</h5>
+                                    <p class="text-sm text-gray-600 mb-3">Solve equations to save the kingdom!</p>
+                                    <div class="flex justify-between text-xs">
+                                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">Easy</span>
+                                        <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded">+30 XP</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow cursor-pointer" onclick="startScienceGame()">
+                                <div class="text-center">
+                                    <div class="text-4xl mb-3">🔬</div>
+                                    <h5 class="font-semibold mb-2">Lab Detective</h5>
+                                    <p class="text-sm text-gray-600 mb-3">Conduct experiments and solve mysteries!</p>
+                                    <div class="flex justify-between text-xs">
+                                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded">Medium</span>
+                                        <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded">+50 XP</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow cursor-pointer" onclick="startEnglishGame()">
+                                <div class="text-center">
+                                    <div class="text-4xl mb-3">📚</div>
+                                    <h5 class="font-semibold mb-2">Word Wizard</h5>
+                                    <p class="text-sm text-gray-600 mb-3">Build vocabulary through magical quests!</p>
+                                    <div class="flex justify-between text-xs">
+                                        <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded">Hard</span>
+                                        <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded">+70 XP</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Future Predictor Interface -->
+                    <div id="predict-interface" class="feature-interface hidden">
+                        <div class="bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg shadow-lg text-white p-6 mb-6">
+                            <h3 class="text-xl font-bold mb-4">🔮 AI Career Predictor</h3>
+                            <p class="text-blue-100">Discover your future career paths based on your learning patterns, interests, and academic performance!</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div class="bg-white rounded-lg shadow-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 flex items-center">
+                                    <span class="text-2xl mr-2">🎯</span>
+                                    Career Predictions
+                                </h4>
+
+                                <div class="space-y-4">
+                                    <div class="p-4 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border-l-4 border-green-500">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h5 class="font-semibold text-green-800">Data Scientist</h5>
+                                            <span class="bg-green-500 text-white px-2 py-1 rounded text-xs">92% Match</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mb-2">Perfect fit based on your Mathematics excellence and analytical thinking!</p>
+                                        <div class="flex space-x-2">
+                                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">High Salary</span>
+                                            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">Growing Field</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border-l-4 border-purple-500">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h5 class="font-semibold text-purple-800">Software Engineer</h5>
+                                            <span class="bg-purple-500 text-white px-2 py-1 rounded text-xs">88% Match</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mb-2">Your logical thinking and problem-solving skills are ideal for coding!</p>
+                                        <div class="flex space-x-2">
+                                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Remote Work</span>
+                                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Creative</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-4 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border-l-4 border-orange-500">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h5 class="font-semibold text-orange-800">Research Scientist</h5>
+                                            <span class="bg-orange-500 text-white px-2 py-1 rounded text-xs">85% Match</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mb-2">Your curiosity and Science performance suggest research potential!</p>
+                                        <div class="flex space-x-2">
+                                            <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded text-xs">Innovation</span>
+                                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Impact</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white rounded-lg shadow-lg p-6">
+                                <h4 class="text-lg font-semibold mb-4 flex items-center">
+                                    <span class="text-2xl mr-2">📊</span>
+                                    Skills Analysis
+                                </h4>
+
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm font-medium">Analytical Thinking</span>
+                                            <span class="text-sm text-green-600">95%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-green-500 h-2 rounded-full" style="width: 95%"></div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm font-medium">Problem Solving</span>
+                                            <span class="text-sm text-blue-600">90%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-blue-500 h-2 rounded-full" style="width: 90%"></div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm font-medium">Creativity</span>
+                                            <span class="text-sm text-purple-600">78%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-purple-500 h-2 rounded-full" style="width: 78%"></div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm font-medium">Communication</span>
+                                            <span class="text-sm text-orange-600">65%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-orange-500 h-2 rounded-full" style="width: 65%"></div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm font-medium">Leadership</span>
+                                            <span class="text-sm text-red-600">60%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-red-500 h-2 rounded-full" style="width: 60%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                                    <p class="text-sm text-blue-800">
+                                        <strong>💡 AI Suggestion:</strong> Focus on improving Communication and Leadership skills to unlock more career opportunities!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <h4 class="text-lg font-semibold mb-4 flex items-center">
+                                <span class="text-2xl mr-2">🛤️</span>
+                                Recommended Learning Path
+                            </h4>
+
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                <div class="text-center p-4 bg-gradient-to-b from-blue-50 to-blue-100 rounded-lg">
+                                    <div class="text-2xl mb-2">📚</div>
+                                    <h5 class="font-semibold text-blue-800 mb-1">Grade 9-10</h5>
+                                    <p class="text-xs text-blue-600">Focus on Math & Science</p>
+                                </div>
+
+                                <div class="text-center p-4 bg-gradient-to-b from-green-50 to-green-100 rounded-lg">
+                                    <div class="text-2xl mb-2">🎓</div>
+                                    <h5 class="font-semibold text-green-800 mb-1">Grade 11-12</h5>
+                                    <p class="text-xs text-green-600">PCM Stream + Coding</p>
+                                </div>
+
+                                <div class="text-center p-4 bg-gradient-to-b from-purple-50 to-purple-100 rounded-lg">
+                                    <div class="text-2xl mb-2">🏛️</div>
+                                    <h5 class="font-semibold text-purple-800 mb-1">College</h5>
+                                    <p class="text-xs text-purple-600">Computer Science/Data Science</p>
+                                </div>
+
+                                <div class="text-center p-4 bg-gradient-to-b from-yellow-50 to-yellow-100 rounded-lg">
+                                    <div class="text-2xl mb-2">💼</div>
+                                    <h5 class="font-semibold text-yellow-800 mb-1">Career</h5>
+                                    <p class="text-xs text-yellow-600">Tech Industry Leader</p>
+                                </div>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <button onclick="generateCareerPlan()" class="bg-indigo-500 text-white px-6 py-2 rounded-lg hover:bg-indigo-600">
+                                    📋 Generate Detailed Career Plan
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating AI Button -->
+    <button onclick="showTab(2)" class="fixed bottom-6 right-6 bg-gradient-to-r from-purple-500 to-purple-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200" title="AI Features">
+        <span class="text-2xl">🤖</span>
+    </button>
+
+    <script>
+        let currentTab = 0;
+
+        // Toast notification system
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg text-white transform transition-all duration-300 translate-x-full`;
+
+            if (type === 'success') {
+                toast.classList.add('bg-green-500');
+            } else if (type === 'info') {
+                toast.classList.add('bg-blue-500');
+            } else if (type === 'warning') {
+                toast.classList.add('bg-yellow-500');
+            }
+
+            toast.innerHTML = message;
+            document.body.appendChild(toast);
+
+            // Animate in
+            setTimeout(() => {
+                toast.classList.remove('translate-x-full');
+            }, 100);
+
+            // Animate out and remove
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+
+        function showTab(tabIndex) {
+            // Hide all content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Reset all tab styles
+            document.querySelectorAll('[id^="tab-"]').forEach(tab => {
+                tab.className = 'py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300';
+            });
+
+            // Show selected content and highlight tab
+            document.getElementById(`content-${tabIndex}`).classList.remove('hidden');
+            document.getElementById(`tab-${tabIndex}`).className = 'py-4 px-1 border-b-2 font-medium text-sm border-blue-500 text-blue-600';
+
+            currentTab = tabIndex;
+        }
+
+        function refreshInsights() {
+            const insightDiv = document.querySelector('.bg-green-50.border.border-green-200');
+            const originalContent = insightDiv.innerHTML;
+
+            insightDiv.innerHTML = '<p class="text-blue-800 text-sm">🤖 AI is analyzing your latest performance...</p>';
+
+            setTimeout(() => {
+                // Update performance numbers slightly
+                updatePerformanceNumbers();
+
+                const insights = [
+                    "Excellent progress in Mathematics! Your algebra skills have improved by 8% this week.",
+                    "Great job on Science concepts! Focus on Physics equations for even better results.",
+                    "Your English grammar is improving steadily. Keep practicing daily for best results.",
+                    "Outstanding effort in all subjects! You're on track to reach 80% overall performance.",
+                    "Your consistent practice is paying off! Keep up the excellent work.",
+                    "AI detected improvement in problem-solving speed. Great job!"
+                ];
+
+                const randomInsight = insights[Math.floor(Math.random() * insights.length)];
+                insightDiv.innerHTML = `<p class="text-green-800 text-sm">${randomInsight}</p>`;
+            }, 2000);
+        }
+
+        function updatePerformanceNumbers() {
+            // Slightly increase performance numbers to show progress
+            const mathBar = document.querySelector('.bg-green-500');
+            const scienceBar = document.querySelector('.bg-yellow-500');
+            const englishBar = document.querySelector('.bg-red-500');
+
+            const mathPercent = document.querySelector('.bg-green-500').parentElement.nextElementSibling;
+            const sciencePercent = document.querySelector('.bg-yellow-500').parentElement.nextElementSibling;
+            const englishPercent = document.querySelector('.bg-red-500').parentElement.nextElementSibling;
+
+            // Increase by 1-2%
+            let currentMath = parseInt(mathPercent.textContent);
+            let currentScience = parseInt(sciencePercent.textContent);
+            let currentEnglish = parseInt(englishPercent.textContent);
+
+            if (currentMath < 90) {
+                mathPercent.textContent = (currentMath + 1) + '%';
+                mathBar.style.width = (currentMath + 1) + '%';
+            }
+            if (currentScience < 85) {
+                sciencePercent.textContent = (currentScience + 1) + '%';
+                scienceBar.style.width = (currentScience + 1) + '%';
+            }
+            if (currentEnglish < 75) {
+                englishPercent.textContent = (currentEnglish + 2) + '%';
+                englishBar.style.width = (currentEnglish + 2) + '%';
+            }
+
+            // Update overall progress
+            const overallProgress = Math.round((parseInt(mathPercent.textContent) + parseInt(sciencePercent.textContent) + parseInt(englishPercent.textContent)) / 3);
+            document.querySelector('.text-2xl.font-bold').textContent = overallProgress + '%';
+            document.querySelector('.bg-blue-500').style.width = overallProgress + '%';
+        }
+
+        function startLearning() {
+            showTab(2);
+            selectFeature('session');
+            showLearningSession();
+        }
+
+        function generateWorksheet() {
+            showTab(2); // Switch to AI Features tab
+            selectFeature('worksheet'); // Select worksheet feature
+            showWorksheetGenerator(); // Show the worksheet interface
+        }
+
+        function askAI() {
+            console.log('askAI() called - switching to AI Features tab');
+            showTab(2);
+            selectFeature('doubt');
+            showDoubtInterface();
+
+            // Show a toast notification
+            showToast('🤖 AI Tutor is ready! Ask any question.', 'success');
+        }
+
+        function viewProgress() {
+            const progressModal = document.createElement('div');
+            progressModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            progressModal.innerHTML = `
+                <div class="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-96 overflow-y-auto">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">📊 Detailed Progress Analytics</h3>
+                        <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-medium text-blue-800 mb-2">📈 Weekly Progress</h4>
+                            <div class="space-y-2">
+                                <div class="flex justify-between"><span>Mathematics:</span><span class="text-green-600 font-bold">+3%</span></div>
+                                <div class="flex justify-between"><span>Science:</span><span class="text-green-600 font-bold">+2%</span></div>
+                                <div class="flex justify-between"><span>English:</span><span class="text-yellow-600 font-bold">+1%</span></div>
+                                <div class="flex justify-between"><span>History:</span><span class="text-green-600 font-bold">+2%</span></div>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h4 class="font-medium text-green-800 mb-2">🎯 Goals Status</h4>
+                            <div class="space-y-2">
+                                <div class="flex justify-between"><span>Daily Practice:</span><span class="text-green-600">✅ 6/7 days</span></div>
+                                <div class="flex justify-between"><span>Worksheets:</span><span class="text-green-600">✅ 4/3 target</span></div>
+                                <div class="flex justify-between"><span>AI Questions:</span><span class="text-yellow-600">⚠️ 2/5 target</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                        <h4 class="font-medium text-purple-800 mb-2">🤖 AI Recommendations</h4>
+                        <ul class="text-sm text-purple-700 space-y-1">
+                            <li>• Increase English practice to 20 minutes daily</li>
+                            <li>• Focus on History dates and events</li>
+                            <li>• Continue excellent Mathematics performance</li>
+                            <li>• Ask more questions to AI tutor for better understanding</li>
+                        </ul>
+                    </div>
+
+                    <div class="text-center">
+                        <button onclick="this.closest('.fixed').remove()" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">Close</button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(progressModal);
+        }
+
+        function selectFeature(feature) {
+            // Define original styles for each card type
+            const originalStyles = {
+                'doubt': 'bg-white rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow border-2',
+                'worksheet': 'bg-white rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow border-2',
+                'session': 'bg-white rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow border-2',
+                'voice': 'bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg shadow-lg p-4 cursor-pointer hover:shadow-xl transition-all transform hover:scale-105 text-white border-2',
+                'emotion': 'bg-gradient-to-br from-green-500 to-teal-500 rounded-lg shadow-lg p-4 cursor-pointer hover:shadow-xl transition-all transform hover:scale-105 text-white border-2',
+                'gamify': 'bg-gradient-to-br from-orange-500 to-red-500 rounded-lg shadow-lg p-4 cursor-pointer hover:shadow-xl transition-all transform hover:scale-105 text-white border-2',
+                'predict': 'bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg shadow-lg p-4 cursor-pointer hover:shadow-xl transition-all transform hover:scale-105 text-white border-2'
+            };
+
+            // Reset all feature cards to their original styles
+            const allCards = document.querySelectorAll('[onclick^="selectFeature"]');
+            allCards.forEach((card, index) => {
+                const cardFeature = card.getAttribute('onclick').match(/selectFeature\('(\w+)'\)/)[1];
+                const baseStyle = originalStyles[cardFeature] || 'bg-white rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow border-2';
+                card.className = baseStyle + ' border-transparent';
+            });
+
+            // Highlight selected feature
+            let selectedCard = null;
+            if (event && event.target) {
+                selectedCard = event.target.closest('div[onclick^="selectFeature"]');
+            } else {
+                // If called programmatically, find the correct card
+                allCards.forEach(card => {
+                    const cardFeature = card.getAttribute('onclick').match(/selectFeature\('(\w+)'\)/)[1];
+                    if (cardFeature === feature) {
+                        selectedCard = card;
+                    }
+                });
+            }
+
+            // Apply selection styling
+            if (selectedCard) {
+                const cardFeature = selectedCard.getAttribute('onclick').match(/selectFeature\('(\w+)'\)/)[1];
+                const baseStyle = originalStyles[cardFeature] || 'bg-white rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow border-2';
+                selectedCard.className = baseStyle + ' border-blue-500';
+            }
+
+            // Show appropriate interface
+            if (feature === 'doubt') {
+                showDoubtInterface();
+            } else if (feature === 'worksheet') {
+                showWorksheetGenerator();
+            } else if (feature === 'session') {
+                showLearningSession();
+            } else if (feature === 'voice') {
+                showVoiceInterface();
+            } else if (feature === 'emotion') {
+                showEmotionInterface();
+            } else if (feature === 'gamify') {
+                showGamifyInterface();
+            } else if (feature === 'predict') {
+                showPredictInterface();
+            }
+        }
+
+        function showDoubtInterface() {
+            document.querySelectorAll('.feature-interface').forEach(interface => {
+                interface.classList.add('hidden');
+            });
+            document.getElementById('doubt-interface').classList.remove('hidden');
+        }
+
+        function showWorksheetGenerator() {
+            document.querySelectorAll('.feature-interface').forEach(interface => {
+                interface.classList.add('hidden');
+            });
+            document.getElementById('worksheet-interface').classList.remove('hidden');
+        }
+
+        function showLearningSession() {
+            document.querySelectorAll('.feature-interface').forEach(interface => {
+                interface.classList.add('hidden');
+            });
+            document.getElementById('session-interface').classList.remove('hidden');
+        }
+
+        function showVoiceInterface() {
+            document.querySelectorAll('.feature-interface').forEach(interface => {
+                interface.classList.add('hidden');
+            });
+            document.getElementById('voice-interface').classList.remove('hidden');
+        }
+
+        function showEmotionInterface() {
+            document.querySelectorAll('.feature-interface').forEach(interface => {
+                interface.classList.add('hidden');
+            });
+            document.getElementById('emotion-interface').classList.remove('hidden');
+        }
+
+        function showGamifyInterface() {
+            document.querySelectorAll('.feature-interface').forEach(interface => {
+                interface.classList.add('hidden');
+            });
+            document.getElementById('gamify-interface').classList.remove('hidden');
+        }
+
+        function showPredictInterface() {
+            document.querySelectorAll('.feature-interface').forEach(interface => {
+                interface.classList.add('hidden');
+            });
+            document.getElementById('predict-interface').classList.remove('hidden');
+        }
+
+        function askAIQuestion() {
+            const questionText = document.querySelector('#doubt-interface textarea').value;
+            const subject = document.querySelector('#doubt-interface select').value;
+            const topic = document.querySelector('#doubt-interface input[type="text"]').value;
+
+            if (!questionText.trim()) {
+                alert('Please enter a question first!');
+                return;
+            }
+
+            const responseDiv = document.getElementById('ai-response');
+
+            // Show loading state
+            responseDiv.innerHTML = `
+                <h4 class="text-md font-medium mb-3">🤖 AI Response</h4>
+                <div class="bg-white rounded-lg p-4 mb-4">
+                    <div class="flex items-center space-x-2">
+                        <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500"></div>
+                        <p class="text-gray-600">AI is thinking about your question...</p>
+                    </div>
+                </div>
+            `;
+
+            // Simulate AI response after a delay
+            setTimeout(() => {
+                responseDiv.innerHTML = `
+                    <h4 class="text-md font-medium mb-3">🤖 AI Response</h4>
+                    <div class="bg-white rounded-lg p-4 mb-4">
+                        <div class="mb-3">
+                            <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Question about: ${subject} - ${topic || 'General'}</span>
+                        </div>
+                        <p class="text-gray-800 mb-3"><strong>Your Question:</strong> "${questionText}"</p>
+                        <p class="text-gray-800 mb-3">Great question! This is an important concept in ${subject}. Let me break this down for you in a simple way that connects to what you already know.</p>
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-3 mb-3">
+                            <p class="text-green-800 text-sm">🎯 Based on your learning profile, I'll explain this using visual examples and step-by-step reasoning.</p>
+                        </div>
+                        <div class="text-sm">
+                            <p class="font-medium mb-2">💡 Follow-up Suggestions:</p>
+                            <ul class="space-y-1 text-gray-600">
+                                <li>• Would you like to see how this connects to your strength in ${subject}?</li>
+                                <li>• Should we practice some examples to make this clearer?</li>
+                                <li>• Would a visual explanation help you understand better?</li>
+                            </ul>
+                        </div>
+                        <div class="flex justify-between items-center mt-4 text-xs text-gray-500">
+                            <span>Confidence: 92%</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">AI Generated</span>
+                        </div>
+                    </div>
+                `;
+            }, 1500);
+        }
+
+        function generateAIWorksheet() {
+            const subject = document.getElementById('worksheet-subject').value;
+            const difficulty = document.getElementById('worksheet-difficulty').value;
+            const topic = document.getElementById('worksheet-topic').value || 'General';
+            const questions = document.getElementById('worksheet-questions').value;
+            const type = document.getElementById('worksheet-type').value;
+
+            const previewDiv = document.getElementById('worksheet-preview');
+            previewDiv.innerHTML = `
+                <h4 class="text-md font-medium mb-3">📝 Generated Worksheet</h4>
+                <div class="bg-white rounded-lg p-4 mb-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h5 class="font-semibold text-gray-800">${subject.charAt(0).toUpperCase() + subject.slice(1)} - ${topic}</h5>
+                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Level: ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}</span>
+                    </div>
+
+                    <div class="space-y-3 text-sm">
+                        <div class="border-l-4 border-green-500 pl-3">
+                            <p class="font-medium">Question 1:</p>
+                            <p class="text-gray-700">Solve for x: 2x + 5 = 13</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-3">
+                            <p class="font-medium">Question 2:</p>
+                            <p class="text-gray-700">If y = 3x - 2, find y when x = 4</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-3">
+                            <p class="font-medium">Question 3:</p>
+                            <p class="text-gray-700">Simplify: 4(x + 3) - 2x</p>
+                        </div>
+                        <div class="text-center text-gray-500 py-2">
+                            ... ${questions - 3} more questions ...
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-4 pt-4 border-t">
+                        <div class="text-xs text-gray-500">
+                            <span>📊 Difficulty: ${difficulty} | 🎯 Adapted for 76% level</span>
+                        </div>
+                        <div class="space-x-2">
+                            <button onclick="downloadPDF()" class="bg-blue-500 text-white px-3 py-1 rounded text-xs hover:bg-blue-600">📥 Download PDF</button>
+                            <button onclick="printWorksheet()" class="bg-green-500 text-white px-3 py-1 rounded text-xs hover:bg-green-600">🖨️ Print</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                    <p class="text-green-800 text-sm">
+                        ✅ Worksheet generated successfully! This ${difficulty} level worksheet is perfectly adapted to your current 76% performance level in ${subject}.
+                    </p>
+                </div>
+            `;
+        }
+
+        function startAISession() {
+            const subject = document.getElementById('session-subject').value;
+            const duration = document.getElementById('session-duration').value;
+
+            showToast(`🎓 Starting ${duration}-minute ${subject} learning session!`, 'info');
+
+            const previewDiv = document.getElementById('session-preview');
+            previewDiv.innerHTML = `
+                <h4 class="text-md font-medium mb-3">🎓 Session Started!</h4>
+                <div class="bg-white rounded-lg p-4 mb-4">
+                    <div class="text-center mb-4">
+                        <div class="text-3xl mb-2">⏱️</div>
+                        <div class="text-lg font-semibold text-purple-600">${duration} minutes</div>
+                        <div class="text-sm text-gray-600">${subject.charAt(0).toUpperCase() + subject.slice(1)} Session</div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="bg-purple-50 border border-purple-200 rounded-lg p-3">
+                            <p class="text-purple-800 text-sm font-medium">🎯 Today's Learning Goal:</p>
+                            <p class="text-purple-700 text-sm">Master English Grammar basics using visual examples and interactive exercises.</p>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                            <div class="bg-green-100 text-green-800 py-2 rounded">
+                                <div class="font-medium">Step 1</div>
+                                <div>Visual Examples</div>
+                            </div>
+                            <div class="bg-yellow-100 text-yellow-800 py-2 rounded">
+                                <div class="font-medium">Step 2</div>
+                                <div>Practice</div>
+                            </div>
+                            <div class="bg-blue-100 text-blue-800 py-2 rounded">
+                                <div class="font-medium">Step 3</div>
+                                <div>Assessment</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center mt-4">
+                        <button class="bg-purple-500 text-white px-6 py-2 rounded-lg hover:bg-purple-600 transition-colors">
+                            🚀 Continue Learning
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-3">
+                    <p class="text-purple-800 text-sm">
+                        🎓 AI Learning Session is now active! The content is personalized for your visual learning style and 65% English performance.
+                    </p>
+                </div>
+            `;
+        }
+
+        function downloadPDF() {
+            const subject = document.getElementById('worksheet-subject').value;
+            const difficulty = document.getElementById('worksheet-difficulty').value;
+            const topic = document.getElementById('worksheet-topic').value || 'General';
+            const questions = document.getElementById('worksheet-questions').value;
+
+            // Create worksheet content
+            const content = `
+AI Education Agent - Personalized Worksheet
+${subject.toUpperCase()} - ${topic}
+Generated: ${new Date().toLocaleDateString()}
+Difficulty: ${difficulty} Level
+
+Student: Priya Sharma
+Grade: 8
+Learning Style: Visual
+Performance Level: 76%
+
+Questions:
+1. Sample question based on ${topic}
+2. Practice problem for ${difficulty} level
+3. Application question for ${subject}
+... (${questions} total questions)
+
+Instructions: This worksheet is personalized for your learning level.
+Show all work and ask your AI tutor if you need help!
+
+Generated by AI Education Agent for Government Schools
+            `;
+
+            // Create and download file
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${subject}_${topic}_worksheet.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+
+            showToast('📥 Worksheet downloaded successfully! Check your Downloads folder.', 'success');
+        }
+
+        function printWorksheet() {
+            const subject = document.getElementById('worksheet-subject').value;
+            const difficulty = document.getElementById('worksheet-difficulty').value;
+            const topic = document.getElementById('worksheet-topic').value || 'General';
+            const questions = document.getElementById('worksheet-questions').value;
+
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                <head>
+                    <title>Worksheet - ${subject} - ${topic}</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 20px; }
+                        .info { background: #f5f5f5; padding: 10px; margin-bottom: 20px; }
+                        .question { margin-bottom: 20px; }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h1>🤖 AI Education Agent - Personalized Worksheet</h1>
+                        <h2>${subject.toUpperCase()} - ${topic}</h2>
+                        <p>Generated: ${new Date().toLocaleDateString()} | Difficulty: ${difficulty} Level</p>
+                    </div>
+
+                    <div class="info">
+                        <strong>Student:</strong> Priya Sharma &nbsp;&nbsp;
+                        <strong>Grade:</strong> 8 &nbsp;&nbsp;
+                        <strong>Learning Style:</strong> Visual &nbsp;&nbsp;
+                        <strong>Performance:</strong> 76%<br><br>
+                        <strong>Instructions:</strong> This worksheet is personalized for your learning level. Show all work!
+                    </div>
+
+                    <div class="question"><strong>Question 1:</strong> Sample question for ${topic}<br><br>Answer: ________________</div>
+                    <div class="question"><strong>Question 2:</strong> Practice problem (${difficulty} level)<br><br>Answer: ________________</div>
+                    <div class="question"><strong>Question 3:</strong> Application question for ${subject}<br><br>Answer: ________________</div>
+
+                    <p style="text-align: center; margin-top: 30px; font-size: 12px;">
+                        🤖 Generated by AI Education Agent | Personalized for Government Schools
+                    </p>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        // Teacher Dashboard Functions
+        function addNewStudent() {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">👥 Add New Student</h3>
+                        <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+                    </div>
+
+                    <form onsubmit="submitNewStudent(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Student Name</label>
+                            <input type="text" id="student-name" required class="w-full border border-gray-300 rounded-lg px-3 py-2" placeholder="Enter student name">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Student ID</label>
+                            <input type="text" id="student-id" required class="w-full border border-gray-300 rounded-lg px-3 py-2" placeholder="e.g., STU002">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Grade</label>
+                            <select id="student-grade" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                                <option value="6">Grade 6</option>
+                                <option value="7">Grade 7</option>
+                                <option value="8" selected>Grade 8</option>
+                                <option value="9">Grade 9</option>
+                                <option value="10">Grade 10</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Learning Style</label>
+                            <select id="learning-style" class="w-full border border-gray-300 rounded-lg px-3 py-2">
+                                <option value="visual">Visual</option>
+                                <option value="auditory">Auditory</option>
+                                <option value="kinesthetic">Kinesthetic</option>
+                                <option value="reading">Reading/Writing</option>
+                            </select>
+                        </div>
+
+                        <div class="flex space-x-3 pt-4">
+                            <button type="submit" class="flex-1 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Add Student</button>
+                            <button type="button" onclick="this.closest('.fixed').remove()" class="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+        }
+
+        function submitNewStudent(event) {
+            event.preventDefault();
+            const name = document.getElementById('student-name').value;
+            const studentId = document.getElementById('student-id').value;
+            const grade = document.getElementById('student-grade').value;
+            const learningStyle = document.getElementById('learning-style').value;
+
+            // Close modal
+            event.target.closest('.fixed').remove();
+
+            // Show success message
+            showToast(`✅ Student ${name} (${studentId}) added successfully!`, 'success');
+
+            // Update student count
+            const totalStudentsElement = document.querySelector('.text-2xl.font-bold.text-blue-600');
+            const currentCount = parseInt(totalStudentsElement.textContent);
+            totalStudentsElement.textContent = currentCount + 1;
+        }
+
+        function exportClassData() {
+            const classData = `AI Education Agent - Class 8 Report
+Generated: ${new Date().toLocaleDateString()}
+
+CLASS OVERVIEW:
+- Total Students: 25
+- Average Performance: 72.5%
+- Active Sessions: 8
+- Worksheets Completed: 45
+- Pending Doubts: 12
+
+STUDENT PERFORMANCE:
+Student ID: STU001
+Name: Priya Sharma
+Performance: 76%
+Strengths: Mathematics, Science
+Focus Areas: English, History
+Status: Active
+
+[Additional student data would be included here...]
+
+SUBJECT ANALYSIS:
+Mathematics: 85% average (Class strength)
+Science: 78% average (Good progress)
+English: 65% average (Needs attention)
+History: 70% average (Improving)
+
+AI RECOMMENDATIONS:
+1. Increase English practice sessions
+2. Focus on Grammar and Writing skills
+3. Continue Mathematics excellence
+4. Implement more visual learning aids
+
+Generated by AI Education Agent for Government Schools`;
+
+            // Create and download file
+            const blob = new Blob([classData], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Class_8_Report_${new Date().toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+
+            showToast('📥 Class report exported successfully!', 'success');
+        }
+
+        function showStudentDetails(studentId, studentName) {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 max-h-96 overflow-y-auto">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">👤 Student Details - ${studentName}</h3>
+                        <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Student Info -->
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <h4 class="font-medium text-purple-800 mb-3">📋 Basic Information</h4>
+                            <div class="space-y-2 text-sm">
+                                <div><strong>Student ID:</strong> ${studentId}</div>
+                                <div><strong>Name:</strong> ${studentName}</div>
+                                <div><strong>Grade:</strong> 8</div>
+                                <div><strong>Learning Style:</strong> Visual</div>
+                                <div><strong>Overall Performance:</strong> 76%</div>
+                                <div><strong>Status:</strong> <span class="text-green-600">Active</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Performance Details -->
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-medium text-blue-800 mb-3">📊 Subject Performance</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm">Mathematics</span>
+                                    <div class="flex items-center">
+                                        <div class="w-16 bg-gray-200 rounded-full h-2 mr-2">
+                                            <div class="bg-green-500 h-2 rounded-full" style="width: 85%"></div>
+                                        </div>
+                                        <span class="text-sm font-medium">85%</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm">Science</span>
+                                    <div class="flex items-center">
+                                        <div class="w-16 bg-gray-200 rounded-full h-2 mr-2">
+                                            <div class="bg-yellow-500 h-2 rounded-full" style="width: 78%"></div>
+                                        </div>
+                                        <span class="text-sm font-medium">78%</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm">English</span>
+                                    <div class="flex items-center">
+                                        <div class="w-16 bg-gray-200 rounded-full h-2 mr-2">
+                                            <div class="bg-red-500 h-2 rounded-full" style="width: 65%"></div>
+                                        </div>
+                                        <span class="text-sm font-medium">65%</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm">History</span>
+                                    <div class="flex items-center">
+                                        <div class="w-16 bg-gray-200 rounded-full h-2 mr-2">
+                                            <div class="bg-orange-500 h-2 rounded-full" style="width: 70%"></div>
+                                        </div>
+                                        <span class="text-sm font-medium">70%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Insights -->
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h4 class="font-medium text-green-800 mb-3">🤖 AI Insights</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="bg-white p-2 rounded border-l-4 border-green-500">
+                                    <strong>Strengths:</strong> Mathematics, Science
+                                </div>
+                                <div class="bg-white p-2 rounded border-l-4 border-yellow-500">
+                                    <strong>Focus Areas:</strong> English Grammar, History
+                                </div>
+                                <div class="bg-white p-2 rounded border-l-4 border-blue-500">
+                                    <strong>Learning Style:</strong> Responds well to visual aids and diagrams
+                                </div>
+                                <div class="bg-white p-2 rounded border-l-4 border-purple-500">
+                                    <strong>Recommendation:</strong> Increase English practice to 20 min/day
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 flex justify-center space-x-3">
+                        <button onclick="generatePersonalizedWorksheet('${studentId}')" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">📝 Generate Worksheet</button>
+                        <button onclick="startPersonalizedSession('${studentId}')" class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600">🎓 Start Session</button>
+                        <button onclick="this.closest('.fixed').remove()" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400">Close</button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+        }
+
+        // Voice Learning Functions
+        let isRecording = false;
+        let voiceRecognition = null;
+
+        function toggleVoiceRecording() {
+            const btn = document.getElementById('voice-record-btn');
+            const btnText = document.getElementById('voice-btn-text');
+
+            if (!isRecording) {
+                // Start recording
+                isRecording = true;
+                btnText.textContent = '🔴 Stop Speaking';
+                btn.className = 'flex-1 bg-red-500 text-white py-3 px-4 rounded-lg hover:bg-red-600 transition-colors';
+
+                // Simulate voice recognition
+                setTimeout(() => {
+                    addVoiceMessage('user', 'Can you help me understand fractions in mathematics?');
+                    setTimeout(() => {
+                        addVoiceMessage('ai', 'Of course! Fractions represent parts of a whole. Think of a pizza cut into 8 slices. If you eat 3 slices, you\'ve eaten 3/8 of the pizza. Would you like me to show you some visual examples?');
+                    }, 1500);
+                }, 2000);
+
+            } else {
+                // Stop recording
+                isRecording = false;
+                btnText.textContent = '🎤 Start Speaking';
+                btn.className = 'flex-1 bg-purple-500 text-white py-3 px-4 rounded-lg hover:bg-purple-600 transition-colors';
+            }
+        }
+
+        function addVoiceMessage(sender, message) {
+            const conversation = document.getElementById('voice-conversation');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex items-start';
+
+            if (sender === 'user') {
+                messageDiv.innerHTML = `
+                    <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">P</div>
+                    <div class="bg-blue-50 rounded-lg p-3 flex-1">
+                        <p class="text-sm">${message}</p>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">AI</div>
+                    <div class="bg-purple-50 rounded-lg p-3 flex-1">
+                        <p class="text-sm">${message}</p>
+                    </div>
+                `;
+            }
+
+            conversation.appendChild(messageDiv);
+            conversation.scrollTop = conversation.scrollHeight;
+        }
+
+        function clearVoiceChat() {
+            const conversation = document.getElementById('voice-conversation');
+            conversation.innerHTML = `
+                <div class="flex items-start">
+                    <div class="bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">AI</div>
+                    <div class="bg-purple-50 rounded-lg p-3 flex-1">
+                        <p class="text-sm">Hello Priya! I'm your voice tutor. What would you like to learn today? You can ask me anything about Mathematics, Science, English, or History!</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function startSubjectPractice() {
+            showToast('🎤 Starting subject practice mode! Speak about any topic and I\'ll provide feedback.', 'info');
+            addVoiceMessage('ai', 'Great! Let\'s practice. Tell me about photosynthesis in plants. I\'ll help you with pronunciation and content!');
+        }
+
+        function startLanguagePractice() {
+            showToast('🌍 English pronunciation practice activated! Speak clearly and I\'ll help improve your accent.', 'info');
+            addVoiceMessage('ai', 'Perfect! Let\'s work on English pronunciation. Try saying: "The quick brown fox jumps over the lazy dog." I\'ll analyze your pronunciation!');
+        }
+
+        function startStoryMode() {
+            showToast('🎭 Story mode activated! I\'ll create an educational story based on your curriculum.', 'success');
+            addVoiceMessage('ai', 'Once upon a time, in the kingdom of Mathlandia, there lived a brave princess named Algebra. She had a magical power to solve any equation! One day, the evil wizard Confusion cast a spell that mixed up all the numbers in the kingdom...');
+        }
+
+        // Emotion AI Functions
+        const moods = [
+            { emoji: '😊', status: 'Happy & Ready to Learn!', color: 'text-green-600' },
+            { emoji: '😴', status: 'Feeling Sleepy', color: 'text-blue-600' },
+            { emoji: '😰', status: 'A bit Stressed', color: 'text-orange-600' },
+            { emoji: '🤔', status: 'Curious & Thoughtful', color: 'text-purple-600' },
+            { emoji: '😎', status: 'Confident & Energetic!', color: 'text-green-600' },
+            { emoji: '😔', status: 'Need Some Motivation', color: 'text-red-600' }
+        ];
+
+        function detectMood() {
+            showToast('🔍 Analyzing your mood through learning patterns...', 'info');
+
+            setTimeout(() => {
+                const randomMood = moods[Math.floor(Math.random() * moods.length)];
+                document.getElementById('current-mood').textContent = randomMood.emoji;
+                const statusElement = document.getElementById('mood-status');
+                statusElement.textContent = randomMood.status;
+                statusElement.className = `font-medium ${randomMood.color}`;
+
+                showToast(`😊 Mood detected: ${randomMood.status}`, 'success');
+            }, 2000);
+        }
+
+        function moodBooster() {
+            const boosterMessages = [
+                "🌟 You're doing amazing! Your Math scores have improved by 15% this month!",
+                "🚀 Remember: Every expert was once a beginner. You're on the right path!",
+                "💪 Your dedication to learning is inspiring. Keep up the great work!",
+                "🎯 You've completed 4 worksheets this week - that's fantastic progress!",
+                "⭐ Believe in yourself! You have the power to achieve anything you set your mind to!"
+            ];
+
+            const randomMessage = boosterMessages[Math.floor(Math.random() * boosterMessages.length)];
+            showToast(randomMessage, 'success');
+
+            // Update mood to happy
+            document.getElementById('current-mood').textContent = '😊';
+            const statusElement = document.getElementById('mood-status');
+            statusElement.textContent = 'Motivated & Ready to Learn!';
+            statusElement.className = 'font-medium text-green-600';
+        }
+
+        function startBreathingExercise() {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 text-center">
+                    <h3 class="text-xl font-semibold mb-4">🫁 Breathing Exercise</h3>
+                    <div class="mb-6">
+                        <div id="breathing-circle" class="w-32 h-32 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mx-auto flex items-center justify-center text-white text-lg font-bold transition-transform duration-4000">
+                            Breathe
+                        </div>
+                    </div>
+                    <p id="breathing-instruction" class="text-lg mb-4">Breathe in slowly...</p>
+                    <div class="flex space-x-3">
+                        <button onclick="this.closest('.fixed').remove()" class="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400">Close</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            // Animate breathing
+            let breathingIn = true;
+            const circle = modal.querySelector('#breathing-circle');
+            const instruction = modal.querySelector('#breathing-instruction');
+
+            setInterval(() => {
+                if (breathingIn) {
+                    circle.style.transform = 'scale(1.3)';
+                    instruction.textContent = 'Breathe in slowly...';
+                } else {
+                    circle.style.transform = 'scale(1)';
+                    instruction.textContent = 'Breathe out slowly...';
+                }
+                breathingIn = !breathingIn;
+            }, 4000);
+        }
+
+        function startMotivation() {
+            const motivationalQuotes = [
+                "🌟 'The future belongs to those who believe in the beauty of their dreams.' - Eleanor Roosevelt",
+                "🚀 'Success is not final, failure is not fatal: it is the courage to continue that counts.' - Winston Churchill",
+                "💪 'Education is the most powerful weapon which you can use to change the world.' - Nelson Mandela",
+                "⭐ 'The only way to do great work is to love what you do.' - Steve Jobs",
+                "🎯 'Believe you can and you're halfway there.' - Theodore Roosevelt"
+            ];
+
+            const randomQuote = motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
+
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg p-8 max-w-lg w-full mx-4 text-center text-white">
+                    <h3 class="text-xl font-semibold mb-6">⭐ Daily Motivation</h3>
+                    <div class="text-lg mb-6 italic">${randomQuote}</div>
+                    <div class="mb-6">
+                        <p class="text-purple-100">Remember Priya, you're capable of amazing things! Your journey in learning is unique and valuable.</p>
+                    </div>
+                    <button onclick="this.closest('.fixed').remove()" class="bg-white text-purple-600 py-2 px-6 rounded-lg hover:bg-purple-50 font-semibold">Thank You! 💜</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function startMindfulness() {
+            showToast('🧘 Starting 2-minute mindfulness break. Focus on your breathing and relax.', 'info');
+
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-gradient-to-br from-green-400 to-teal-500 rounded-lg p-8 max-w-md w-full mx-4 text-center text-white">
+                    <h3 class="text-xl font-semibold mb-4">🧘 Mindfulness Break</h3>
+                    <div class="mb-6">
+                        <div class="text-6xl mb-4">🌸</div>
+                        <p class="text-green-100 mb-4">Take a moment to relax and center yourself.</p>
+                        <p class="text-sm text-green-200">Close your eyes, breathe deeply, and let go of any stress or worry.</p>
+                    </div>
+                    <div id="mindfulness-timer" class="text-2xl font-bold mb-4">2:00</div>
+                    <button onclick="this.closest('.fixed').remove()" class="bg-white text-green-600 py-2 px-6 rounded-lg hover:bg-green-50 font-semibold">I Feel Better 🌟</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            // Start countdown timer
+            let timeLeft = 120;
+            const timer = modal.querySelector('#mindfulness-timer');
+            const countdown = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timer.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    timer.textContent = 'Complete! 🌟';
+                }
+            }, 1000);
+        }
+
+        function celebrateAchievement() {
+            const achievements = [
+                "🏆 Completed 5 Math worksheets this week!",
+                "⭐ Improved English score by 10 points!",
+                "🎯 Maintained 6-day learning streak!",
+                "💪 Asked 15 questions to AI tutor!",
+                "🌟 Mastered fractions and decimals!"
+            ];
+
+            const randomAchievement = achievements[Math.floor(Math.random() * achievements.length)];
+
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg p-8 max-w-md w-full mx-4 text-center text-white">
+                    <h3 class="text-2xl font-bold mb-4">🎉 Celebration Time!</h3>
+                    <div class="text-6xl mb-4">🏆</div>
+                    <div class="text-lg mb-4 font-semibold">${randomAchievement}</div>
+                    <p class="text-yellow-100 mb-6">You're doing fantastic! Keep up the amazing work, Priya!</p>
+                    <button onclick="this.closest('.fixed').remove()" class="bg-white text-orange-600 py-2 px-6 rounded-lg hover:bg-orange-50 font-semibold">Thank You! 🎊</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            // Add confetti effect
+            showToast('🎊 Congratulations on your amazing progress!', 'success');
+        }
+
+        // AI Games Functions
+        function startMathGame() {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg p-6 max-w-2xl w-full mx-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-semibold">🧮 Math Adventure - Save the Kingdom!</h3>
+                        <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg mb-4">
+                        <p class="text-sm text-gray-700">🏰 The evil wizard has locked the princess in a tower! Solve these equations to break the spell and save her!</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
+                            <h4 class="font-semibold mb-2">Level 1: The Magic Door</h4>
+                            <p class="mb-2">What is 15 + 27?</p>
+                            <input type="number" id="math-answer-1" class="border border-gray-300 rounded px-3 py-2 w-20" placeholder="?">
+                            <button onclick="checkMathAnswer(1, 42)" class="ml-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Cast Spell!</button>
+                        </div>
+
+                        <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                            <h4 class="font-semibold mb-2">Level 2: The Enchanted Bridge</h4>
+                            <p class="mb-2">If x + 8 = 15, what is x?</p>
+                            <input type="number" id="math-answer-2" class="border border-gray-300 rounded px-3 py-2 w-20" placeholder="?">
+                            <button onclick="checkMathAnswer(2, 7)" class="ml-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Cross Bridge!</button>
+                        </div>
+
+                        <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                            <h4 class="font-semibold mb-2">Final Level: Break the Spell</h4>
+                            <p class="mb-2">What is 3/4 as a decimal?</p>
+                            <input type="number" step="0.01" id="math-answer-3" class="border border-gray-300 rounded px-3 py-2 w-20" placeholder="?">
+                            <button onclick="checkMathAnswer(3, 0.75)" class="ml-2 bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Save Princess!</button>
+                        </div>
+                    </div>
+
+                    <div id="game-result" class="mt-4 text-center"></div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function checkMathAnswer(level, correctAnswer) {
+            const userAnswer = parseFloat(document.getElementById(`math-answer-${level}`).value);
+            const resultDiv = document.getElementById('game-result');
+
+            if (userAnswer === correctAnswer) {
+                resultDiv.innerHTML = `<div class="bg-green-100 text-green-800 p-3 rounded-lg">✅ Correct! You've completed Level ${level}! ${level === 3 ? '🏰 Princess saved! +70 XP earned!' : '+20 XP earned!'}</div>`;
+                showToast(`🎉 Level ${level} completed! Great job!`, 'success');
+            } else {
+                resultDiv.innerHTML = `<div class="bg-red-100 text-red-800 p-3 rounded-lg">❌ Not quite right. Try again! Hint: ${level === 1 ? 'Add the numbers carefully' : level === 2 ? 'Subtract 8 from both sides' : 'Divide 3 by 4'}</div>`;
+            }
+        }
+
+        function startScienceGame() {
+            showToast('🔬 Starting Lab Detective game! Solve scientific mysteries through experiments!', 'info');
+
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg p-6 max-w-2xl w-full mx-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-semibold">🔬 Lab Detective - Mystery of the Missing Elements!</h3>
+                        <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-lg mb-4">
+                        <p class="text-sm text-gray-700">🧪 Elements have gone missing from the periodic table! Use your scientific knowledge to find them!</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2">🔍 Clue 1</h4>
+                            <p class="text-sm mb-2">I am the most abundant gas in Earth's atmosphere. What am I?</p>
+                            <select id="science-answer-1" class="w-full border border-gray-300 rounded px-3 py-2">
+                                <option value="">Choose element...</option>
+                                <option value="oxygen">Oxygen</option>
+                                <option value="nitrogen">Nitrogen</option>
+                                <option value="carbon">Carbon</option>
+                            </select>
+                        </div>
+
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2">🔍 Clue 2</h4>
+                            <p class="text-sm mb-2">I am essential for photosynthesis and have the symbol 'O'. What am I?</p>
+                            <select id="science-answer-2" class="w-full border border-gray-300 rounded px-3 py-2">
+                                <option value="">Choose element...</option>
+                                <option value="oxygen">Oxygen</option>
+                                <option value="hydrogen">Hydrogen</option>
+                                <option value="carbon">Carbon</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button onclick="checkScienceAnswers()" class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600">🔬 Solve Mystery!</button>
+                    </div>
+
+                    <div id="science-result" class="mt-4 text-center"></div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function checkScienceAnswers() {
+            const answer1 = document.getElementById('science-answer-1').value;
+            const answer2 = document.getElementById('science-answer-2').value;
+            const resultDiv = document.getElementById('science-result');
+
+            let correct = 0;
+            if (answer1 === 'nitrogen') correct++;
+            if (answer2 === 'oxygen') correct++;
+
+            if (correct === 2) {
+                resultDiv.innerHTML = `<div class="bg-green-100 text-green-800 p-3 rounded-lg">🎉 Perfect! You've solved the mystery! All elements found! +50 XP earned!</div>`;
+                showToast('🔬 Mystery solved! You\'re a true Lab Detective!', 'success');
+            } else {
+                resultDiv.innerHTML = `<div class="bg-yellow-100 text-yellow-800 p-3 rounded-lg">🤔 ${correct}/2 correct. Keep investigating! Science requires careful observation.</div>`;
+            }
+        }
+
+        function startEnglishGame() {
+            showToast('📚 Starting Word Wizard adventure! Build your vocabulary through magical quests!', 'info');
+
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg p-6 max-w-2xl w-full mx-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-semibold">📚 Word Wizard - The Vocabulary Quest!</h3>
+                        <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-lg mb-4">
+                        <p class="text-sm text-gray-700">🪄 The ancient spell book needs the correct words to unlock its magic! Choose wisely, young wizard!</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-500">
+                            <h4 class="font-semibold mb-2">Spell 1: The Synonym Charm</h4>
+                            <p class="mb-2">What is a synonym for "happy"?</p>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button onclick="checkEnglishAnswer(1, 'joyful')" class="bg-blue-100 hover:bg-blue-200 p-2 rounded text-sm">Joyful</button>
+                                <button onclick="checkEnglishAnswer(1, 'sad')" class="bg-blue-100 hover:bg-blue-200 p-2 rounded text-sm">Sad</button>
+                                <button onclick="checkEnglishAnswer(1, 'angry')" class="bg-blue-100 hover:bg-blue-200 p-2 rounded text-sm">Angry</button>
+                                <button onclick="checkEnglishAnswer(1, 'tired')" class="bg-blue-100 hover:bg-blue-200 p-2 rounded text-sm">Tired</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                            <h4 class="font-semibold mb-2">Spell 2: The Grammar Guardian</h4>
+                            <p class="mb-2">Choose the correct sentence:</p>
+                            <div class="space-y-2">
+                                <button onclick="checkEnglishAnswer(2, 'correct')" class="w-full bg-green-100 hover:bg-green-200 p-2 rounded text-sm text-left">She and I went to the store.</button>
+                                <button onclick="checkEnglishAnswer(2, 'wrong')" class="w-full bg-green-100 hover:bg-green-200 p-2 rounded text-sm text-left">Her and me went to the store.</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="english-result" class="mt-4 text-center"></div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        let englishScore = 0;
+        function checkEnglishAnswer(question, answer) {
+            const resultDiv = document.getElementById('english-result');
+
+            if ((question === 1 && answer === 'joyful') || (question === 2 && answer === 'correct')) {
+                englishScore++;
+                resultDiv.innerHTML = `<div class="bg-green-100 text-green-800 p-3 rounded-lg">✨ Correct! Spell ${question} cast successfully! Score: ${englishScore}/2</div>`;
+
+                if (englishScore === 2) {
+                    setTimeout(() => {
+                        resultDiv.innerHTML = `<div class="bg-purple-100 text-purple-800 p-3 rounded-lg">🪄 Congratulations! You've mastered the Word Wizard quest! +70 XP earned!</div>`;
+                        showToast('📚 Word Wizard quest completed! Your vocabulary is growing stronger!', 'success');
+                    }, 1500);
+                }
+            } else {
+                resultDiv.innerHTML = `<div class="bg-red-100 text-red-800 p-3 rounded-lg">❌ The spell fizzled! Try again, young wizard!</div>`;
+            }
+        }
+
+        // Future Predictor Functions
+        function generateCareerPlan() {
+            showToast('🔮 Generating your personalized career roadmap...', 'info');
+
+            setTimeout(() => {
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+                modal.innerHTML = `
+                    <div class="bg-white rounded-lg p-6 max-w-4xl w-full mx-4 max-h-96 overflow-y-auto">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-semibold">📋 Personalized Career Plan for Priya Sharma</h3>
+                            <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-blue-800 mb-2">🎯 Immediate Goals (Next 6 months)</h4>
+                                <ul class="text-sm text-blue-700 space-y-1">
+                                    <li>• Improve English score from 65% to 75%</li>
+                                    <li>• Maintain Mathematics excellence (85%+)</li>
+                                    <li>• Start basic coding with Scratch programming</li>
+                                    <li>• Join school science club for hands-on experiments</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-green-800 mb-2">📚 Academic Path (Grades 9-12)</h4>
+                                <ul class="text-sm text-green-700 space-y-1">
+                                    <li>• Choose PCM (Physics, Chemistry, Mathematics) stream</li>
+                                    <li>• Add Computer Science as optional subject</li>
+                                    <li>• Target 90%+ in board exams</li>
+                                    <li>• Participate in Math and Science Olympiads</li>
+                                    <li>• Learn Python programming language</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-purple-800 mb-2">🏛️ Higher Education (College)</h4>
+                                <ul class="text-sm text-purple-700 space-y-1">
+                                    <li>• Target: IIT/NIT for Computer Science Engineering</li>
+                                    <li>• Alternative: B.Sc. Data Science from top universities</li>
+                                    <li>• Prepare for JEE Main & Advanced</li>
+                                    <li>• Build portfolio with coding projects</li>
+                                    <li>• Internships at tech companies</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-yellow-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-yellow-800 mb-2">💼 Career Opportunities</h4>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                    <div>
+                                        <h5 class="font-medium">Tech Industry:</h5>
+                                        <ul class="text-yellow-700 space-y-1">
+                                            <li>• Data Scientist at Google/Microsoft</li>
+                                            <li>• AI/ML Engineer</li>
+                                            <li>• Software Developer</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-medium">Research & Academia:</h5>
+                                        <ul class="text-yellow-700 space-y-1">
+                                            <li>• Research Scientist</li>
+                                            <li>• University Professor</li>
+                                            <li>• Innovation Consultant</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-6">
+                            <button onclick="downloadCareerPlan()" class="bg-indigo-500 text-white px-6 py-2 rounded-lg hover:bg-indigo-600 mr-3">📥 Download Plan</button>
+                            <button onclick="this.closest('.fixed').remove()" class="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400">Close</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            }, 2000);
+        }
+
+        function downloadCareerPlan() {
+            const careerPlan = `🔮 AI CAREER PLAN FOR PRIYA SHARMA
+Generated: ${new Date().toLocaleDateString()}
+
+STUDENT PROFILE:
+- Name: Priya Sharma
+- Grade: 8
+- Learning Style: Visual
+- Strengths: Mathematics (85%), Analytical Thinking
+- Focus Areas: English (65%), Communication Skills
+
+IMMEDIATE GOALS (Next 6 months):
+✓ Improve English score from 65% to 75%
+✓ Maintain Mathematics excellence (85%+)
+✓ Start basic coding with Scratch programming
+✓ Join school science club for hands-on experiments
+
+ACADEMIC PATH (Grades 9-12):
+✓ Choose PCM (Physics, Chemistry, Mathematics) stream
+✓ Add Computer Science as optional subject
+✓ Target 90%+ in board exams
+✓ Participate in Math and Science Olympiads
+✓ Learn Python programming language
+
+HIGHER EDUCATION (College):
+✓ Target: IIT/NIT for Computer Science Engineering
+✓ Alternative: B.Sc. Data Science from top universities
+✓ Prepare for JEE Main & Advanced
+✓ Build portfolio with coding projects
+✓ Internships at tech companies
+
+CAREER OPPORTUNITIES:
+Tech Industry:
+- Data Scientist at Google/Microsoft
+- AI/ML Engineer
+- Software Developer
+
+Research & Academia:
+- Research Scientist
+- University Professor
+- Innovation Consultant
+
+PREDICTED SALARY RANGE: ₹15-50 LPA
+SUCCESS PROBABILITY: 92%
+
+Generated by AI Education Agent - Future Predictor
+Personalized for Government Schools Initiative`;
+
+            const blob = new Blob([careerPlan], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Career_Plan_Priya_Sharma_${new Date().toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+
+            showToast('📥 Career plan downloaded successfully!', 'success');
+        }
+
+        function generatePersonalizedWorksheet(studentId) {
+            // Close the student details modal
+            document.querySelector('.fixed').remove();
+
+            // Switch to AI Features tab and show worksheet generator
+            showTab(2);
+            selectFeature('worksheet');
+            showWorksheetGenerator();
+
+            showToast(`📝 Generating personalized worksheet for ${studentId}...`, 'info');
+        }
+
+        function startPersonalizedSession(studentId) {
+            // Close the student details modal
+            document.querySelector('.fixed').remove();
+
+            // Switch to AI Features tab and show learning session
+            showTab(2);
+            selectFeature('session');
+            showLearningSession();
+
+            showToast(`🎓 Starting personalized learning session for ${studentId}...`, 'info');
+        }
+
+        function showStatDetails(statType) {
+            const statData = {
+                students: {
+                    title: '👥 Student Statistics',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-medium text-blue-800 mb-2">Enrollment Trends</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>Total Students: <strong>25</strong></div>
+                                    <div>New This Week: <strong class="text-green-600">+2</strong></div>
+                                    <div>Active Students: <strong>23</strong></div>
+                                    <div>Inactive: <strong class="text-red-600">2</strong></div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-medium text-gray-800 mb-2">Grade Distribution</h4>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between"><span>Grade 8:</span><span>25 students</span></div>
+                                    <div class="flex justify-between"><span>Average Age:</span><span>13.2 years</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                performance: {
+                    title: '📈 Performance Analytics',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-medium text-green-800 mb-2">Overall Performance</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>Class Average: <strong>72.5%</strong></div>
+                                    <div>Monthly Growth: <strong class="text-green-600">+3.2%</strong></div>
+                                    <div>Top Performer: <strong>Priya Sharma (76%)</strong></div>
+                                    <div>Improvement Needed: <strong class="text-orange-600">5 students</strong></div>
+                                </div>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-medium text-blue-800 mb-2">Subject-wise Performance</h4>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between"><span>Mathematics:</span><span class="text-green-600">85% avg</span></div>
+                                    <div class="flex justify-between"><span>Science:</span><span class="text-yellow-600">78% avg</span></div>
+                                    <div class="flex justify-between"><span>English:</span><span class="text-red-600">65% avg</span></div>
+                                    <div class="flex justify-between"><span>History:</span><span class="text-orange-600">70% avg</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                sessions: {
+                    title: '🎓 Active Learning Sessions',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <h4 class="font-medium text-purple-800 mb-2">Current Sessions</h4>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between"><span>Mathematics - Algebra:</span><span class="text-green-600">3 students</span></div>
+                                    <div class="flex justify-between"><span>English - Grammar:</span><span class="text-blue-600">2 students</span></div>
+                                    <div class="flex justify-between"><span>Science - Physics:</span><span class="text-purple-600">3 students</span></div>
+                                </div>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-medium text-blue-800 mb-2">Session Statistics</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>Total Sessions Today: <strong>8</strong></div>
+                                    <div>Average Duration: <strong>25 min</strong></div>
+                                    <div>Completion Rate: <strong class="text-green-600">92%</strong></div>
+                                    <div>Student Satisfaction: <strong class="text-green-600">4.8/5</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                worksheets: {
+                    title: '📝 Worksheet Analytics',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="bg-orange-50 p-4 rounded-lg">
+                                <h4 class="font-medium text-orange-800 mb-2">Worksheet Statistics</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>Total Completed: <strong>45</strong></div>
+                                    <div>Completed Today: <strong class="text-green-600">12</strong></div>
+                                    <div>Average Score: <strong>78%</strong></div>
+                                    <div>Pending Review: <strong class="text-yellow-600">8</strong></div>
+                                </div>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <h4 class="font-medium text-purple-800 mb-2">Subject Distribution</h4>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between"><span>Mathematics:</span><span>18 worksheets</span></div>
+                                    <div class="flex justify-between"><span>Science:</span><span>12 worksheets</span></div>
+                                    <div class="flex justify-between"><span>English:</span><span>10 worksheets</span></div>
+                                    <div class="flex justify-between"><span>History:</span><span>5 worksheets</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                doubts: {
+                    title: '🤖 Doubt Resolution Status',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="bg-red-50 p-4 rounded-lg">
+                                <h4 class="font-medium text-red-800 mb-2">Pending Doubts</h4>
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>Total Pending: <strong>12</strong></div>
+                                    <div>Urgent (>24h): <strong class="text-red-600">3</strong></div>
+                                    <div>Average Response Time: <strong>2.5 hours</strong></div>
+                                    <div>Resolution Rate: <strong class="text-green-600">94%</strong></div>
+                                </div>
+                            </div>
+                            <div class="bg-yellow-50 p-4 rounded-lg">
+                                <h4 class="font-medium text-yellow-800 mb-2">Subject-wise Doubts</h4>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between"><span>Mathematics:</span><span class="text-blue-600">5 doubts</span></div>
+                                    <div class="flex justify-between"><span>English:</span><span class="text-red-600">4 doubts</span></div>
+                                    <div class="flex justify-between"><span>Science:</span><span class="text-yellow-600">2 doubts</span></div>
+                                    <div class="flex justify-between"><span>History:</span><span class="text-green-600">1 doubt</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                }
+            };
+
+            const data = statData[statType];
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg p-6 max-w-2xl w-full mx-4 max-h-96 overflow-y-auto">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">${data.title}</h3>
+                        <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+                    </div>
+                    ${data.content}
+                    <div class="text-center mt-6">
+                        <button onclick="this.closest('.fixed').remove()" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">Close</button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+        }
+
+        // Check API connection
+        async function checkAPI() {
+            try {
+                const response = await fetch('http://localhost:8000/');
+                const data = await response.json();
+                document.getElementById('api-status').innerHTML = '✅ AI Connected';
+                document.getElementById('api-status').className = 'px-3 py-1 rounded-full text-sm font-medium bg-green-500 text-white';
+            } catch (error) {
+                document.getElementById('api-status').innerHTML = '❌ Offline';
+                document.getElementById('api-status').className = 'px-3 py-1 rounded-full text-sm font-medium bg-red-500 text-white';
+            }
+        }
+
+        // Check API on load
+        checkAPI();
+
+        // Initialize page with Student Dashboard as default
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set Student Dashboard (tab 0) as default active tab
+            showTab(0);
+        });
+
+        // Also set default tab immediately in case DOMContentLoaded already fired
+        showTab(0);
+    </script>
+</body>
+</html>
