@@ -173,6 +173,16 @@ coverage.xml
 .hypothesis
 .pytest_cache
 
+# Python Virtual Environments (all variations)
+backend/venv/
+backend/env/
+backend/.venv/
+backend/.env/
+**/venv/
+**/env/
+**/.venv/
+**/.env/
+
 # IDEs
 .vscode/
 .idea/
