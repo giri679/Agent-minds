@@ -1,0 +1,23 @@
+{
+  "name": "ai-education-agent",
+  "version": "1.0.1",
+  "description": "AI Education Agent - Personalized learning system for government schools",
+  "main": "demo.html",
+  "scripts": {
+    "build": "echo 'Building AI Education Agent...'",
+    "start": "echo 'AI Education Agent is ready!'",
+    "dev": "echo 'Development mode'"
+  },
+  "keywords": [
+    "ai",
+    "education",
+    "learning",
+    "personalized",
+    "government-schools"
+  ],
+  "author": "AI Education Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

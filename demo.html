@@ -265,10 +265,11 @@
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Strengths</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Focus Areas</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                <tr class="hover:bg-gray-50 cursor-pointer" onclick="showStudentDetails('STU001', 'Priya Sharma')">
+                                <tr class="hover:bg-gray-50">
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
                                             <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold mr-3">P</div>
@@ -294,6 +295,13 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Active</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <div class="flex space-x-2">
+                                            <button onclick="event.stopPropagation(); showStudentDetails('STU001', 'Priya Sharma')" class="text-blue-600 hover:text-blue-900 px-2 py-1 rounded text-xs">View</button>
+                                            <button onclick="event.stopPropagation(); editStudent('STU001')" class="text-green-600 hover:text-green-900 px-2 py-1 rounded text-xs">Edit</button>
+                                            <button onclick="event.stopPropagation(); confirmRemoveStudent('STU001', 'Priya Sharma')" class="text-red-600 hover:text-red-900 px-2 py-1 rounded text-xs">Remove</button>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -1488,98 +1496,289 @@
                 </div>
             `;
 
-            // Simulate API call delay
-            setTimeout(() => {
-                previewDiv.innerHTML = `
-                    <h4 class="text-md font-medium mb-3 text-gray-800">📝 Generated Worksheet</h4>
-                    <div class="bg-white rounded-lg shadow-sm border p-4 mb-4 max-h-96 overflow-y-auto">
-                        <!-- Header -->
-                        <div class="flex justify-between items-center mb-4 pb-3 border-b">
-                            <div>
-                                <h5 class="font-semibold text-gray-800 text-lg">${subject.charAt(0).toUpperCase() + subject.slice(1)} - ${topic}</h5>
-                                <p class="text-sm text-gray-600">Student: Priya Sharma | Grade: 8 | Date: ${new Date().toLocaleDateString()}</p>
-                            </div>
-                            <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full font-medium">Level: ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}</span>
-                        </div>
+            // Call the backend API to generate worksheet
+            const apiUrl = window.location.hostname === 'localhost' ?
+                'http://localhost:8000/api/worksheets/generate' :
+                '/api/worksheets/ai-generate';
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    subject: subject,
+                    topic: topic,
+                    difficulty_level: difficulty,
+                    questions: questions,
+                    type: type
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                displayWorksheet(data, subject, topic, difficulty, questions, type);
+            })
+            .catch(error => {
+                console.error('Error generating worksheet:', error);
+                // Fallback to local generation
+                setTimeout(() => {
+                    const fallbackData = {
+                        worksheet_id: 'fallback_' + Date.now(),
+                        title: `${subject.charAt(0).toUpperCase() + subject.slice(1)} - ${topic}`,
+                        problems: [
+                            generateQuestionData(subject, 1, type),
+                            generateQuestionData(subject, 2, type),
+                            generateQuestionData(subject, 3, type)
+                        ]
+                    };
+                    displayWorksheet(fallbackData, subject, topic, difficulty, questions, type);
+                }, 1500);
+            });
+        }
 
-                        <!-- Questions -->
-                        <div class="space-y-4">
-                            <div class="bg-gray-50 rounded-lg p-3 border-l-4 border-green-500">
-                                <p class="font-medium text-gray-800 mb-1">Question 1:</p>
-                                <p class="text-gray-700">${getQuestionBySubject(subject, 1)}</p>
-                                <div class="mt-2 text-xs text-gray-500">Points: 5 | Type: ${type}</div>
-                            </div>
-                            <div class="bg-gray-50 rounded-lg p-3 border-l-4 border-green-500">
-                                <p class="font-medium text-gray-800 mb-1">Question 2:</p>
-                                <p class="text-gray-700">${getQuestionBySubject(subject, 2)}</p>
-                                <div class="mt-2 text-xs text-gray-500">Points: 5 | Type: ${type}</div>
-                            </div>
-                            <div class="bg-gray-50 rounded-lg p-3 border-l-4 border-green-500">
-                                <p class="font-medium text-gray-800 mb-1">Question 3:</p>
-                                <p class="text-gray-700">${getQuestionBySubject(subject, 3)}</p>
-                                <div class="mt-2 text-xs text-gray-500">Points: 5 | Type: ${type}</div>
-                            </div>
-                            ${questions > 3 ? `
-                            <div class="text-center text-gray-500 py-3 border-t border-gray-200">
-                                <p class="text-sm">... ${questions - 3} more questions ...</p>
-                                <p class="text-xs mt-1">Total Questions: ${questions} | Estimated Time: ${Math.ceil(questions * 2)} minutes</p>
-                            </div>
-                            ` : ''}
-                        </div>
+        // Function to display the worksheet
+        function displayWorksheet(worksheetData, subject, topic, difficulty, questions, type) {
+            const previewDiv = document.getElementById('worksheet-preview');
 
-                        <!-- Footer -->
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-6 pt-4 border-t gap-3">
-                            <div class="text-xs text-gray-500">
-                                <div>📊 Difficulty: ${difficulty} | 🎯 Adapted for 76% performance level</div>
-                                <div class="mt-1">⏱️ Estimated time: ${Math.ceil(questions * 2)} minutes | 📝 Total points: ${questions * 5}</div>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button onclick="downloadPDF()" class="bg-blue-500 text-white px-3 py-2 rounded-lg text-xs hover:bg-blue-600 transition-colors">📥 Download PDF</button>
-                                <button onclick="printWorksheet()" class="bg-green-500 text-white px-3 py-2 rounded-lg text-xs hover:bg-green-600 transition-colors">🖨️ Print</button>
-                            </div>
+            let questionsHTML = '';
+            worksheetData.problems.forEach((problem, index) => {
+                if (problem.type === 'multiple_choice') {
+                    const optionsHTML = problem.options.map(option =>
+                        `<div class="ml-4 mt-1 text-gray-600 text-sm">${option}</div>`
+                    ).join('');
+
+                    questionsHTML += `
+                        <div class="bg-gray-50 rounded-lg p-3 border-l-4 border-green-500">
+                            <p class="font-medium text-gray-800 mb-1">Question ${index + 1}:</p>
+                            <p class="text-gray-700 mb-2">${problem.question}</p>
+                            ${optionsHTML}
+                            <div class="mt-3 text-xs text-gray-500">Points: 5 | Type: Multiple Choice | Correct Answer: ${problem.correct_answer}</div>
                         </div>
+                    `;
+                } else {
+                    questionsHTML += `
+                        <div class="bg-gray-50 rounded-lg p-3 border-l-4 border-green-500">
+                            <p class="font-medium text-gray-800 mb-1">Question ${index + 1}:</p>
+                            <p class="text-gray-700">${problem.question}</p>
+                            <div class="mt-2 text-xs text-gray-500">Points: 5 | Type: ${problem.type === 'short_answer' ? 'Short Answer' : 'Long Answer'}</div>
+                        </div>
+                    `;
+                }
+            });
+
+            previewDiv.innerHTML = `
+                <h4 class="text-md font-medium mb-3 text-gray-800">📝 Generated Worksheet</h4>
+                <div class="bg-white rounded-lg shadow-sm border p-4 mb-4 max-h-96 overflow-y-auto">
+                    <!-- Header -->
+                    <div class="flex justify-between items-center mb-4 pb-3 border-b">
+                        <div>
+                            <h5 class="font-semibold text-gray-800 text-lg">${worksheetData.title}</h5>
+                            <p class="text-sm text-gray-600">Student: Priya Sharma | Grade: 8 | Date: ${new Date().toLocaleDateString()}</p>
+                        </div>
+                        <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full font-medium">Level: ${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}</span>
                     </div>
 
-                    <!-- Success Message -->
-                    <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-                        <div class="flex items-start">
-                            <div class="text-green-500 mr-3 mt-0.5">✅</div>
-                            <div>
-                                <p class="text-green-800 text-sm font-medium">Worksheet Generated Successfully!</p>
-                                <p class="text-green-700 text-xs mt-1">This ${difficulty} level worksheet is perfectly adapted to your current 76% performance level in ${subject}. Questions are personalized based on your learning style and previous performance.</p>
-                            </div>
+                    <!-- Questions -->
+                    <div class="space-y-4">
+                        ${questionsHTML}
+                        ${questions > worksheetData.problems.length ? `
+                        <div class="text-center text-gray-500 py-3 border-t border-gray-200">
+                            <p class="text-sm">... ${questions - worksheetData.problems.length} more questions ...</p>
+                            <p class="text-xs mt-1">Total Questions: ${questions} | Estimated Time: ${worksheetData.estimated_time_minutes || Math.ceil(questions * 2)} minutes</p>
                         </div>
+                        ` : ''}
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-6 pt-4 border-t gap-3">
+                        <div class="text-xs text-gray-500">
+                            <div>📊 Difficulty: ${difficulty} | 🎯 Adapted for 76% performance level</div>
+                            <div class="mt-1">⏱️ Estimated time: ${worksheetData.estimated_time_minutes || Math.ceil(questions * 2)} minutes | 📝 Total points: ${questions * 5}</div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button onclick="downloadPDF()" class="bg-blue-500 text-white px-3 py-2 rounded-lg text-xs hover:bg-blue-600 transition-colors">📥 Download PDF</button>
+                            <button onclick="printWorksheet()" class="bg-green-500 text-white px-3 py-2 rounded-lg text-xs hover:bg-green-600 transition-colors">🖨️ Print</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Success Message -->
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <div class="flex items-start">
+                        <div class="text-green-500 mr-3 mt-0.5">✅</div>
+                        <div>
+                            <p class="text-green-800 text-sm font-medium">Worksheet Generated Successfully!</p>
+                            <p class="text-green-700 text-xs mt-1">This ${difficulty} level worksheet is perfectly adapted to your current 76% performance level in ${subject}. Questions are personalized based on your learning style and previous performance.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Helper function to generate question data for fallback
+        function generateQuestionData(subject, questionNum, type) {
+            const questionData = getQuestionBySubject(subject, questionNum, type);
+
+            if (type === 'mcq' || type === 'multiple_choice') {
+                return {
+                    id: questionNum,
+                    type: 'multiple_choice',
+                    question: questionData.question,
+                    options: questionData.options,
+                    correct_answer: questionData.correct
+                };
+            } else {
+                return {
+                    id: questionNum,
+                    type: 'short_answer',
+                    question: questionData,
+                    expected_length: '2-3 sentences'
+                };
+            }
+        }
+
+        // Helper function to generate question HTML based on type
+        function generateQuestionHTML(subject, questionNum, type) {
+            const questionData = getQuestionBySubject(subject, questionNum, type);
+
+            if (type === 'mcq' || type === 'multiple_choice') {
+                const optionsHTML = questionData.options.map(option =>
+                    `<div class="ml-4 mt-1 text-gray-600 text-sm">${option}</div>`
+                ).join('');
+
+                return `
+                    <div class="bg-gray-50 rounded-lg p-3 border-l-4 border-green-500">
+                        <p class="font-medium text-gray-800 mb-1">Question ${questionNum}:</p>
+                        <p class="text-gray-700 mb-2">${questionData.question}</p>
+                        ${optionsHTML}
+                        <div class="mt-3 text-xs text-gray-500">Points: 5 | Type: Multiple Choice | Correct Answer: ${questionData.correct}</div>
                     </div>
                 `;
-            }, 1500);
+            } else {
+                return `
+                    <div class="bg-gray-50 rounded-lg p-3 border-l-4 border-green-500">
+                        <p class="font-medium text-gray-800 mb-1">Question ${questionNum}:</p>
+                        <p class="text-gray-700">${questionData}</p>
+                        <div class="mt-2 text-xs text-gray-500">Points: 5 | Type: ${type === 'short' ? 'Short Answer' : type === 'long' ? 'Long Answer' : 'Mixed'}</div>
+                    </div>
+                `;
+            }
         }
 
         // Helper function to generate subject-specific questions
-        function getQuestionBySubject(subject, questionNum) {
-            const questions = {
-                mathematics: [
-                    "Solve for x: 2x + 5 = 13",
-                    "If y = 3x - 2, find y when x = 4",
-                    "Simplify: 4(x + 3) - 2x"
-                ],
-                science: [
-                    "What is the function of mitochondria in a cell?",
-                    "Explain the process of photosynthesis in plants",
-                    "What are the three states of matter and their properties?"
-                ],
-                english: [
-                    "Identify the subject and predicate in: 'The quick brown fox jumps over the lazy dog.'",
-                    "Write a sentence using the past perfect tense",
-                    "What is the difference between 'affect' and 'effect'?"
-                ],
-                history: [
-                    "Who was the first Prime Minister of India?",
-                    "In which year did India gain independence?",
-                    "Name three important leaders of the Indian freedom struggle"
-                ]
+        function getQuestionBySubject(subject, questionNum, type) {
+            const questionData = {
+                mathematics: {
+                    mcq: [
+                        {
+                            question: "What is the value of x in the equation 2x + 5 = 13?",
+                            options: ["A) x = 3", "B) x = 4", "C) x = 5", "D) x = 6"],
+                            correct: "B"
+                        },
+                        {
+                            question: "If y = 3x - 2, what is the value of y when x = 4?",
+                            options: ["A) y = 8", "B) y = 10", "C) y = 12", "D) y = 14"],
+                            correct: "B"
+                        },
+                        {
+                            question: "What is the simplified form of 4(x + 3) - 2x?",
+                            options: ["A) 2x + 12", "B) 4x + 12", "C) 2x + 3", "D) 6x + 12"],
+                            correct: "A"
+                        }
+                    ],
+                    short: [
+                        "Solve for x: 2x + 5 = 13. Show your work step by step.",
+                        "If y = 3x - 2, find y when x = 4. Explain your calculation.",
+                        "Simplify: 4(x + 3) - 2x. Show each step of the simplification."
+                    ]
+                },
+                science: {
+                    mcq: [
+                        {
+                            question: "What is the primary function of mitochondria in a cell?",
+                            options: ["A) Protein synthesis", "B) Energy production", "C) DNA storage", "D) Waste removal"],
+                            correct: "B"
+                        },
+                        {
+                            question: "Which process do plants use to make their own food?",
+                            options: ["A) Respiration", "B) Digestion", "C) Photosynthesis", "D) Transpiration"],
+                            correct: "C"
+                        },
+                        {
+                            question: "What are the three main states of matter?",
+                            options: ["A) Hot, cold, warm", "B) Solid, liquid, gas", "C) Big, medium, small", "D) Fast, slow, still"],
+                            correct: "B"
+                        }
+                    ],
+                    short: [
+                        "Explain the function of mitochondria in a cell and why they are called 'powerhouses'.",
+                        "Describe the process of photosynthesis and explain why it's important for life on Earth.",
+                        "List the three states of matter and give two examples of each state."
+                    ]
+                },
+                english: {
+                    mcq: [
+                        {
+                            question: "In the sentence 'The quick brown fox jumps over the lazy dog', what is the subject?",
+                            options: ["A) quick brown", "B) fox", "C) jumps", "D) lazy dog"],
+                            correct: "B"
+                        },
+                        {
+                            question: "Which sentence uses the past perfect tense correctly?",
+                            options: ["A) I had eaten lunch", "B) I am eating lunch", "C) I will eat lunch", "D) I eat lunch"],
+                            correct: "A"
+                        },
+                        {
+                            question: "Choose the correct usage: 'The rain will _____ our picnic plans.'",
+                            options: ["A) effect", "B) affect", "C) effects", "D) affects"],
+                            correct: "B"
+                        }
+                    ],
+                    short: [
+                        "Identify the subject and predicate in this sentence: 'The quick brown fox jumps over the lazy dog.'",
+                        "Write a sentence using the past perfect tense and explain why you used this tense.",
+                        "Explain the difference between 'affect' and 'effect' with examples."
+                    ]
+                },
+                history: {
+                    mcq: [
+                        {
+                            question: "Who was the first Prime Minister of India?",
+                            options: ["A) Mahatma Gandhi", "B) Jawaharlal Nehru", "C) Sardar Patel", "D) Dr. Rajendra Prasad"],
+                            correct: "B"
+                        },
+                        {
+                            question: "In which year did India gain independence?",
+                            options: ["A) 1945", "B) 1946", "C) 1947", "D) 1948"],
+                            correct: "C"
+                        },
+                        {
+                            question: "Which movement was led by Mahatma Gandhi for Indian independence?",
+                            options: ["A) Quit India Movement", "B) Khilafat Movement", "C) Swadeshi Movement", "D) All of the above"],
+                            correct: "D"
+                        }
+                    ],
+                    short: [
+                        "Name the first Prime Minister of India and describe one of his major contributions.",
+                        "Explain the significance of August 15, 1947, in Indian history.",
+                        "List three important leaders of the Indian freedom struggle and their contributions."
+                    ]
+                }
             };
 
-            return questions[subject] ? questions[subject][questionNum - 1] : `Sample question ${questionNum} for ${subject}`;
+            const subjectData = questionData[subject];
+            if (!subjectData) {
+                return type === 'mcq' ?
+                    { question: `Sample multiple choice question ${questionNum} for ${subject}`, options: ["A) Option 1", "B) Option 2", "C) Option 3", "D) Option 4"], correct: "A" } :
+                    `Sample question ${questionNum} for ${subject}`;
+            }
+
+            if (type === 'mcq' || type === 'multiple_choice') {
+                const mcqData = subjectData.mcq[questionNum - 1];
+                return mcqData || { question: `Sample MCQ ${questionNum} for ${subject}`, options: ["A) Option 1", "B) Option 2", "C) Option 3", "D) Option 4"], correct: "A" };
+            } else {
+                const shortData = subjectData.short[questionNum - 1];
+                return shortData || `Sample question ${questionNum} for ${subject}`;
+            }
         }
 
         function downloadPDF() {
@@ -1904,11 +2103,228 @@ Generated by AI Education Agent for Government Schools
                             </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <button onclick="viewStudentDetails('${student.student_id}')" class="text-blue-600 hover:text-blue-900">View</button>
+                            <div class="flex space-x-2">
+                                <button onclick="viewStudentDetails('${student.student_id}')" class="text-blue-600 hover:text-blue-900 px-2 py-1 rounded text-xs">View</button>
+                                <button onclick="editStudent('${student.student_id}')" class="text-green-600 hover:text-green-900 px-2 py-1 rounded text-xs">Edit</button>
+                                <button onclick="confirmRemoveStudent('${student.student_id}', '${student.name}')" class="text-red-600 hover:text-red-900 px-2 py-1 rounded text-xs">Remove</button>
+                            </div>
                         </td>
                     `;
                     studentTableBody.appendChild(row);
                 });
+            }
+        }
+
+        // Function to confirm student removal
+        function confirmRemoveStudent(studentId, studentName) {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+                    <div class="flex items-center mb-4">
+                        <div class="text-red-500 text-2xl mr-3">⚠️</div>
+                        <h3 class="text-lg font-semibold text-gray-900">Confirm Student Removal</h3>
+                    </div>
+                    <p class="text-gray-600 mb-6">
+                        Are you sure you want to remove <strong>${studentName}</strong> (${studentId}) from the class?
+                        This action cannot be undone and will permanently delete all student data.
+                    </p>
+                    <div class="flex justify-end space-x-3">
+                        <button onclick="this.closest('.fixed').remove()" class="px-4 py-2 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                            Cancel
+                        </button>
+                        <button onclick="removeStudent('${studentId}'); this.closest('.fixed').remove()" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
+                            Remove Student
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Function to remove a student
+        function removeStudent(studentId) {
+            // Handle default student removal
+            if (studentId === 'STU001') {
+                // Hide the default student row
+                const tableBody = document.querySelector('#teacher-students-table tbody');
+                const defaultRow = tableBody.querySelector('tr');
+                if (defaultRow) {
+                    defaultRow.style.display = 'none';
+                }
+
+                // Update student count
+                const totalStudentsElement = document.querySelector('.text-2xl.font-bold.text-blue-600');
+                if (totalStudentsElement) {
+                    const currentCount = parseInt(totalStudentsElement.textContent);
+                    totalStudentsElement.textContent = Math.max(0, currentCount - 1);
+                }
+
+                showToast(`✅ Student Priya Sharma (STU001) removed successfully!`, 'success');
+                return;
+            }
+
+            let students = JSON.parse(localStorage.getItem('students') || '[]');
+            const studentIndex = students.findIndex(s => s.student_id === studentId);
+
+            if (studentIndex !== -1) {
+                const removedStudent = students[studentIndex];
+                students.splice(studentIndex, 1);
+                localStorage.setItem('students', JSON.stringify(students));
+
+                // Update student count
+                const totalStudentsElement = document.querySelector('.text-2xl.font-bold.text-blue-600');
+                if (totalStudentsElement) {
+                    const currentCount = parseInt(totalStudentsElement.textContent);
+                    totalStudentsElement.textContent = Math.max(0, currentCount - 1);
+                }
+
+                // If this was the current student, switch to another student or default
+                const currentStudentId = localStorage.getItem('currentStudentId');
+                if (currentStudentId === studentId) {
+                    if (students.length > 0) {
+                        localStorage.setItem('currentStudentId', students[0].student_id);
+                    } else {
+                        localStorage.setItem('currentStudentId', 'STU001'); // Default student
+                    }
+                    updateStudentDashboard();
+                }
+
+                // Refresh teacher dashboard
+                refreshTeacherDashboard();
+
+                // Show success message
+                showToast(`✅ Student ${removedStudent.name} (${studentId}) removed successfully!`, 'success');
+            }
+        }
+
+        // Function to edit a student
+        function editStudent(studentId) {
+            let student;
+
+            // Handle default student
+            if (studentId === 'STU001') {
+                student = {
+                    student_id: 'STU001',
+                    name: 'Priya Sharma',
+                    grade: 8,
+                    learning_style: 'visual'
+                };
+            } else {
+                const students = JSON.parse(localStorage.getItem('students') || '[]');
+                student = students.find(s => s.student_id === studentId);
+
+                if (!student) {
+                    showToast('❌ Student not found!', 'error');
+                    return;
+                }
+            }
+
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Edit Student</h3>
+                        <button onclick="this.closest('.fixed').remove()" class="text-gray-400 hover:text-gray-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <form onsubmit="updateStudent(event, '${studentId}')">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Student Name</label>
+                                <input type="text" id="edit-student-name" value="${student.name}" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Student ID</label>
+                                <input type="text" id="edit-student-id" value="${student.student_id}" class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-gray-100" readonly>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Grade</label>
+                                <select id="edit-student-grade" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                                    <option value="6" ${student.grade === 6 ? 'selected' : ''}>Grade 6</option>
+                                    <option value="7" ${student.grade === 7 ? 'selected' : ''}>Grade 7</option>
+                                    <option value="8" ${student.grade === 8 ? 'selected' : ''}>Grade 8</option>
+                                    <option value="9" ${student.grade === 9 ? 'selected' : ''}>Grade 9</option>
+                                    <option value="10" ${student.grade === 10 ? 'selected' : ''}>Grade 10</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Learning Style</label>
+                                <select id="edit-learning-style" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                                    <option value="visual" ${student.learning_style === 'visual' ? 'selected' : ''}>Visual</option>
+                                    <option value="auditory" ${student.learning_style === 'auditory' ? 'selected' : ''}>Auditory</option>
+                                    <option value="kinesthetic" ${student.learning_style === 'kinesthetic' ? 'selected' : ''}>Kinesthetic</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="flex justify-end space-x-3 mt-6">
+                            <button type="button" onclick="this.closest('.fixed').remove()" class="px-4 py-2 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                                Cancel
+                            </button>
+                            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                                Update Student
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Function to update student information
+        function updateStudent(event, studentId) {
+            event.preventDefault();
+
+            const name = document.getElementById('edit-student-name').value;
+            const grade = document.getElementById('edit-student-grade').value;
+            const learningStyle = document.getElementById('edit-learning-style').value;
+
+            // Handle default student
+            if (studentId === 'STU001') {
+                // Update the default student row in the table
+                const tableBody = document.querySelector('#teacher-students-table tbody');
+                const defaultRow = tableBody.querySelector('tr');
+                if (defaultRow) {
+                    const nameCell = defaultRow.querySelector('td:first-child .text-sm.font-medium');
+                    if (nameCell) {
+                        nameCell.textContent = name;
+                    }
+                }
+
+                // Close modal
+                event.target.closest('.fixed').remove();
+
+                // Show success message
+                showToast(`✅ Student ${name} updated successfully!`, 'success');
+                return;
+            }
+
+            let students = JSON.parse(localStorage.getItem('students') || '[]');
+            const studentIndex = students.findIndex(s => s.student_id === studentId);
+
+            if (studentIndex !== -1) {
+                students[studentIndex] = {
+                    ...students[studentIndex],
+                    name: name,
+                    grade: parseInt(grade),
+                    learning_style: learningStyle
+                };
+
+                localStorage.setItem('students', JSON.stringify(students));
+
+                // Close modal
+                event.target.closest('.fixed').remove();
+
+                // Refresh dashboards
+                refreshTeacherDashboard();
+                updateStudentDashboard();
+
+                // Show success message
+                showToast(`✅ Student ${name} updated successfully!`, 'success');
             }
         }
 
@@ -2908,11 +3324,10 @@ Personalized for Government Schools Initiative`;
 
             // Optional: Still try to check for real backend
             try {
-                // Detect environment and use appropriate API URL
-                const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-                const apiUrl = isLocalhost ? 'http://localhost:8000/' : '/api/health';
-
-                const response = await fetch(apiUrl);
+                const healthUrl = window.location.hostname === 'localhost' ?
+                    'http://localhost:8000/' :
+                    '/api/health';
+                const response = await fetch(healthUrl);
                 const data = await response.json();
                 document.getElementById('api-status').innerHTML = '✅ AI Connected';
             } catch (error) {

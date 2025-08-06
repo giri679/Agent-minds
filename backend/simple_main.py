@@ -128,29 +128,136 @@ async def start_learning_session(session_data: dict):
 @app.post("/api/worksheets/generate")
 async def generate_worksheet(request_data: dict):
     """Generate a simple worksheet"""
+    subject = request_data.get('subject', 'mathematics').lower()
+    topic = request_data.get('topic', 'General')
+    question_type = request_data.get('type', 'mixed')
+    num_questions = int(request_data.get('questions', 10))
+
+    # Subject-specific question templates
+    question_templates = {
+        'mathematics': {
+            'mcq': [
+                {
+                    "question": "What is the value of x in the equation 2x + 5 = 13?",
+                    "options": ["A) x = 3", "B) x = 4", "C) x = 5", "D) x = 6"],
+                    "correct_answer": "B"
+                },
+                {
+                    "question": "If y = 3x - 2, what is the value of y when x = 4?",
+                    "options": ["A) y = 8", "B) y = 10", "C) y = 12", "D) y = 14"],
+                    "correct_answer": "B"
+                },
+                {
+                    "question": "What is the simplified form of 4(x + 3) - 2x?",
+                    "options": ["A) 2x + 12", "B) 4x + 12", "C) 2x + 3", "D) 6x + 12"],
+                    "correct_answer": "A"
+                }
+            ],
+            'short': [
+                "Solve for x: 2x + 5 = 13. Show your work step by step.",
+                "If y = 3x - 2, find y when x = 4. Explain your calculation.",
+                "Simplify: 4(x + 3) - 2x. Show each step of the simplification."
+            ]
+        },
+        'science': {
+            'mcq': [
+                {
+                    "question": "What is the primary function of mitochondria in a cell?",
+                    "options": ["A) Protein synthesis", "B) Energy production", "C) DNA storage", "D) Waste removal"],
+                    "correct_answer": "B"
+                },
+                {
+                    "question": "Which process do plants use to make their own food?",
+                    "options": ["A) Respiration", "B) Digestion", "C) Photosynthesis", "D) Transpiration"],
+                    "correct_answer": "C"
+                },
+                {
+                    "question": "What are the three main states of matter?",
+                    "options": ["A) Hot, cold, warm", "B) Solid, liquid, gas", "C) Big, medium, small", "D) Fast, slow, still"],
+                    "correct_answer": "B"
+                }
+            ],
+            'short': [
+                "Explain the function of mitochondria in a cell and why they are called 'powerhouses'.",
+                "Describe the process of photosynthesis and explain why it's important for life on Earth.",
+                "List the three states of matter and give two examples of each state."
+            ]
+        },
+        'history': {
+            'mcq': [
+                {
+                    "question": "Who was the first Prime Minister of India?",
+                    "options": ["A) Mahatma Gandhi", "B) Jawaharlal Nehru", "C) Sardar Patel", "D) Dr. Rajendra Prasad"],
+                    "correct_answer": "B"
+                },
+                {
+                    "question": "In which year did India gain independence?",
+                    "options": ["A) 1945", "B) 1946", "C) 1947", "D) 1948"],
+                    "correct_answer": "C"
+                },
+                {
+                    "question": "Which movement was led by Mahatma Gandhi for Indian independence?",
+                    "options": ["A) Quit India Movement", "B) Khilafat Movement", "C) Swadeshi Movement", "D) All of the above"],
+                    "correct_answer": "D"
+                }
+            ],
+            'short': [
+                "Name the first Prime Minister of India and describe one of his major contributions.",
+                "Explain the significance of August 15, 1947, in Indian history.",
+                "List three important leaders of the Indian freedom struggle and their contributions."
+            ]
+        }
+    }
+
+    # Generate problems based on type
+    problems = []
+    templates = question_templates.get(subject, question_templates['mathematics'])
+
+    for i in range(min(num_questions, 3)):  # Limit to 3 for demo
+        if question_type == 'mcq' or question_type == 'multiple_choice':
+            mcq_template = templates['mcq'][i % len(templates['mcq'])]
+            problems.append({
+                "id": i + 1,
+                "type": "multiple_choice",
+                "question": mcq_template["question"],
+                "options": mcq_template["options"],
+                "correct_answer": mcq_template["correct_answer"]
+            })
+        elif question_type == 'short':
+            problems.append({
+                "id": i + 1,
+                "type": "short_answer",
+                "question": templates['short'][i % len(templates['short'])],
+                "expected_length": "2-3 sentences"
+            })
+        else:  # mixed
+            if i % 2 == 0:  # MCQ for even indices
+                mcq_template = templates['mcq'][i % len(templates['mcq'])]
+                problems.append({
+                    "id": i + 1,
+                    "type": "multiple_choice",
+                    "question": mcq_template["question"],
+                    "options": mcq_template["options"],
+                    "correct_answer": mcq_template["correct_answer"]
+                })
+            else:  # Short answer for odd indices
+                problems.append({
+                    "id": i + 1,
+                    "type": "short_answer",
+                    "question": templates['short'][i % len(templates['short'])],
+                    "expected_length": "2-3 sentences"
+                })
+
     return {
         "worksheet_id": f"worksheet_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
-        "title": f"{request_data.get('subject', 'Subject')} - {request_data.get('topic', 'Topic')} Practice",
+        "title": f"{subject.title()} - {topic} Practice",
         "difficulty_level": request_data.get("difficulty_level", 3),
-        "estimated_time_minutes": 30,
-        "problems": [
-            {
-                "id": 1,
-                "type": "multiple_choice",
-                "question": f"What is the main concept in {request_data.get('topic', 'this topic')}?",
-                "options": ["Option A", "Option B", "Option C", "Option D"],
-                "correct_answer": "A"
-            },
-            {
-                "id": 2,
-                "type": "short_answer",
-                "question": f"Explain {request_data.get('topic', 'the concept')} in your own words.",
-                "expected_length": "2-3 sentences"
-            }
-        ],
+        "estimated_time_minutes": num_questions * 3,
+        "problems": problems,
         "learning_objectives": [
-            f"Understand basic concepts of {request_data.get('topic', 'the topic')}",
-            f"Apply {request_data.get('topic', 'the concept')} in practical scenarios"
+            f"Understand basic concepts of {topic}",
+            f"Apply {topic} knowledge in practical scenarios",
+            f"Build confidence in {subject}"
         ]
     }
 
