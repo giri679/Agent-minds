@@ -65,6 +65,12 @@
                         <span>AI Features</span>
                     </div>
                 </button>
+                <button onclick="showTab(3)" id="tab-3" class="py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                    <div class="flex items-center space-x-2">
+                        <span>📊</span>
+                        <span>Report Card</span>
+                    </div>
+                </button>
             </nav>
         </div>
     </div>
@@ -252,6 +258,7 @@
                         <h3 class="text-lg font-semibold">👥 Class 8 - Student Overview</h3>
                         <div class="space-x-2">
                             <button onclick="addNewStudent()" class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600">+ Add Student</button>
+                            <button onclick="showTab(3)" class="bg-purple-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-600">📊 Report Cards</button>
                             <button onclick="exportClassData()" class="bg-gray-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-600">📥 Export</button>
                         </div>
                     </div>
@@ -957,6 +964,177 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Report Card -->
+            <div id="content-3" class="tab-content hidden">
+                <!-- Report Card Header -->
+                <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold mb-2">📊 Student Report Card</h2>
+                            <p class="text-blue-100">Comprehensive learning progress report for parents</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-sm text-blue-100">Generated on</div>
+                            <div class="text-lg font-semibold" id="report-date"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Student Selection for Report -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">👤 Select Student for Report</h3>
+                        <div class="flex items-center space-x-3">
+                            <select id="report-student-selector" onchange="generateReportCard(this.value)" class="border border-gray-300 rounded-lg px-3 py-2">
+                                <option value="">Select a student...</option>
+                            </select>
+                            <button onclick="downloadReportCard()" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 flex items-center space-x-2">
+                                <span>📥</span>
+                                <span>Download PDF</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Report Card Content -->
+                <div id="report-card-content" class="hidden">
+                    <!-- Student Information Card -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <div class="flex items-center space-x-4 mb-6">
+                            <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold" id="report-student-avatar">
+                                P
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900" id="report-student-name">Student Name</h3>
+                                <p class="text-gray-600" id="report-student-details">Grade • Learning Style</p>
+                                <p class="text-sm text-gray-500" id="report-student-id">Student ID</p>
+                            </div>
+                            <div class="ml-auto text-right">
+                                <div class="text-3xl font-bold text-blue-600" id="report-overall-grade">A</div>
+                                <div class="text-sm text-gray-500">Overall Grade</div>
+                            </div>
+                        </div>
+
+                        <!-- Overall Performance Summary -->
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                            <div class="bg-green-50 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-green-600" id="report-performance">76%</div>
+                                <div class="text-sm text-green-700">Overall Performance</div>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-blue-600" id="report-attendance">95%</div>
+                                <div class="text-sm text-blue-700">Attendance Rate</div>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-purple-600" id="report-assignments">12</div>
+                                <div class="text-sm text-purple-700">Assignments Completed</div>
+                            </div>
+                            <div class="bg-orange-50 p-4 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-orange-600" id="report-improvement">+8%</div>
+                                <div class="text-sm text-orange-700">Improvement This Month</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subject-wise Performance -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-4">📚 Subject-wise Performance</h4>
+                        <div class="space-y-4" id="subject-performance">
+                            <!-- Subject performance will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Learning Analytics -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <!-- Strengths and Weaknesses -->
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <h4 class="text-lg font-semibold text-gray-900 mb-4">💪 Strengths & Areas for Improvement</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <h5 class="font-medium text-green-700 mb-2">✅ Strengths</h5>
+                                    <div class="flex flex-wrap gap-2" id="report-strengths">
+                                        <!-- Strengths will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-medium text-orange-700 mb-2">🎯 Focus Areas</h5>
+                                    <div class="flex flex-wrap gap-2" id="report-weaknesses">
+                                        <!-- Weaknesses will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Learning Style & Recommendations -->
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <h4 class="text-lg font-semibold text-gray-900 mb-4">🎯 Learning Insights</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <h5 class="font-medium text-blue-700 mb-2">Learning Style</h5>
+                                    <div class="bg-blue-50 p-3 rounded-lg">
+                                        <span class="text-blue-800 font-medium" id="report-learning-style">Visual Learner</span>
+                                        <p class="text-sm text-blue-600 mt-1" id="report-learning-description">Learns best through visual aids, diagrams, and charts</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-medium text-purple-700 mb-2">AI Recommendations</h5>
+                                    <div class="space-y-2" id="report-recommendations">
+                                        <!-- Recommendations will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activities -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-4">📅 Recent Learning Activities</h4>
+                        <div class="space-y-3" id="recent-activities">
+                            <!-- Recent activities will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Parent Guidance Section -->
+                    <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 mb-6">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-4">👨‍👩‍👧‍👦 Guidance for Parents</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h5 class="font-medium text-green-700 mb-2">🏠 How to Help at Home</h5>
+                                <ul class="space-y-2 text-sm text-gray-700" id="home-guidance">
+                                    <!-- Home guidance will be populated by JavaScript -->
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="font-medium text-blue-700 mb-2">📈 Next Steps</h5>
+                                <ul class="space-y-2 text-sm text-gray-700" id="next-steps">
+                                    <!-- Next steps will be populated by JavaScript -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Teacher's Comments -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h4 class="text-lg font-semibold text-gray-900 mb-4">💬 Teacher's Comments</h4>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="text-gray-700 italic" id="teacher-comments">
+                                "This student shows excellent progress in mathematics and science. Recommend focusing on reading comprehension and writing skills for balanced development."
+                            </p>
+                            <div class="mt-3 text-right">
+                                <span class="text-sm text-gray-500">- AI Education System</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- No Student Selected Message -->
+                <div id="no-student-selected" class="text-center py-12">
+                    <div class="text-6xl mb-4">📊</div>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2">Select a Student</h3>
+                    <p class="text-gray-500">Choose a student from the dropdown above to generate their report card</p>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -1014,6 +1192,11 @@
             document.getElementById(`tab-${tabIndex}`).className = 'py-4 px-1 border-b-2 font-medium text-sm border-blue-500 text-blue-600';
 
             currentTab = tabIndex;
+
+            // Initialize report card when tab 3 is selected
+            if (tabIndex === 3) {
+                initializeReportCard();
+            }
         }
 
         function refreshInsights() {
@@ -2606,6 +2789,7 @@ Generated by AI Education Agent for Government Schools`;
                     <div class="mt-6 flex justify-center space-x-3">
                         <button onclick="generatePersonalizedWorksheet('${studentId}')" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">📝 Generate Worksheet</button>
                         <button onclick="startPersonalizedSession('${studentId}')" class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600">🎓 Start Session</button>
+                        <button onclick="viewStudentReportCard('${studentId}')" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">📊 Report Card</button>
                         <button onclick="this.closest('.fixed').remove()" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400">Close</button>
                     </div>
                 </div>
@@ -3215,6 +3399,23 @@ Personalized for Government Schools Initiative`;
             showToast(`🎓 Starting personalized learning session for ${studentId}...`, 'info');
         }
 
+        function viewStudentReportCard(studentId) {
+            // Close the student details modal
+            document.querySelector('.fixed').remove();
+
+            // Switch to Report Card tab
+            showTab(3);
+
+            // Set the student in the selector and generate report
+            const selector = document.getElementById('report-student-selector');
+            if (selector) {
+                selector.value = studentId;
+                generateReportCard(studentId);
+            }
+
+            showToast(`📊 Generating report card for ${studentId}...`, 'info');
+        }
+
         function showStatDetails(statType) {
             const statData = {
                 students: {
@@ -3417,6 +3618,386 @@ Personalized for Government Schools Initiative`;
             // Update both dashboards
             updateStudentDashboard();
             refreshTeacherDashboard();
+        }
+
+        // Report Card Functions
+        function initializeReportCard() {
+            // Set current date
+            const reportDate = document.getElementById('report-date');
+            if (reportDate) {
+                reportDate.textContent = new Date().toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            }
+
+            // Populate student selector
+            updateReportStudentSelector();
+        }
+
+        function updateReportStudentSelector() {
+            const selector = document.getElementById('report-student-selector');
+            if (!selector) return;
+
+            const storedStudents = JSON.parse(localStorage.getItem('students') || '[]');
+            const defaultStudent = {
+                student_id: 'STU001',
+                name: 'Priya Sharma',
+                grade: 8,
+                learning_style: 'visual'
+            };
+
+            const allStudents = [defaultStudent, ...storedStudents];
+
+            selector.innerHTML = '<option value="">Select a student...</option>';
+            allStudents.forEach(student => {
+                const option = document.createElement('option');
+                option.value = student.student_id;
+                option.textContent = `${student.name} (${student.student_id})`;
+                selector.appendChild(option);
+            });
+        }
+
+        function generateReportCard(studentId) {
+            if (!studentId) {
+                document.getElementById('report-card-content').classList.add('hidden');
+                document.getElementById('no-student-selected').classList.remove('hidden');
+                return;
+            }
+
+            // Get student data
+            const storedStudents = JSON.parse(localStorage.getItem('students') || '[]');
+            const defaultStudent = {
+                student_id: 'STU001',
+                name: 'Priya Sharma',
+                grade: 8,
+                learning_style: 'visual',
+                current_level: 76,
+                strengths: ['Mathematics', 'Science'],
+                weaknesses: ['English', 'History'],
+                status: 'active'
+            };
+
+            const allStudents = [defaultStudent, ...storedStudents];
+            const student = allStudents.find(s => s.student_id === studentId);
+
+            if (!student) {
+                showToast('❌ Student not found!', 'error');
+                return;
+            }
+
+            // Show report card content
+            document.getElementById('report-card-content').classList.remove('hidden');
+            document.getElementById('no-student-selected').classList.add('hidden');
+
+            // Populate student information
+            document.getElementById('report-student-avatar').textContent = student.name.charAt(0);
+            document.getElementById('report-student-name').textContent = student.name;
+            document.getElementById('report-student-details').textContent = `Grade ${student.grade} • ${student.learning_style} Learner`;
+            document.getElementById('report-student-id').textContent = `Student ID: ${student.student_id}`;
+
+            // Calculate overall grade
+            const performance = student.current_level || 50;
+            const grade = getLetterGrade(performance);
+            document.getElementById('report-overall-grade').textContent = grade;
+
+            // Update performance metrics
+            document.getElementById('report-performance').textContent = `${performance}%`;
+            document.getElementById('report-attendance').textContent = '95%'; // Mock data
+            document.getElementById('report-assignments').textContent = Math.floor(Math.random() * 15) + 8;
+            document.getElementById('report-improvement').textContent = `+${Math.floor(Math.random() * 10) + 3}%`;
+
+            // Generate subject performance
+            generateSubjectPerformance(student);
+
+            // Update strengths and weaknesses
+            updateStrengthsWeaknesses(student);
+
+            // Update learning style information
+            updateLearningStyleInfo(student);
+
+            // Generate recommendations
+            generateRecommendations(student);
+
+            // Generate recent activities
+            generateRecentActivities(student);
+
+            // Generate parent guidance
+            generateParentGuidance(student);
+
+            // Update teacher comments
+            updateTeacherComments(student);
+
+            showToast(`📊 Report card generated for ${student.name}`, 'success');
+        }
+
+        function getLetterGrade(percentage) {
+            if (percentage >= 90) return 'A+';
+            if (percentage >= 85) return 'A';
+            if (percentage >= 80) return 'B+';
+            if (percentage >= 75) return 'B';
+            if (percentage >= 70) return 'C+';
+            if (percentage >= 65) return 'C';
+            if (percentage >= 60) return 'D+';
+            if (percentage >= 55) return 'D';
+            return 'F';
+        }
+
+        function generateSubjectPerformance(student) {
+            const subjects = [
+                { name: 'Mathematics', score: Math.max(60, student.current_level + Math.floor(Math.random() * 20) - 10), color: 'blue' },
+                { name: 'Science', score: Math.max(60, student.current_level + Math.floor(Math.random() * 20) - 10), color: 'green' },
+                { name: 'English', score: Math.max(50, student.current_level + Math.floor(Math.random() * 20) - 15), color: 'purple' },
+                { name: 'History', score: Math.max(55, student.current_level + Math.floor(Math.random() * 20) - 12), color: 'orange' },
+                { name: 'Geography', score: Math.max(58, student.current_level + Math.floor(Math.random() * 20) - 8), color: 'teal' }
+            ];
+
+            const container = document.getElementById('subject-performance');
+            container.innerHTML = '';
+
+            subjects.forEach(subject => {
+                const grade = getLetterGrade(subject.score);
+                const div = document.createElement('div');
+                div.className = 'flex items-center justify-between p-3 bg-gray-50 rounded-lg';
+                div.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <div class="w-3 h-3 bg-${subject.color}-500 rounded-full"></div>
+                        <span class="font-medium text-gray-900">${subject.name}</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-32 bg-gray-200 rounded-full h-2">
+                            <div class="bg-${subject.color}-500 h-2 rounded-full" style="width: ${subject.score}%"></div>
+                        </div>
+                        <span class="text-sm font-medium text-gray-700 w-12">${subject.score}%</span>
+                        <span class="text-lg font-bold text-${subject.color}-600 w-8">${grade}</span>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function updateStrengthsWeaknesses(student) {
+            const strengthsContainer = document.getElementById('report-strengths');
+            const weaknessesContainer = document.getElementById('report-weaknesses');
+
+            // Clear existing content
+            strengthsContainer.innerHTML = '';
+            weaknessesContainer.innerHTML = '';
+
+            // Add strengths
+            const strengths = student.strengths && student.strengths.length > 0 ?
+                student.strengths : ['Problem Solving', 'Logical Thinking'];
+
+            strengths.forEach(strength => {
+                const span = document.createElement('span');
+                span.className = 'px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full';
+                span.textContent = strength;
+                strengthsContainer.appendChild(span);
+            });
+
+            // Add weaknesses
+            const weaknesses = student.weaknesses && student.weaknesses.length > 0 ?
+                student.weaknesses : ['Reading Comprehension', 'Writing Skills'];
+
+            weaknesses.forEach(weakness => {
+                const span = document.createElement('span');
+                span.className = 'px-3 py-1 bg-orange-100 text-orange-800 text-sm rounded-full';
+                span.textContent = weakness;
+                weaknessesContainer.appendChild(span);
+            });
+        }
+
+        function updateLearningStyleInfo(student) {
+            const styleElement = document.getElementById('report-learning-style');
+            const descriptionElement = document.getElementById('report-learning-description');
+
+            const learningStyles = {
+                'visual': {
+                    name: 'Visual Learner',
+                    description: 'Learns best through visual aids, diagrams, charts, and colorful presentations'
+                },
+                'auditory': {
+                    name: 'Auditory Learner',
+                    description: 'Learns best through listening, discussions, music, and verbal explanations'
+                },
+                'kinesthetic': {
+                    name: 'Kinesthetic Learner',
+                    description: 'Learns best through hands-on activities, movement, and practical experiences'
+                }
+            };
+
+            const style = learningStyles[student.learning_style] || learningStyles['visual'];
+            styleElement.textContent = style.name;
+            descriptionElement.textContent = style.description;
+        }
+
+        function generateRecommendations(student) {
+            const container = document.getElementById('report-recommendations');
+            container.innerHTML = '';
+
+            const recommendations = [
+                '📚 Continue practicing daily math problems to strengthen analytical skills',
+                '🎨 Use visual learning tools and mind maps for better retention',
+                '👥 Participate in group discussions to improve communication skills',
+                '📝 Practice writing short essays to enhance language skills',
+                '🔬 Engage in hands-on science experiments for deeper understanding'
+            ];
+
+            recommendations.forEach(rec => {
+                const div = document.createElement('div');
+                div.className = 'text-sm text-purple-700 bg-purple-50 p-2 rounded';
+                div.textContent = rec;
+                container.appendChild(div);
+            });
+        }
+
+        function generateRecentActivities(student) {
+            const container = document.getElementById('recent-activities');
+            container.innerHTML = '';
+
+            const activities = [
+                { date: '2024-08-05', activity: 'Completed Algebra Worksheet', score: '85%', type: 'worksheet' },
+                { date: '2024-08-04', activity: 'AI Doubt Clearing Session', score: '5 questions', type: 'doubt' },
+                { date: '2024-08-03', activity: 'Science Quiz on Photosynthesis', score: '92%', type: 'quiz' },
+                { date: '2024-08-02', activity: 'English Reading Comprehension', score: '78%', type: 'reading' },
+                { date: '2024-08-01', activity: 'Math Problem Solving Session', score: '88%', type: 'math' }
+            ];
+
+            activities.forEach(activity => {
+                const div = document.createElement('div');
+                div.className = 'flex items-center justify-between p-3 bg-gray-50 rounded-lg';
+
+                const typeIcons = {
+                    'worksheet': '📝',
+                    'doubt': '🤖',
+                    'quiz': '📊',
+                    'reading': '📖',
+                    'math': '🔢'
+                };
+
+                div.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <span class="text-xl">${typeIcons[activity.type] || '📚'}</span>
+                        <div>
+                            <div class="font-medium text-gray-900">${activity.activity}</div>
+                            <div class="text-sm text-gray-500">${activity.date}</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-medium text-blue-600">${activity.score}</div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function generateParentGuidance(student) {
+            const homeGuidance = document.getElementById('home-guidance');
+            const nextSteps = document.getElementById('next-steps');
+
+            homeGuidance.innerHTML = '';
+            nextSteps.innerHTML = '';
+
+            const homeAdvice = [
+                '📖 Set aside 30 minutes daily for reading practice',
+                '🧮 Practice mental math during everyday activities',
+                '🎨 Use colorful charts and diagrams for visual learning',
+                '💬 Encourage questions and discussions about school topics',
+                '⏰ Maintain a consistent study schedule'
+            ];
+
+            const nextStepsAdvice = [
+                '🎯 Focus on improving writing and communication skills',
+                '📚 Enroll in advanced mathematics programs',
+                '🔬 Explore science experiments and projects',
+                '👥 Join study groups for collaborative learning',
+                '📱 Use educational apps for interactive learning'
+            ];
+
+            homeAdvice.forEach(advice => {
+                const li = document.createElement('li');
+                li.textContent = advice;
+                homeGuidance.appendChild(li);
+            });
+
+            nextStepsAdvice.forEach(step => {
+                const li = document.createElement('li');
+                li.textContent = step;
+                nextSteps.appendChild(li);
+            });
+        }
+
+        function updateTeacherComments(student) {
+            const commentsElement = document.getElementById('teacher-comments');
+
+            const comments = [
+                `${student.name} demonstrates excellent analytical thinking and shows consistent improvement in problem-solving skills. Recommend focusing on language arts for well-rounded development.`,
+                `This student shows great enthusiasm for learning and actively participates in class discussions. Continue encouraging curiosity and exploration in all subjects.`,
+                `${student.name} has shown remarkable progress this term. The visual learning approach is working well. Suggest incorporating more hands-on activities for enhanced engagement.`,
+                `Strong performance in STEM subjects with room for growth in creative writing. Recommend joining the school's creative writing club to develop these skills further.`
+            ];
+
+            const randomComment = comments[Math.floor(Math.random() * comments.length)];
+            commentsElement.textContent = randomComment;
+        }
+
+        function downloadReportCard() {
+            const studentSelector = document.getElementById('report-student-selector');
+            const selectedStudentId = studentSelector.value;
+
+            if (!selectedStudentId) {
+                showToast('❌ Please select a student first!', 'error');
+                return;
+            }
+
+            // Get student name for filename
+            const selectedOption = studentSelector.options[studentSelector.selectedIndex];
+            const studentName = selectedOption.textContent.split(' (')[0];
+
+            // Create a simplified version for download
+            const reportContent = `
+AI EDUCATION AGENT - STUDENT REPORT CARD
+Generated: ${new Date().toLocaleDateString()}
+
+STUDENT INFORMATION:
+${document.getElementById('report-student-name').textContent}
+${document.getElementById('report-student-details').textContent}
+${document.getElementById('report-student-id').textContent}
+
+OVERALL PERFORMANCE:
+Overall Grade: ${document.getElementById('report-overall-grade').textContent}
+Performance: ${document.getElementById('report-performance').textContent}
+Attendance: ${document.getElementById('report-attendance').textContent}
+Assignments Completed: ${document.getElementById('report-assignments').textContent}
+Monthly Improvement: ${document.getElementById('report-improvement').textContent}
+
+TEACHER'S COMMENTS:
+${document.getElementById('teacher-comments').textContent}
+
+RECOMMENDATIONS FOR PARENTS:
+- Set aside 30 minutes daily for reading practice
+- Practice mental math during everyday activities
+- Use colorful charts and diagrams for visual learning
+- Encourage questions and discussions about school topics
+- Maintain a consistent study schedule
+
+This report was generated by the AI Education Agent system.
+For more detailed analytics, please visit the online dashboard.
+            `;
+
+            // Create and download the file
+            const blob = new Blob([reportContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${studentName}_Report_Card_${new Date().toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+
+            showToast(`📥 Report card downloaded for ${studentName}!`, 'success');
         }
 
         // Also set default tab immediately in case DOMContentLoaded already fired
