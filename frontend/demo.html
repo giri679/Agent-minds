@@ -3,8 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🤖 AI Education Agent - Government Schools</title>
+    <title>🎓 AI Education Agent - Smart Learning Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'pantone-blue': '#0F4C75',
+                        'pantone-teal': '#3282B8',
+                        'pantone-light': '#BBE1FA',
+                        'pantone-accent': '#1B262C',
+                        'pantone-green': '#2E8B57',
+                        'pantone-orange': '#FF6B35',
+                        'pantone-purple': '#6A4C93'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         .feature-interface {
             transition: all 0.3s ease-in-out;
@@ -12,78 +31,248 @@
         .feature-interface.hidden {
             display: none;
         }
+        .auth-container {
+            background: linear-gradient(135deg, #0F4C75 0%, #3282B8 100%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .loading-spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid #BBE1FA;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors">
+
+    <!-- Home Page / Authentication -->
+    <div id="home-page" class="min-h-screen auth-container flex items-center justify-center">
+        <div class="max-w-md w-full mx-4">
+            <!-- Professional Logo -->
+            <div class="text-center mb-8">
+                <div class="w-24 h-24 mx-auto mb-4 bg-white rounded-full flex items-center justify-center shadow-lg">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Graduation Cap -->
+                        <path d="M24 8L8 16L24 24L40 16L24 8Z" fill="#0F4C75" stroke="#3282B8" stroke-width="1"/>
+                        <path d="M16 20V28C16 32 20 36 24 36C28 36 32 32 32 28V20" stroke="#0F4C75" stroke-width="2" fill="none"/>
+                        <!-- AI Brain Circuit -->
+                        <circle cx="24" cy="20" r="3" fill="#3282B8"/>
+                        <path d="M21 18L19 16M27 18L29 16M21 22L19 24M27 22L29 24" stroke="#BBE1FA" stroke-width="1.5"/>
+                        <!-- Tassel -->
+                        <path d="M36 16V20L38 22" stroke="#FF6B35" stroke-width="2" fill="none"/>
+                        <circle cx="38" cy="22" r="1.5" fill="#FF6B35"/>
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-bold text-white mb-2">AI Education Agent</h1>
+                <p class="text-pantone-light">Smart Learning Platform for Government Schools</p>
+            </div>
+
+            <!-- Role Selection -->
+            <div id="role-selection" class="glass-effect rounded-lg p-6 mb-6">
+                <h2 class="text-xl font-semibold text-white mb-4 text-center">Choose Your Role</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <button onclick="showLogin('student')" class="bg-pantone-green hover:bg-green-600 text-white py-3 px-4 rounded-lg transition-colors flex flex-col items-center">
+                        <span class="text-2xl mb-1">👨‍🎓</span>
+                        <span>Student</span>
+                    </button>
+                    <button onclick="showLogin('teacher')" class="bg-pantone-purple hover:bg-purple-600 text-white py-3 px-4 rounded-lg transition-colors flex flex-col items-center">
+                        <span class="text-2xl mb-1">👨‍🏫</span>
+                        <span>Teacher</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Login Form -->
+            <div id="login-form" class="glass-effect rounded-lg p-6 hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 id="login-title" class="text-xl font-semibold text-white">Student Login</h2>
+                    <button onclick="showRoleSelection()" class="text-pantone-light hover:text-white">
+                        <span class="text-sm">← Back</span>
+                    </button>
+                </div>
+
+                <form onsubmit="handleLogin(event)">
+                    <div class="mb-4">
+                        <label class="block text-pantone-light text-sm font-medium mb-2">Student ID / Email</label>
+                        <input type="text" id="login-id" class="w-full px-3 py-2 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pantone-light" placeholder="Enter your ID or email" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-pantone-light text-sm font-medium mb-2">Password</label>
+                        <input type="password" id="login-password" class="w-full px-3 py-2 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pantone-light" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="w-full bg-pantone-orange hover:bg-orange-600 text-white py-2 px-4 rounded-lg transition-colors font-medium">
+                        Login
+                    </button>
+                </form>
+
+                <!-- Teacher Signup Option -->
+                <div id="teacher-signup-option" class="mt-4 text-center hidden">
+                    <p class="text-pantone-light text-sm mb-2">Don't have an account?</p>
+                    <button onclick="showSignup()" class="text-pantone-light hover:text-white underline text-sm">
+                        Sign up as Teacher
+                    </button>
+                </div>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-form" class="glass-effect rounded-lg p-6 hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-xl font-semibold text-white">Teacher Signup</h2>
+                    <button onclick="showLogin('teacher')" class="text-pantone-light hover:text-white">
+                        <span class="text-sm">← Back to Login</span>
+                    </button>
+                </div>
+
+                <form onsubmit="handleSignup(event)">
+                    <div class="mb-4">
+                        <label class="block text-pantone-light text-sm font-medium mb-2">Full Name</label>
+                        <input type="text" id="signup-name" class="w-full px-3 py-2 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pantone-light" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-pantone-light text-sm font-medium mb-2">Email</label>
+                        <input type="email" id="signup-email" class="w-full px-3 py-2 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pantone-light" placeholder="Enter your email" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-pantone-light text-sm font-medium mb-2">School Name</label>
+                        <input type="text" id="signup-school" class="w-full px-3 py-2 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pantone-light" placeholder="Enter your school name" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-pantone-light text-sm font-medium mb-2">Password</label>
+                        <input type="password" id="signup-password" class="w-full px-3 py-2 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pantone-light" placeholder="Create a password" required>
+                    </div>
+                    <button type="submit" class="w-full bg-pantone-green hover:bg-green-600 text-white py-2 px-4 rounded-lg transition-colors font-medium">
+                        Create Account
+                    </button>
+                </form>
+            </div>
+
+            <!-- Demo Credentials -->
+            <div class="glass-effect rounded-lg p-4 mt-6">
+                <h3 class="text-lg font-semibold text-white mb-3 text-center">🔑 Demo Credentials</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div class="bg-white bg-opacity-10 rounded p-3">
+                        <h4 class="font-medium text-pantone-light mb-2">👨‍🏫 Teacher Login</h4>
+                        <p class="text-white">Email: <code class="bg-black bg-opacity-20 px-1 rounded">teacher@demo.com</code></p>
+                        <p class="text-white">Password: <code class="bg-black bg-opacity-20 px-1 rounded">demo123</code></p>
+                    </div>
+                    <div class="bg-white bg-opacity-10 rounded p-3">
+                        <h4 class="font-medium text-pantone-light mb-2">👨‍🎓 Student Login</h4>
+                        <p class="text-white">Student ID: <code class="bg-black bg-opacity-20 px-1 rounded">STU001</code></p>
+                        <p class="text-white">Password: <code class="bg-black bg-opacity-20 px-1 rounded">stu001123</code></p>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <button onclick="resetDemoData()" class="bg-pantone-orange hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+                        🔄 Reset Demo Data
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application (Hidden Initially) -->
+    <div id="main-app" class="hidden">
+
     <!-- Header -->
-    <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg">
+    <header class="bg-gradient-to-r from-pantone-blue to-pantone-teal dark:from-pantone-accent dark:to-pantone-blue text-white shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center space-x-3">
-                    <div class="text-3xl">🤖</div>
+                    <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                        <svg width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Graduation Cap -->
+                            <path d="M24 8L8 16L24 24L40 16L24 8Z" fill="white" stroke="#BBE1FA" stroke-width="1"/>
+                            <path d="M16 20V28C16 32 20 36 24 36C28 36 32 32 32 28V20" stroke="white" stroke-width="2" fill="none"/>
+                            <!-- AI Brain Circuit -->
+                            <circle cx="24" cy="20" r="3" fill="#BBE1FA"/>
+                            <path d="M21 18L19 16M27 18L29 16M21 22L19 24M27 22L29 24" stroke="white" stroke-width="1.5"/>
+                            <!-- Tassel -->
+                            <path d="M36 16V20L38 22" stroke="#FF6B35" stroke-width="2" fill="none"/>
+                            <circle cx="38" cy="22" r="1.5" fill="#FF6B35"/>
+                        </svg>
+                    </div>
                     <div>
                         <h1 class="text-2xl font-bold">AI Education Agent</h1>
-                        <p class="text-blue-100 text-sm">Government Schools - Personalized Learning</p>
+                        <p class="text-pantone-light text-sm">Smart Learning Platform</p>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <div id="api-status" class="px-3 py-1 rounded-full text-sm font-medium bg-green-500 text-white">
-                        ✅ AI Connected
+                    <div class="text-right">
+                        <p id="user-welcome" class="text-sm font-medium">Welcome back!</p>
+                        <p id="user-role" class="text-xs text-pantone-light">Ready to learn today?</p>
                     </div>
+                    <div class="w-10 h-10 bg-pantone-teal rounded-full flex items-center justify-center">
+                        <span id="user-avatar" class="text-lg font-bold">👤</span>
+                    </div>
+                    <button onclick="showHelpModal()" class="bg-pantone-purple hover:bg-purple-600 px-3 py-1 rounded text-sm transition-colors mr-2">
+                        Help
+                    </button>
+                    <button onclick="logout()" class="bg-pantone-orange hover:bg-orange-600 px-3 py-1 rounded text-sm transition-colors">
+                        Logout
+                    </button>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- System Info Banner -->
-    <div class="bg-blue-500 text-white text-center py-2">
-        <p class="text-sm">
-            🎓 AI Education Agent - Full AI-Powered Version | Version 2.0.0 |
-            OpenAI Status: ✅ Connected
-        </p>
-    </div>
-
     <!-- Navigation Tabs -->
-    <div class="bg-white shadow">
+    <div class="bg-white dark:bg-gray-800 shadow">
         <div class="max-w-7xl mx-auto">
-            <nav class="flex space-x-8" aria-label="Tabs">
-                <button onclick="showTab(0)" id="tab-0" class="py-4 px-1 border-b-2 font-medium text-sm border-blue-500 text-blue-600">
+            <div class="flex justify-between items-center px-4 py-2">
+                <nav class="flex space-x-8" aria-label="Tabs">
+                <button onclick="showTab(0)" id="tab-0" class="py-4 px-1 border-b-2 font-medium text-sm border-pantone-teal dark:border-pantone-light text-pantone-blue dark:text-pantone-light">
                     <div class="flex items-center space-x-2">
                         <span>📚</span>
                         <span>Student Dashboard</span>
                     </div>
                 </button>
-                <button onclick="showTab(1)" id="tab-1" class="py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                <button onclick="showTab(1)" id="tab-1" class="py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 dark:text-gray-400 hover:text-pantone-blue dark:hover:text-pantone-light hover:border-pantone-teal dark:hover:border-pantone-light">
                     <div class="flex items-center space-x-2">
                         <span>👨‍🏫</span>
                         <span>Teacher Dashboard</span>
                     </div>
                 </button>
-                <button onclick="showTab(2)" id="tab-2" class="py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                <button onclick="showTab(2)" id="tab-2" class="py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 dark:text-gray-400 hover:text-pantone-blue dark:hover:text-pantone-light hover:border-pantone-teal dark:hover:border-pantone-light">
                     <div class="flex items-center space-x-2">
                         <span>🤖</span>
                         <span>AI Features</span>
                     </div>
                 </button>
-                <button onclick="showTab(3)" id="tab-3" class="py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                <button onclick="showTab(3)" id="tab-3" class="py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 dark:text-gray-400 hover:text-pantone-blue dark:hover:text-pantone-light hover:border-pantone-teal dark:hover:border-pantone-light">
                     <div class="flex items-center space-x-2">
                         <span>📊</span>
                         <span>Report Card</span>
                     </div>
                 </button>
-            </nav>
+                </nav>
+
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="p-2 rounded-lg bg-pantone-light dark:bg-pantone-accent hover:bg-pantone-teal dark:hover:bg-pantone-blue transition-colors" onclick="toggleTheme()">
+                    <span id="theme-icon" class="text-pantone-blue dark:text-pantone-light">🌙</span>
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors">
         <div class="px-4 py-6 sm:px-0">
             <!-- Student Dashboard -->
             <div id="content-0" class="tab-content">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <!-- Student Profile Card -->
                     <div class="lg:col-span-1">
-                        <div class="bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg shadow-lg text-white p-6">
+                        <div class="bg-gradient-to-br from-purple-500 to-blue-600 dark:from-purple-600 dark:to-blue-700 rounded-lg shadow-lg text-white p-6">
                             <div class="text-center">
                                 <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
                                     <span class="text-2xl font-bold">P</span>
@@ -105,10 +294,10 @@
 
                     <!-- AI Insights -->
                     <div class="lg:col-span-2">
-                        <div class="bg-white rounded-lg shadow-lg p-6">
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
                             <div class="flex items-center mb-4">
                                 <span class="text-2xl mr-2">🤖</span>
-                                <h3 class="text-lg font-semibold">AI-Powered Insights</h3>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">AI-Powered Insights</h3>
                                 <button onclick="refreshInsights()" class="ml-auto text-blue-500 hover:text-blue-700">
                                     <span class="text-sm">🔄 Refresh</span>
                                 </button>
@@ -141,8 +330,8 @@
 
                     <!-- Subject Performance -->
                     <div class="lg:col-span-1">
-                        <div class="bg-white rounded-lg shadow-lg p-6">
-                            <h3 class="text-lg font-semibold mb-4">📊 Subject Performance</h3>
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">📊 Subject Performance</h3>
                             <div class="space-y-4">
                                 <div>
                                     <div class="flex justify-between text-sm mb-1">
@@ -177,8 +366,8 @@
 
                     <!-- Quick Actions -->
                     <div class="lg:col-span-3">
-                        <div class="bg-white rounded-lg shadow-lg p-6">
-                            <h3 class="text-lg font-semibold mb-4">🚀 Quick Actions</h3>
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                            <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-white">🚀 Quick Actions</h3>
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                                 <button onclick="startLearning()" class="bg-blue-500 hover:bg-blue-600 text-white py-4 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md">
                                     <div class="text-center">
@@ -221,45 +410,45 @@
             <!-- Teacher Dashboard -->
             <div id="content-1" class="tab-content hidden">
                 <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-6">
-                    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer" onclick="showStatDetails('students')">
-                        <div class="text-3xl text-blue-500 mb-2">👥</div>
-                        <div class="text-2xl font-bold text-blue-600">25</div>
-                        <div class="text-sm text-gray-600">Total Students</div>
-                        <div class="text-xs text-green-500 mt-1">+2 this week</div>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer" onclick="showStatDetails('students')">
+                        <div class="text-3xl text-pantone-teal mb-2">👥</div>
+                        <div id="total-students-count" class="text-2xl font-bold text-pantone-blue dark:text-pantone-light">25</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Total Students</div>
+                        <div id="students-weekly-change" class="text-xs text-pantone-green mt-1">+2 this week</div>
                     </div>
-                    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer" onclick="showStatDetails('performance')">
-                        <div class="text-3xl text-green-500 mb-2">📈</div>
-                        <div class="text-2xl font-bold text-green-600">72.5%</div>
-                        <div class="text-sm text-gray-600">Avg Performance</div>
-                        <div class="text-xs text-green-500 mt-1">+3.2% this month</div>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer" onclick="showStatDetails('performance')">
+                        <div class="text-3xl text-pantone-green mb-2">📈</div>
+                        <div id="avg-performance" class="text-2xl font-bold text-pantone-green dark:text-green-400">72.5%</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Avg Performance</div>
+                        <div class="text-xs text-pantone-green mt-1">+3.2% this month</div>
                     </div>
-                    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer" onclick="showStatDetails('sessions')">
-                        <div class="text-3xl text-blue-500 mb-2">🎓</div>
-                        <div class="text-2xl font-bold text-blue-600">8</div>
-                        <div class="text-sm text-gray-600">Active Sessions</div>
-                        <div class="text-xs text-blue-500 mt-1">Live now</div>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer" onclick="showStatDetails('sessions')">
+                        <div class="text-3xl text-pantone-teal mb-2">🎓</div>
+                        <div id="active-sessions-count" class="text-2xl font-bold text-pantone-teal dark:text-pantone-light">8</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Active Sessions</div>
+                        <div class="text-xs text-pantone-teal mt-1">Live now</div>
                     </div>
-                    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer" onclick="showStatDetails('worksheets')">
-                        <div class="text-3xl text-purple-500 mb-2">📝</div>
-                        <div class="text-2xl font-bold text-purple-600">45</div>
-                        <div class="text-sm text-gray-600">Worksheets Done</div>
-                        <div class="text-xs text-orange-500 mt-1">12 today</div>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer" onclick="showStatDetails('worksheets')">
+                        <div class="text-3xl text-pantone-purple mb-2">📝</div>
+                        <div id="worksheets-done-count" class="text-2xl font-bold text-pantone-purple dark:text-purple-400">45</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Worksheets Done</div>
+                        <div class="text-xs text-pantone-orange mt-1">12 today</div>
                     </div>
-                    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer" onclick="showStatDetails('doubts')">
-                        <div class="text-3xl text-orange-500 mb-2">🤖</div>
-                        <div class="text-2xl font-bold text-orange-600">12</div>
-                        <div class="text-sm text-gray-600">Pending Doubts</div>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow cursor-pointer" onclick="showStatDetails('doubts')">
+                        <div class="text-3xl text-pantone-orange mb-2">🤖</div>
+                        <div id="pending-doubts-count" class="text-2xl font-bold text-pantone-orange dark:text-orange-400">12</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Pending Doubts</div>
                         <div class="text-xs text-red-500 mt-1">3 urgent</div>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
                     <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-lg font-semibold">👥 Class 8 - Student Overview</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">👥 Class 8 - Student Overview</h3>
                         <div class="space-x-2">
-                            <button onclick="addNewStudent()" class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600">+ Add Student</button>
-                            <button onclick="showTab(3)" class="bg-purple-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-600">📊 Report Cards</button>
-                            <button onclick="exportClassData()" class="bg-gray-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-600">📥 Export</button>
+                            <button onclick="addNewStudent()" class="bg-pantone-teal text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600">+ Add Student</button>
+                            <button onclick="showTab(3)" class="bg-pantone-purple text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-600">📊 Report Cards</button>
+                            <button onclick="exportToExcel()" class="bg-pantone-green text-white px-4 py-2 rounded-lg text-sm hover:bg-green-600">📊 Export Excel</button>
                         </div>
                     </div>
 
@@ -320,25 +509,25 @@
             <!-- AI Features -->
             <div id="content-2" class="tab-content hidden">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                    <div onclick="selectFeature('doubt')" class="bg-white rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow border-2 border-blue-500">
+                    <div onclick="selectFeature('doubt')" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow border-2 border-blue-500">
                         <div class="text-center">
                             <div class="text-4xl mb-4">🤖</div>
-                            <h3 class="text-lg font-semibold mb-2">AI Doubt Clearing</h3>
-                            <p class="text-gray-600 text-sm">Ask questions and get personalized explanations</p>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">AI Doubt Clearing</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm">Ask questions and get personalized explanations</p>
                         </div>
                     </div>
-                    <div onclick="selectFeature('worksheet')" class="bg-white rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow border-2 border-transparent">
+                    <div onclick="selectFeature('worksheet')" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow border-2 border-transparent">
                         <div class="text-center">
                             <div class="text-4xl mb-4">📝</div>
-                            <h3 class="text-lg font-semibold mb-2">Smart Worksheets</h3>
-                            <p class="text-gray-600 text-sm">Generate personalized practice materials</p>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Smart Worksheets</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm">Generate personalized practice materials</p>
                         </div>
                     </div>
-                    <div onclick="selectFeature('session')" class="bg-white rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow border-2 border-transparent">
+                    <div onclick="selectFeature('session')" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow border-2 border-transparent">
                         <div class="text-center">
                             <div class="text-4xl mb-4">🎓</div>
-                            <h3 class="text-lg font-semibold mb-2">Learning Sessions</h3>
-                            <p class="text-gray-600 text-sm">Start AI-powered personalized lessons</p>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Learning Sessions</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm">Start AI-powered personalized lessons</p>
                         </div>
                     </div>
                 </div>
@@ -376,7 +565,7 @@
                 </div>
 
                 <!-- AI Features Interface -->
-                <div id="ai-features-interface" class="bg-white rounded-lg shadow-lg p-6">
+                <div id="ai-features-interface" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
                     <!-- AI Doubt Clearing -->
                     <div id="doubt-interface" class="feature-interface">
                         <div class="flex items-center mb-6">
@@ -982,9 +1171,9 @@
                 </div>
 
                 <!-- Student Selection for Report -->
-                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-semibold text-gray-900">👤 Select Student for Report</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">👤 Select Student for Report</h3>
                         <div class="flex items-center space-x-3">
                             <select id="report-student-selector" onchange="generateReportCard(this.value)" class="border border-gray-300 rounded-lg px-3 py-2">
                                 <option value="">Select a student...</option>
@@ -1146,17 +1335,110 @@
     <script>
         let currentTab = 0;
 
+        // Theme Management
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('theme-icon');
+
+            if (savedTheme === 'dark') {
+                html.classList.add('dark');
+                themeIcon.textContent = '☀️';
+            } else {
+                html.classList.remove('dark');
+                themeIcon.textContent = '🌙';
+            }
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('theme-icon');
+
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Dynamic Statistics Management
+        function updateStatistics() {
+            const students = JSON.parse(localStorage.getItem('students') || '[]');
+            const defaultStudents = ['STU001']; // Default students that are always counted
+
+            // Calculate total students (including default + added students)
+            const totalStudents = defaultStudents.length + students.length;
+
+            // Update total students count
+            const totalStudentsElement = document.getElementById('total-students-count');
+            if (totalStudentsElement) {
+                totalStudentsElement.textContent = totalStudents;
+            }
+
+            // Calculate active sessions (simulate based on student count)
+            const activeSessions = Math.min(Math.floor(totalStudents * 0.3), totalStudents);
+            const activeSessionsElement = document.getElementById('active-sessions-count');
+            if (activeSessionsElement) {
+                activeSessionsElement.textContent = activeSessions;
+            }
+
+            // Calculate worksheets done (simulate based on student count)
+            const worksheetsDone = totalStudents * 2 + Math.floor(Math.random() * 10);
+            const worksheetsDoneElement = document.getElementById('worksheets-done-count');
+            if (worksheetsDoneElement) {
+                worksheetsDoneElement.textContent = worksheetsDone;
+            }
+
+            // Calculate pending doubts (simulate)
+            const pendingDoubts = Math.max(1, Math.floor(totalStudents * 0.4));
+            const pendingDoubtsElement = document.getElementById('pending-doubts-count');
+            if (pendingDoubtsElement) {
+                pendingDoubtsElement.textContent = pendingDoubts;
+            }
+
+            // Update weekly change indicator
+            const weeklyChange = students.length > 0 ? `+${students.length} this week` : '+0 this week';
+            const weeklyChangeElement = document.getElementById('students-weekly-change');
+            if (weeklyChangeElement) {
+                weeklyChangeElement.textContent = weeklyChange;
+            }
+
+            // Update the student table count display
+            updateStudentTableCount();
+        }
+
+        function updateStudentTableCount() {
+            // Count visible rows in the student table
+            const tableBody = document.querySelector('#teacher-students-table tbody');
+            if (tableBody) {
+                const visibleRows = tableBody.querySelectorAll('tr:not([style*="display: none"])');
+                const count = visibleRows.length;
+
+                // Update any count displays in the table header or nearby elements
+                const countElements = document.querySelectorAll('.student-count-display');
+                countElements.forEach(element => {
+                    element.textContent = `${count} student${count !== 1 ? 's' : ''} total`;
+                });
+            }
+        }
+
         // Toast notification system
         function showToast(message, type = 'success') {
             const toast = document.createElement('div');
             toast.className = `fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg text-white transform transition-all duration-300 translate-x-full`;
 
             if (type === 'success') {
-                toast.classList.add('bg-green-500');
+                toast.classList.add('bg-pantone-green');
             } else if (type === 'info') {
-                toast.classList.add('bg-blue-500');
+                toast.classList.add('bg-pantone-teal');
             } else if (type === 'warning') {
-                toast.classList.add('bg-yellow-500');
+                toast.classList.add('bg-pantone-orange');
+            } else if (type === 'error') {
+                toast.classList.add('bg-red-500');
             }
 
             toast.innerHTML = message;
@@ -1177,19 +1459,29 @@
         }
 
         function showTab(tabIndex) {
+            console.log('Switching to tab:', tabIndex);
+
             // Hide all content
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.add('hidden');
             });
 
-            // Reset all tab styles
+            // Reset all tab styles to inactive state
             document.querySelectorAll('[id^="tab-"]').forEach(tab => {
-                tab.className = 'py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300';
+                tab.className = 'py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 dark:text-gray-400 hover:text-pantone-blue dark:hover:text-pantone-light hover:border-pantone-teal dark:hover:border-pantone-light';
             });
 
-            // Show selected content and highlight tab
-            document.getElementById(`content-${tabIndex}`).classList.remove('hidden');
-            document.getElementById(`tab-${tabIndex}`).className = 'py-4 px-1 border-b-2 font-medium text-sm border-blue-500 text-blue-600';
+            // Show selected content and highlight tab with active state
+            const contentElement = document.getElementById(`content-${tabIndex}`);
+            const tabElement = document.getElementById(`tab-${tabIndex}`);
+
+            if (contentElement) {
+                contentElement.classList.remove('hidden');
+            }
+
+            if (tabElement) {
+                tabElement.className = 'py-4 px-1 border-b-2 font-medium text-sm border-pantone-teal dark:border-pantone-light text-pantone-blue dark:text-pantone-light';
+            }
 
             currentTab = tabIndex;
 
@@ -2185,10 +2477,12 @@ Generated by AI Education Agent for Government Schools
             const learningStyle = document.getElementById('learning-style').value;
 
             // Create new student object
+            const defaultPassword = studentId.toLowerCase() + '123'; // Simple default password
             const newStudent = {
                 student_id: studentId,
                 name: name,
                 grade: parseInt(grade),
+                password: defaultPassword,
                 current_level: 50.0, // Default starting level
                 strengths: [],
                 weaknesses: [],
@@ -2205,13 +2499,11 @@ Generated by AI Education Agent for Government Schools
             // Close modal
             event.target.closest('.fixed').remove();
 
-            // Show success message
-            showToast(`✅ Student ${name} (${studentId}) added successfully!`, 'success');
+            // Show success message with password info
+            showToast(`✅ Student ${name} (${studentId}) added successfully! Default password: ${defaultPassword}`, 'success');
 
-            // Update student count
-            const totalStudentsElement = document.querySelector('.text-2xl.font-bold.text-blue-600');
-            const currentCount = parseInt(totalStudentsElement.textContent);
-            totalStudentsElement.textContent = currentCount + 1;
+            // Update statistics
+            updateStatistics();
 
             // Switch to the newly added student
             localStorage.setItem('currentStudentId', studentId);
@@ -2344,12 +2636,8 @@ Generated by AI Education Agent for Government Schools
                     defaultRow.style.display = 'none';
                 }
 
-                // Update student count
-                const totalStudentsElement = document.querySelector('.text-2xl.font-bold.text-blue-600');
-                if (totalStudentsElement) {
-                    const currentCount = parseInt(totalStudentsElement.textContent);
-                    totalStudentsElement.textContent = Math.max(0, currentCount - 1);
-                }
+                // Update statistics
+                updateStatistics();
 
                 showToast(`✅ Student Priya Sharma (STU001) removed successfully!`, 'success');
                 return;
@@ -2363,12 +2651,8 @@ Generated by AI Education Agent for Government Schools
                 students.splice(studentIndex, 1);
                 localStorage.setItem('students', JSON.stringify(students));
 
-                // Update student count
-                const totalStudentsElement = document.querySelector('.text-2xl.font-bold.text-blue-600');
-                if (totalStudentsElement) {
-                    const currentCount = parseInt(totalStudentsElement.textContent);
-                    totalStudentsElement.textContent = Math.max(0, currentCount - 1);
-                }
+                // Update statistics
+                updateStatistics();
 
                 // If this was the current student, switch to another student or default
                 const currentStudentId = localStorage.getItem('currentStudentId');
@@ -2697,6 +2981,106 @@ Generated by AI Education Agent for Government Schools`;
             window.URL.revokeObjectURL(url);
 
             showToast('📥 Class report exported successfully!', 'success');
+        }
+
+        function exportToExcel() {
+            // Get all students data
+            const students = JSON.parse(localStorage.getItem('students') || '[]');
+            const defaultStudent = {
+                student_id: 'STU001',
+                name: 'Priya Sharma',
+                grade: 8,
+                current_level: 76.0,
+                strengths: ['Mathematics', 'Science'],
+                weaknesses: ['English', 'History'],
+                learning_style: 'Visual',
+                last_activity: new Date().toISOString(),
+                status: 'active'
+            };
+
+            // Combine default student with added students
+            const allStudents = [defaultStudent, ...students];
+
+            // Prepare data for Excel
+            const excelData = [];
+
+            // Add header row
+            excelData.push([
+                'Student ID',
+                'Name',
+                'Grade',
+                'Performance (%)',
+                'Strengths',
+                'Areas for Improvement',
+                'Learning Style',
+                'Status',
+                'Last Activity',
+                'Worksheets Completed',
+                'Active Sessions',
+                'Pending Doubts'
+            ]);
+
+            // Add student data rows
+            allStudents.forEach((student, index) => {
+                const worksheetsCompleted = Math.floor(Math.random() * 20) + 10; // Simulate data
+                const activeSessions = Math.floor(Math.random() * 5) + 1;
+                const pendingDoubts = Math.floor(Math.random() * 3);
+
+                excelData.push([
+                    student.student_id,
+                    student.name,
+                    student.grade || 8,
+                    student.current_level || (Math.random() * 30 + 60).toFixed(1),
+                    Array.isArray(student.strengths) ? student.strengths.join(', ') : 'Mathematics, Science',
+                    Array.isArray(student.weaknesses) ? student.weaknesses.join(', ') : 'English, History',
+                    student.learning_style || 'Visual',
+                    student.status || 'active',
+                    new Date(student.last_activity || Date.now()).toLocaleDateString(),
+                    worksheetsCompleted,
+                    activeSessions,
+                    pendingDoubts
+                ]);
+            });
+
+            // Add summary data
+            excelData.push([]);
+            excelData.push(['SUMMARY STATISTICS']);
+            excelData.push(['Total Students', allStudents.length]);
+            excelData.push(['Average Performance', (allStudents.reduce((sum, s) => sum + (s.current_level || 70), 0) / allStudents.length).toFixed(1) + '%']);
+            excelData.push(['Active Students', allStudents.filter(s => s.status === 'active').length]);
+            excelData.push(['Generated On', new Date().toLocaleString()]);
+
+            // Create workbook and worksheet
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.aoa_to_sheet(excelData);
+
+            // Set column widths
+            const colWidths = [
+                { wch: 12 }, // Student ID
+                { wch: 20 }, // Name
+                { wch: 8 },  // Grade
+                { wch: 15 }, // Performance
+                { wch: 25 }, // Strengths
+                { wch: 25 }, // Areas for Improvement
+                { wch: 15 }, // Learning Style
+                { wch: 10 }, // Status
+                { wch: 15 }, // Last Activity
+                { wch: 18 }, // Worksheets Completed
+                { wch: 15 }, // Active Sessions
+                { wch: 15 }  // Pending Doubts
+            ];
+            ws['!cols'] = colWidths;
+
+            // Add worksheet to workbook
+            XLSX.utils.book_append_sheet(wb, ws, 'Student Progress Report');
+
+            // Generate filename with current date
+            const filename = `Student_Progress_Report_${new Date().toISOString().split('T')[0]}.xlsx`;
+
+            // Save file
+            XLSX.writeFile(wb, filename);
+
+            showToast('📊 Excel report exported successfully!', 'success');
         }
 
         function showStudentDetails(studentId, studentName) {
@@ -3587,10 +3971,8 @@ Personalized for Government Schools Initiative`;
 
         // Initialize page with Student Dashboard as default
         document.addEventListener('DOMContentLoaded', function() {
-            // Set Student Dashboard (tab 0) as default active tab
-            showTab(0);
-
-            // Initialize student data
+            // Initialize student data, but don't set default tab here
+            // The tab will be set by setupRoleBasedUI() when user logs in
             initializeStudentData();
         });
 
@@ -4000,9 +4382,410 @@ For more detailed analytics, please visit the online dashboard.
             showToast(`📥 Report card downloaded for ${studentName}!`, 'success');
         }
 
-        // Also set default tab immediately in case DOMContentLoaded already fired
-        showTab(0);
+        // Initialize theme and statistics on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTheme();
+            updateStatistics();
+        });
+
+        // Initialize data and theme, but don't set default tab here
+        // The tab will be set by setupRoleBasedUI() when user logs in
         initializeStudentData();
+        initializeTheme();
+        updateStatistics();
+
+        // Authentication System
+        let currentUser = null;
+        let currentUserRole = null;
+
+        function resetDemoData() {
+            // Clear all existing data
+            localStorage.removeItem('teachers');
+            localStorage.removeItem('students');
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('currentStudentId');
+
+            // Reset current user variables
+            currentUser = null;
+            currentUserRole = null;
+
+            // Reinitialize default data
+            initializeDefaultData();
+
+            // Reset to home page
+            showHomePage();
+
+            showToast('✅ Demo data reset successfully! You can now use the demo credentials.', 'success');
+            console.log('Demo data reset completed');
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, initializing...');
+            initializeDefaultData();
+            checkAuthStatus();
+        });
+
+        // Also initialize immediately (in case DOMContentLoaded already fired)
+        if (document.readyState === 'loading') {
+            // Document is still loading
+        } else {
+            // Document has already loaded
+            console.log('Document already loaded, initializing immediately...');
+            initializeDefaultData();
+        }
+
+        function initializeDefaultData() {
+            // Always ensure default teacher account exists
+            let teachers = JSON.parse(localStorage.getItem('teachers') || '[]');
+
+            // Check if default teacher exists, if not add it
+            const defaultTeacherExists = teachers.find(t => t.email === 'teacher@demo.com');
+            if (!defaultTeacherExists) {
+                const defaultTeacher = {
+                    id: 'T001',
+                    name: 'Demo Teacher',
+                    email: 'teacher@demo.com',
+                    school: 'Government High School',
+                    password: 'demo123',
+                    createdAt: new Date().toISOString()
+                };
+                teachers.push(defaultTeacher);
+                localStorage.setItem('teachers', JSON.stringify(teachers));
+                console.log('Default teacher created:', defaultTeacher);
+            }
+
+            // Always ensure default student account exists
+            let students = JSON.parse(localStorage.getItem('students') || '[]');
+
+            // Check if default student exists, if not add it
+            const defaultStudentExists = students.find(s => s.student_id === 'STU001');
+            if (!defaultStudentExists) {
+                const defaultStudent = {
+                    student_id: 'STU001',
+                    name: 'Priya Sharma',
+                    grade: 8,
+                    password: 'stu001123',
+                    current_level: 76.0,
+                    strengths: ['Mathematics', 'Science'],
+                    weaknesses: ['English', 'History'],
+                    learning_style: 'Visual',
+                    last_activity: new Date().toISOString(),
+                    status: 'active'
+                };
+                students.push(defaultStudent);
+                localStorage.setItem('students', JSON.stringify(students));
+                console.log('Default student created:', defaultStudent);
+            }
+
+            // Debug: Log current data
+            console.log('Teachers in storage:', JSON.parse(localStorage.getItem('teachers') || '[]'));
+            console.log('Students in storage:', JSON.parse(localStorage.getItem('students') || '[]'));
+        }
+
+        function checkAuthStatus() {
+            const user = localStorage.getItem('currentUser');
+            const role = localStorage.getItem('userRole');
+
+            if (user && role) {
+                currentUser = JSON.parse(user);
+                currentUserRole = role;
+                showMainApp();
+            } else {
+                showHomePage();
+            }
+        }
+
+        function showHomePage() {
+            document.getElementById('home-page').classList.remove('hidden');
+            document.getElementById('main-app').classList.add('hidden');
+
+            // When showing home page (no user logged in), default to Student Dashboard view
+            showTab(0);
+        }
+
+        function showMainApp() {
+            document.getElementById('home-page').classList.add('hidden');
+            document.getElementById('main-app').classList.remove('hidden');
+
+            // Update user info in header
+            document.getElementById('user-welcome').textContent = `Welcome, ${currentUser.name}!`;
+            document.getElementById('user-role').textContent = currentUserRole === 'teacher' ? 'Teacher Dashboard' : 'Student Dashboard';
+            document.getElementById('user-avatar').textContent = currentUserRole === 'teacher' ? '👨‍🏫' : '👨‍🎓';
+
+            // Show appropriate tabs based on role
+            setupRoleBasedUI();
+
+            initializeTheme();
+            updateStatistics();
+        }
+
+        function setupRoleBasedUI() {
+            console.log('Setting up UI for role:', currentUserRole);
+            const tabs = document.querySelectorAll('[id^="tab-"]');
+
+            if (currentUserRole === 'student') {
+                console.log('Setting up student UI - showing only Student Dashboard');
+                // Student can ONLY see Student Dashboard
+                tabs[0].classList.remove('hidden'); // Student Dashboard
+                tabs[1].classList.add('hidden');    // Teacher Dashboard
+                tabs[2].classList.add('hidden');    // AI Features
+                tabs[3].classList.add('hidden');    // Report Card
+
+                // Remove student selector from student dashboard
+                const studentSelector = document.getElementById('student-selector');
+                if (studentSelector) {
+                    studentSelector.remove();
+                }
+
+                // Set default tab to Student Dashboard
+                showTab(0);
+            } else if (currentUserRole === 'teacher') {
+                console.log('Setting up teacher UI - showing only Teacher Dashboard');
+                // Teacher can ONLY see Teacher Dashboard
+                tabs[0].classList.add('hidden');    // Student Dashboard
+                tabs[1].classList.remove('hidden'); // Teacher Dashboard
+                tabs[2].classList.add('hidden');    // AI Features
+                tabs[3].classList.add('hidden');    // Report Card
+
+                // Default to Teacher Dashboard for teachers
+                setTimeout(() => {
+                    showTab(1); // Teacher Dashboard
+                }, 100); // Small delay to ensure DOM is ready
+            }
+        }
+
+        function showRoleSelection() {
+            document.getElementById('role-selection').classList.remove('hidden');
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('signup-form').classList.add('hidden');
+        }
+
+        function showLogin(role) {
+            document.getElementById('role-selection').classList.add('hidden');
+            document.getElementById('login-form').classList.remove('hidden');
+            document.getElementById('signup-form').classList.add('hidden');
+
+            const title = document.getElementById('login-title');
+            const signupOption = document.getElementById('teacher-signup-option');
+
+            if (role === 'teacher') {
+                title.textContent = 'Teacher Login';
+                signupOption.classList.remove('hidden');
+                document.getElementById('login-id').placeholder = 'Enter your email';
+            } else {
+                title.textContent = 'Student Login';
+                signupOption.classList.add('hidden');
+                document.getElementById('login-id').placeholder = 'Enter your Student ID';
+            }
+
+            // Store current role for login
+            document.getElementById('login-form').setAttribute('data-role', role);
+        }
+
+        function showSignup() {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('signup-form').classList.remove('hidden');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+
+            const role = document.getElementById('login-form').getAttribute('data-role');
+            const loginId = document.getElementById('login-id').value;
+            const password = document.getElementById('login-password').value;
+            const submitButton = event.target.querySelector('button[type="submit"]');
+
+            // Show loading state
+            const originalText = submitButton.innerHTML;
+            submitButton.innerHTML = '<div class="loading-spinner inline-block mr-2"></div>Logging in...';
+            submitButton.disabled = true;
+
+            if (role === 'teacher') {
+                // Check teacher credentials
+                const teachers = JSON.parse(localStorage.getItem('teachers') || '[]');
+                console.log('Available teachers:', teachers);
+                console.log('Login attempt - Email:', loginId, 'Password:', password);
+
+                const teacher = teachers.find(t => t.email === loginId && t.password === password);
+                console.log('Found teacher:', teacher);
+
+                if (teacher) {
+                    currentUser = teacher;
+                    currentUserRole = 'teacher';
+                    localStorage.setItem('currentUser', JSON.stringify(teacher));
+                    localStorage.setItem('userRole', 'teacher');
+                    console.log('Teacher login successful, showing main app...');
+                    showMainApp();
+                    showToast('✅ Welcome back, ' + teacher.name + '!', 'success');
+                } else {
+                    showToast('❌ Invalid email or password. Try clicking "Reset Demo Data" first.', 'error');
+                }
+            } else {
+                // Check student credentials
+                const students = JSON.parse(localStorage.getItem('students') || '[]');
+                console.log('Available students:', students);
+                console.log('Login attempt - Student ID:', loginId, 'Password:', password);
+
+                const student = students.find(s => s.student_id === loginId && s.password === password);
+                console.log('Found student:', student);
+
+                if (student) {
+                    currentUser = student;
+                    currentUserRole = 'student';
+                    localStorage.setItem('currentUser', JSON.stringify(student));
+                    localStorage.setItem('userRole', 'student');
+                    localStorage.setItem('currentStudentId', student.student_id);
+                    showMainApp();
+                    showToast('✅ Welcome back, ' + student.name + '!', 'success');
+                } else {
+                    showToast('❌ Invalid Student ID or password. Try clicking "Reset Demo Data" first.', 'error');
+                }
+            }
+
+            // Reset loading state
+            setTimeout(() => {
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+            }, 1000);
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const school = document.getElementById('signup-school').value;
+            const password = document.getElementById('signup-password').value;
+
+            // Check if teacher already exists
+            const teachers = JSON.parse(localStorage.getItem('teachers') || '[]');
+            if (teachers.find(t => t.email === email)) {
+                showToast('❌ Teacher with this email already exists', 'error');
+                return;
+            }
+
+            // Create new teacher
+            const newTeacher = {
+                id: 'T' + Date.now(),
+                name: name,
+                email: email,
+                school: school,
+                password: password,
+                createdAt: new Date().toISOString()
+            };
+
+            teachers.push(newTeacher);
+            localStorage.setItem('teachers', JSON.stringify(teachers));
+
+            showToast('✅ Account created successfully! Please login.', 'success');
+            showLogin('teacher');
+        }
+
+        function logout() {
+            // Clear all user session data
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('currentStudentId');
+            currentUser = null;
+            currentUserRole = null;
+
+            // Reset to home page
+            showHomePage();
+            showToast('👋 Logged out successfully!', 'success');
+
+            // Reset form
+            document.getElementById('login-id').value = '';
+            document.getElementById('login-password').value = '';
+        }
+
+        function showHelpModal() {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-2xl w-full mx-4 max-h-96 overflow-y-auto">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">📚 Help & Instructions</h3>
+                        <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700 text-xl">✕</button>
+                    </div>
+
+                    <div class="space-y-4 text-sm text-gray-700 dark:text-gray-300">
+                        <div>
+                            <h4 class="font-semibold text-pantone-blue mb-2">🔑 Demo Credentials</h4>
+                            <p><strong>Teacher:</strong> teacher@demo.com / demo123</p>
+                            <p><strong>Student:</strong> STU001 / stu001123</p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-pantone-blue mb-2">⌨️ Keyboard Shortcuts</h4>
+                            <p><strong>Alt + T:</strong> Toggle theme</p>
+                            <p><strong>Alt + L:</strong> Logout</p>
+                            <p><strong>Escape:</strong> Close modals</p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-pantone-blue mb-2">👨‍🏫 Teacher Features</h4>
+                            <p>• Add and manage students</p>
+                            <p>• View class statistics</p>
+                            <p>• Export progress reports to Excel</p>
+                            <p>• Access all AI features</p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-pantone-blue mb-2">👨‍🎓 Student Features</h4>
+                            <p>• Personalized learning dashboard</p>
+                            <p>• AI-powered doubt clearing</p>
+                            <p>• Smart worksheets</p>
+                            <p>• Interactive learning sessions</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            // Alt + T for theme toggle
+            if (event.altKey && event.key === 't') {
+                event.preventDefault();
+                toggleTheme();
+            }
+
+            // Alt + L for logout (when logged in)
+            if (event.altKey && event.key === 'l' && currentUser) {
+                event.preventDefault();
+                logout();
+            }
+
+            // Escape to close modals
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.fixed.inset-0');
+                modals.forEach(modal => modal.remove());
+            }
+        });
+
+        // Function to clear session and start fresh
+        function clearSession() {
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('userRole');
+            currentUser = null;
+            currentUserRole = null;
+        }
+
+        // Initialize on page load
+        clearSession(); // Clear any existing session to start fresh
+        initializeDemoData();
+        checkAuthStatus();
     </script>
+
+    <!-- Status Bar at Bottom -->
+    <footer class="bg-pantone-accent dark:bg-gray-800 text-white py-2 px-4 text-center text-sm">
+        <p>🎓 AI Education Agent - Full AI-Powered Version | Version 2.0.0 | OpenAI Status: ✅ Connected</p>
+    </footer>
+
+    </div> <!-- Close main-app div -->
+
 </body>
 </html>
