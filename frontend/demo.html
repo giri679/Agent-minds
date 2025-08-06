@@ -73,13 +73,13 @@
                         <circle cx="38" cy="22" r="1.5" fill="#FF6B35"/>
                     </svg>
                 </div>
-                <h1 class="text-3xl font-bold text-white mb-2">AI Education Agent</h1>
-                <p class="text-pantone-light">Smart Learning Platform for Government Schools</p>
+                <h1 class="text-3xl font-bold text-white mb-2" data-translate="ai-education-agent">AI Education Agent</h1>
+                <p class="text-pantone-light" data-translate="smart-learning-platform-govt">Smart Learning Platform for Government Schools</p>
             </div>
 
             <!-- Role Selection -->
             <div id="role-selection" class="glass-effect rounded-lg p-6 mb-6">
-                <h2 class="text-xl font-semibold text-white mb-4 text-center">Choose Your Role</h2>
+                <h2 class="text-xl font-semibold text-white mb-4 text-center" data-translate="choose-role">Choose Your Role</h2>
                 <div class="grid grid-cols-2 gap-4">
                     <button onclick="showLogin('student')" class="bg-pantone-green hover:bg-green-600 text-white py-3 px-4 rounded-lg transition-colors flex flex-col items-center">
                         <span class="text-2xl mb-1">👨‍🎓</span>
@@ -108,7 +108,15 @@
                     </div>
                     <div class="mb-6">
                         <label class="block text-pantone-light text-sm font-medium mb-2">Password</label>
-                        <input type="password" id="login-password" class="w-full px-3 py-2 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pantone-light" placeholder="Enter your password" required>
+                        <div class="relative">
+                            <input type="password" id="login-password" class="w-full px-3 py-2 pr-10 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pantone-light" placeholder="Enter your password" required>
+                            <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" onclick="togglePasswordVisibility('login-password', this)">
+                                <svg class="h-5 w-5 text-gray-300 hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                     <button type="submit" class="w-full bg-pantone-orange hover:bg-orange-600 text-white py-2 px-4 rounded-lg transition-colors font-medium">
                         Login
@@ -148,7 +156,15 @@
                     </div>
                     <div class="mb-6">
                         <label class="block text-pantone-light text-sm font-medium mb-2">Password</label>
-                        <input type="password" id="signup-password" class="w-full px-3 py-2 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pantone-light" placeholder="Create a password" required>
+                        <div class="relative">
+                            <input type="password" id="signup-password" class="w-full px-3 py-2 pr-10 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-pantone-light" placeholder="Create a password" required>
+                            <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" onclick="togglePasswordVisibility('signup-password', this)">
+                                <svg class="h-5 w-5 text-gray-300 hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                     <button type="submit" class="w-full bg-pantone-green hover:bg-green-600 text-white py-2 px-4 rounded-lg transition-colors font-medium">
                         Create Account
@@ -202,22 +218,22 @@
                         </svg>
                     </div>
                     <div>
-                        <h1 class="text-2xl font-bold">AI Education Agent</h1>
-                        <p class="text-pantone-light text-sm">Smart Learning Platform</p>
+                        <h1 class="text-2xl font-bold" data-translate="ai-education-agent">AI Education Agent</h1>
+                        <p class="text-pantone-light text-sm" data-translate="smart-learning-platform">Smart Learning Platform</p>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
                     <div class="text-right">
-                        <p id="user-welcome" class="text-sm font-medium">Welcome back!</p>
-                        <p id="user-role" class="text-xs text-pantone-light">Ready to learn today?</p>
+                        <p id="user-welcome" class="text-sm font-medium" data-translate="welcome-back">Welcome back!</p>
+                        <p id="user-role" class="text-xs text-pantone-light" data-translate="student-dashboard">Ready to learn today?</p>
                     </div>
                     <div class="w-10 h-10 bg-pantone-teal rounded-full flex items-center justify-center">
                         <span id="user-avatar" class="text-lg font-bold">👤</span>
                     </div>
-                    <button onclick="showHelpModal()" class="bg-pantone-purple hover:bg-purple-600 px-3 py-1 rounded text-sm transition-colors mr-2">
+                    <button onclick="showHelpModal()" class="bg-pantone-purple hover:bg-purple-600 px-3 py-1 rounded text-sm transition-colors mr-2" data-translate="help">
                         Help
                     </button>
-                    <button onclick="logout()" class="bg-pantone-orange hover:bg-orange-600 px-3 py-1 rounded text-sm transition-colors">
+                    <button onclick="logout()" class="bg-pantone-orange hover:bg-orange-600 px-3 py-1 rounded text-sm transition-colors" data-translate="logout">
                         Logout
                     </button>
                 </div>
@@ -233,33 +249,58 @@
                 <button onclick="showTab(0)" id="tab-0" class="py-4 px-1 border-b-2 font-medium text-sm border-pantone-teal dark:border-pantone-light text-pantone-blue dark:text-pantone-light">
                     <div class="flex items-center space-x-2">
                         <span>📚</span>
-                        <span>Student Dashboard</span>
+                        <span data-translate="student-dashboard">Student Dashboard</span>
                     </div>
                 </button>
                 <button onclick="showTab(1)" id="tab-1" class="py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 dark:text-gray-400 hover:text-pantone-blue dark:hover:text-pantone-light hover:border-pantone-teal dark:hover:border-pantone-light">
                     <div class="flex items-center space-x-2">
                         <span>👨‍🏫</span>
-                        <span>Teacher Dashboard</span>
+                        <span data-translate="teacher-dashboard">Teacher Dashboard</span>
                     </div>
                 </button>
                 <button onclick="showTab(2)" id="tab-2" class="py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 dark:text-gray-400 hover:text-pantone-blue dark:hover:text-pantone-light hover:border-pantone-teal dark:hover:border-pantone-light">
                     <div class="flex items-center space-x-2">
                         <span>🤖</span>
-                        <span>AI Features</span>
+                        <span data-translate="ai-features">AI Features</span>
                     </div>
                 </button>
                 <button onclick="showTab(3)" id="tab-3" class="py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 dark:text-gray-400 hover:text-pantone-blue dark:hover:text-pantone-light hover:border-pantone-teal dark:hover:border-pantone-light">
                     <div class="flex items-center space-x-2">
                         <span>📊</span>
-                        <span>Report Card</span>
+                        <span data-translate="report-card">Report Card</span>
                     </div>
                 </button>
                 </nav>
 
-                <!-- Theme Toggle -->
-                <button id="theme-toggle" class="p-2 rounded-lg bg-pantone-light dark:bg-pantone-accent hover:bg-pantone-teal dark:hover:bg-pantone-blue transition-colors" onclick="toggleTheme()">
-                    <span id="theme-icon" class="text-pantone-blue dark:text-pantone-light">🌙</span>
-                </button>
+                <div class="flex items-center space-x-2">
+                    <!-- Language Selector -->
+                    <div class="relative">
+                        <button id="language-toggle" class="p-2 rounded-lg bg-pantone-light dark:bg-pantone-accent hover:bg-pantone-teal dark:hover:bg-pantone-blue transition-colors flex items-center space-x-1" onclick="toggleLanguageDropdown()">
+                            <span class="text-pantone-blue dark:text-pantone-light">🌐</span>
+                            <span id="current-language" class="text-xs text-pantone-blue dark:text-pantone-light font-medium">EN</span>
+                        </button>
+
+                        <!-- Language Dropdown -->
+                        <div id="language-dropdown" class="absolute right-0 mt-2 w-32 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50 hidden">
+                            <div class="py-1">
+                                <button onclick="changeLanguage('en', 'EN')" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-pantone-light dark:hover:bg-pantone-accent transition-colors">
+                                    🇺🇸 English
+                                </button>
+                                <button onclick="changeLanguage('te', 'తె')" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-pantone-light dark:hover:bg-pantone-accent transition-colors">
+                                    🇮🇳 తెలుగు
+                                </button>
+                                <button onclick="changeLanguage('hi', 'हि')" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-pantone-light dark:hover:bg-pantone-accent transition-colors">
+                                    🇮🇳 हिंदी
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-lg bg-pantone-light dark:bg-pantone-accent hover:bg-pantone-teal dark:hover:bg-pantone-blue transition-colors" onclick="toggleTheme()">
+                        <span id="theme-icon" class="text-pantone-blue dark:text-pantone-light">🌙</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -446,9 +487,9 @@
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">👥 Class 8 - Student Overview</h3>
                         <div class="space-x-2">
-                            <button onclick="addNewStudent()" class="bg-pantone-teal text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600">+ Add Student</button>
+                            <button onclick="addNewStudent()" class="bg-pantone-teal text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600" data-translate="add-student">+ Add Student</button>
                             <button onclick="showTab(3)" class="bg-pantone-purple text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-600">📊 Report Cards</button>
-                            <button onclick="exportToExcel()" class="bg-pantone-green text-white px-4 py-2 rounded-lg text-sm hover:bg-green-600">📊 Export Excel</button>
+                            <button onclick="exportToExcel()" class="bg-pantone-green text-white px-4 py-2 rounded-lg text-sm hover:bg-green-600" data-translate="export-excel">📊 Export Excel</button>
                         </div>
                     </div>
 
@@ -494,9 +535,9 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <div class="flex space-x-2">
-                                            <button onclick="event.stopPropagation(); showStudentDetails('STU001', 'Priya Sharma')" class="text-blue-600 hover:text-blue-900 px-2 py-1 rounded text-xs">View</button>
-                                            <button onclick="event.stopPropagation(); editStudent('STU001')" class="text-green-600 hover:text-green-900 px-2 py-1 rounded text-xs">Edit</button>
-                                            <button onclick="event.stopPropagation(); confirmRemoveStudent('STU001', 'Priya Sharma')" class="text-red-600 hover:text-red-900 px-2 py-1 rounded text-xs">Remove</button>
+                                            <button onclick="event.stopPropagation(); showStudentDetails('STU001', 'Priya Sharma')" class="text-blue-600 hover:text-blue-900 px-2 py-1 rounded text-xs" data-translate="view">View</button>
+                                            <button onclick="event.stopPropagation(); editStudent('STU001')" class="text-green-600 hover:text-green-900 px-2 py-1 rounded text-xs" data-translate="edit">Edit</button>
+                                            <button onclick="event.stopPropagation(); confirmRemoveStudent('STU001', 'Priya Sharma')" class="text-red-600 hover:text-red-900 px-2 py-1 rounded text-xs" data-translate="remove">Remove</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -512,22 +553,22 @@
                     <div onclick="selectFeature('doubt')" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow border-2 border-blue-500">
                         <div class="text-center">
                             <div class="text-4xl mb-4">🤖</div>
-                            <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">AI Doubt Clearing</h3>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm">Ask questions and get personalized explanations</p>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white" data-translate="ai-doubt-clearing">AI Doubt Clearing</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm" data-translate="ask-questions-get-explanations">Ask questions and get personalized explanations</p>
                         </div>
                     </div>
                     <div onclick="selectFeature('worksheet')" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow border-2 border-transparent">
                         <div class="text-center">
                             <div class="text-4xl mb-4">📝</div>
-                            <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Smart Worksheets</h3>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm">Generate personalized practice materials</p>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white" data-translate="smart-worksheets">Smart Worksheets</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm" data-translate="generate-practice-materials">Generate personalized practice materials</p>
                         </div>
                     </div>
                     <div onclick="selectFeature('session')" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow border-2 border-transparent">
                         <div class="text-center">
                             <div class="text-4xl mb-4">🎓</div>
-                            <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Learning Sessions</h3>
-                            <p class="text-gray-600 dark:text-gray-400 text-sm">Start AI-powered personalized lessons</p>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white" data-translate="learning-sessions">Learning Sessions</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm" data-translate="start-ai-powered-lessons">Start AI-powered personalized lessons</p>
                         </div>
                     </div>
                 </div>
@@ -537,29 +578,29 @@
                     <div onclick="selectFeature('voice')" class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg shadow-lg p-4 cursor-pointer hover:shadow-xl transition-all transform hover:scale-105 text-white">
                         <div class="text-center">
                             <div class="text-3xl mb-2">🎤</div>
-                            <h4 class="text-sm font-semibold mb-1">Voice Learning</h4>
-                            <p class="text-xs opacity-90">Talk to AI tutor</p>
+                            <h4 class="text-sm font-semibold mb-1" data-translate="voice-learning">Voice Learning</h4>
+                            <p class="text-xs opacity-90" data-translate="talk-to-ai-tutor">Talk to AI tutor</p>
                         </div>
                     </div>
                     <div onclick="selectFeature('emotion')" class="bg-gradient-to-br from-green-500 to-teal-500 rounded-lg shadow-lg p-4 cursor-pointer hover:shadow-xl transition-all transform hover:scale-105 text-white">
                         <div class="text-center">
                             <div class="text-3xl mb-2">😊</div>
-                            <h4 class="text-sm font-semibold mb-1">Emotion AI</h4>
-                            <p class="text-xs opacity-90">Mood-based learning</p>
+                            <h4 class="text-sm font-semibold mb-1" data-translate="emotion-ai">Emotion AI</h4>
+                            <p class="text-xs opacity-90" data-translate="mood-based-learning">Mood-based learning</p>
                         </div>
                     </div>
                     <div onclick="selectFeature('gamify')" class="bg-gradient-to-br from-orange-500 to-red-500 rounded-lg shadow-lg p-4 cursor-pointer hover:shadow-xl transition-all transform hover:scale-105 text-white">
                         <div class="text-center">
                             <div class="text-3xl mb-2">🎮</div>
-                            <h4 class="text-sm font-semibold mb-1">AI Games</h4>
-                            <p class="text-xs opacity-90">Learn through play</p>
+                            <h4 class="text-sm font-semibold mb-1" data-translate="ai-games">AI Games</h4>
+                            <p class="text-xs opacity-90" data-translate="learn-through-play">Learn through play</p>
                         </div>
                     </div>
                     <div onclick="selectFeature('predict')" class="bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg shadow-lg p-4 cursor-pointer hover:shadow-xl transition-all transform hover:scale-105 text-white">
                         <div class="text-center">
                             <div class="text-3xl mb-2">🔮</div>
-                            <h4 class="text-sm font-semibold mb-1">Future Predictor</h4>
-                            <p class="text-xs opacity-90">Career guidance AI</p>
+                            <h4 class="text-sm font-semibold mb-1" data-translate="future-career">Future Predictor</h4>
+                            <p class="text-xs opacity-90" data-translate="career-guidance-ai">Career guidance AI</p>
                         </div>
                     </div>
                 </div>
@@ -771,19 +812,19 @@
                                     <div class="bg-blue-50 p-4 rounded-lg">
                                         <h5 class="font-medium text-blue-800 mb-2">📚 Subject Practice</h5>
                                         <p class="text-sm text-blue-700">Practice speaking about any subject. AI will correct pronunciation and provide feedback.</p>
-                                        <button onclick="startSubjectPractice()" class="mt-2 bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">Start Practice</button>
+                                        <button onclick="startSubjectPractice()" class="mt-2 bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600" data-translate="start-practice">Start Practice</button>
                                     </div>
 
                                     <div class="bg-green-50 p-4 rounded-lg">
                                         <h5 class="font-medium text-green-800 mb-2">🌍 Language Learning</h5>
                                         <p class="text-sm text-green-700">Practice English pronunciation with real-time feedback and accent training.</p>
-                                        <button onclick="startLanguagePractice()" class="mt-2 bg-green-500 text-white px-3 py-1 rounded text-sm hover:bg-green-600">Start English</button>
+                                        <button onclick="startLanguagePractice()" class="mt-2 bg-green-500 text-white px-3 py-1 rounded text-sm hover:bg-green-600" data-translate="start-english">Start English</button>
                                     </div>
 
                                     <div class="bg-orange-50 p-4 rounded-lg">
                                         <h5 class="font-medium text-orange-800 mb-2">🎭 Story Mode</h5>
                                         <p class="text-sm text-orange-700">Learn through interactive storytelling. AI creates stories based on your curriculum.</p>
-                                        <button onclick="startStoryMode()" class="mt-2 bg-orange-500 text-white px-3 py-1 rounded text-sm hover:bg-orange-600">Tell Story</button>
+                                        <button onclick="startStoryMode()" class="mt-2 bg-orange-500 text-white px-3 py-1 rounded text-sm hover:bg-orange-600" data-translate="tell-story">Tell Story</button>
                                     </div>
                                 </div>
                             </div>
@@ -812,8 +853,8 @@
                                     <p id="mood-status" class="font-medium text-green-600">Happy & Ready to Learn!</p>
                                 </div>
 
-                                <button onclick="detectMood()" class="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 mb-2">🔍 Detect My Mood</button>
-                                <button onclick="moodBooster()" class="w-full bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600">⚡ Mood Booster</button>
+                                <button onclick="detectMood()" class="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 mb-2" data-translate="detect-mood">🔍 Detect My Mood</button>
+                                <button onclick="moodBooster()" class="w-full bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600" data-translate="mood-booster">⚡ Mood Booster</button>
                             </div>
 
                             <div class="bg-white rounded-lg shadow-lg p-6">
@@ -1350,6 +1391,39 @@
             }
         }
 
+        function initializeLanguage() {
+            // Always start with English as default - clear any saved language on first load
+            const isFirstLoad = !sessionStorage.getItem('languageInitialized');
+            if (isFirstLoad) {
+                localStorage.removeItem('selectedLanguage');
+                sessionStorage.setItem('languageInitialized', 'true');
+            }
+
+            // Always start with English as default
+            let selectedLanguage = 'en';
+
+            // Only use saved language if user has explicitly selected one and it's not the first load
+            const savedLanguage = localStorage.getItem('selectedLanguage');
+            if (savedLanguage && savedLanguage !== 'en' && !isFirstLoad) {
+                selectedLanguage = savedLanguage;
+            }
+
+            const currentLanguage = document.getElementById('current-language');
+
+            const languageDisplayCodes = {
+                'en': 'EN',
+                'te': 'తె',
+                'hi': 'हि'
+            };
+
+            if (currentLanguage) {
+                currentLanguage.textContent = languageDisplayCodes[selectedLanguage] || 'EN';
+            }
+
+            // Apply translations for the selected language
+            applyTranslations(selectedLanguage);
+        }
+
         function toggleTheme() {
             const html = document.documentElement;
             const themeIcon = document.getElementById('theme-icon');
@@ -1364,6 +1438,384 @@
                 localStorage.setItem('theme', 'dark');
             }
         }
+
+        // Language functionality and translations
+        const translations = {
+            en: {
+                // Header and Navigation
+                'ai-education-agent': 'AI Education Agent',
+                'smart-learning-platform': 'Smart Learning Platform',
+                'smart-learning-platform-govt': 'Smart Learning Platform for Government Schools',
+                'choose-role': 'Choose Your Role',
+                'student-dashboard': 'Student Dashboard',
+                'teacher-dashboard': 'Teacher Dashboard',
+                'ai-features': 'AI Features',
+                'report-card': 'Report Card',
+                'welcome-back': 'Welcome back!',
+                'logout': 'Logout',
+                'help': 'Help',
+                'close': 'Close',
+                'cancel': 'Cancel',
+                'save': 'Save',
+                'add-student': 'Add Student',
+                'export-excel': 'Export Excel',
+                'view': 'View',
+                'edit': 'Edit',
+                'remove': 'Remove',
+                'start-practice': 'Start Practice',
+                'start-english': 'Start English',
+                'tell-story': 'Tell Story',
+                'detect-mood': 'Detect My Mood',
+                'mood-booster': 'Mood Booster',
+                'download-pdf': 'Download PDF',
+                'print': 'Print',
+
+                // Student Dashboard
+                'student-profile': 'Student Profile',
+                'current-progress': 'Current Progress',
+                'mathematics': 'Mathematics',
+                'science': 'Science',
+                'english': 'English',
+                'social-studies': 'Social Studies',
+                'recent-activities': 'Recent Activities',
+                'ai-doubt-clearing': 'AI Doubt Clearing',
+                'ask-questions-get-explanations': 'Ask questions and get personalized explanations',
+                'smart-worksheets': 'Smart Worksheets',
+                'generate-practice-materials': 'Generate personalized practice materials',
+                'learning-sessions': 'Learning Sessions',
+                'start-ai-powered-lessons': 'Start AI-powered personalized lessons',
+                'voice-learning': 'Voice Learning',
+                'talk-to-ai-tutor': 'Talk to AI tutor',
+                'emotion-ai': 'Emotion AI',
+                'mood-based-learning': 'Mood-based learning',
+                'ai-games': 'AI Games',
+                'learn-through-play': 'Learn through play',
+                'future-career': 'Future Career',
+                'career-guidance-ai': 'Career guidance AI',
+
+                // AI Features
+                'ask-your-question': 'Ask Your Question',
+                'topic-eg-algebra': 'Topic (e.g., Algebra)',
+                'ai-response': 'AI Response',
+                'send': 'Send',
+                'generate-worksheet': 'Generate Worksheet',
+                'start-session': 'Start Session',
+                'ask-ai': 'Ask AI',
+
+                // Report Card
+                'student-report-card': 'Student Report Card',
+                'comprehensive-learning-progress': 'Comprehensive learning progress report for parents',
+                'generated-on': 'Generated on',
+                'select-student': 'Select Student',
+                'generate-report': 'Generate Report',
+                'download-report': 'Download Report',
+                'no-student-selected-msg': 'Choose a student from the dropdown above to generate their report card',
+
+                // Teacher Dashboard
+                'total-students': 'Total Students',
+                'avg-performance': 'Avg Performance',
+                'active-sessions': 'Active Sessions',
+                'worksheets-generated': 'Worksheets Generated',
+                'add-student': 'Add Student',
+                'export-excel': 'Export Excel',
+                'class-overview': 'Class 8 - Student Overview',
+
+                // Common
+                'close': 'Close',
+                'save': 'Save',
+                'cancel': 'Cancel',
+                'submit': 'Submit',
+                'loading': 'Loading...',
+                'success': 'Success',
+                'error': 'Error',
+                'warning': 'Warning',
+                'info': 'Info'
+            },
+            te: {
+                // Header and Navigation
+                'ai-education-agent': 'AI విద్యా ఏజెంట్',
+                'smart-learning-platform': 'స్మార్ట్ లెర్నింగ్ ప్లాట్‌ఫారమ్',
+                'smart-learning-platform-govt': 'ప్రభుత్వ పాఠశాలల కోసం స్మార్ట్ లెర్నింగ్ ప్లాట్‌ఫారమ్',
+                'choose-role': 'మీ పాత్రను ఎంచుకోండి',
+                'student-dashboard': 'విద్యార్థి డాష్‌బోర్డ్',
+                'teacher-dashboard': 'ఉపాధ్యాయ డాష్‌బోర్డ్',
+                'ai-features': 'AI ఫీచర్లు',
+                'report-card': 'రిపోర్ట్ కార్డ్',
+                'welcome-back': 'తిరిగి స్వాగతం!',
+                'logout': 'లాగ్ అవుట్',
+                'help': 'సహాయం',
+                'close': 'మూసివేయి',
+                'cancel': 'రద్దు చేయి',
+                'save': 'సేవ్ చేయి',
+                'add-student': 'విద్యార్థిని జోడించు',
+                'export-excel': 'ఎక్సెల్ ఎక్స్‌పోర్ట్',
+                'view': 'చూడు',
+                'edit': 'సవరించు',
+                'remove': 'తొలగించు',
+                'start-practice': 'అభ్యాసం ప్రారంభించు',
+                'start-english': 'ఇంగ్లీష్ ప్రారంభించు',
+                'tell-story': 'కథ చెప్పు',
+                'detect-mood': 'నా మూడ్ గుర్తించు',
+                'mood-booster': 'మూడ్ బూస్టర్',
+                'download-pdf': 'PDF డౌన్‌లోడ్',
+                'print': 'ప్రింట్',
+
+                // Student Dashboard
+                'student-profile': 'విద్యార్థి ప్రొఫైల్',
+                'current-progress': 'ప్రస్తుత పురోగతి',
+                'mathematics': 'గణితం',
+                'science': 'సైన్స్',
+                'english': 'ఇంగ్లీష్',
+                'social-studies': 'సామాజిక అధ్యయనాలు',
+                'recent-activities': 'ఇటీవలి కార్యకలాపాలు',
+                'ai-doubt-clearing': 'AI సందేహ నివృత్తి',
+                'ask-questions-get-explanations': 'ప్రశ్నలు అడిగి వ్యక్తిగత వివరణలు పొందండి',
+                'smart-worksheets': 'స్మార్ట్ వర్క్‌షీట్లు',
+                'generate-practice-materials': 'వ్యక్తిగత అభ్యాస సామగ్రిని రూపొందించండి',
+                'learning-sessions': 'లెర్నింగ్ సెషన్లు',
+                'start-ai-powered-lessons': 'AI-శక్తితో కూడిన వ్యక్తిగత పాఠాలను ప్రారంభించండి',
+                'voice-learning': 'వాయిస్ లెర్నింగ్',
+                'talk-to-ai-tutor': 'AI ట్యూటర్‌తో మాట్లాడండి',
+                'emotion-ai': 'ఎమోషన్ AI',
+                'mood-based-learning': 'మూడ్ ఆధారిత అభ్యాసం',
+                'ai-games': 'AI గేమ్స్',
+                'learn-through-play': 'ఆట ద్వారా నేర్చుకోండి',
+                'future-career': 'భవిష్యత్ కెరీర్',
+                'career-guidance-ai': 'కెరీర్ మార్గదర్శకత్వం AI',
+
+                // AI Features
+                'ask-your-question': 'మీ ప్రశ్న అడగండి',
+                'topic-eg-algebra': 'విషయం (ఉదా., బీజగణితం)',
+                'ai-response': 'AI ప్రతిస్పందన',
+                'send': 'పంపు',
+                'generate-worksheet': 'వర్క్‌షీట్ రూపొందించు',
+                'start-session': 'సెషన్ ప్రారంభించు',
+                'ask-ai': 'AI ని అడగండి',
+
+                // Report Card
+                'student-report-card': 'విద్యార్థి రిపోర్ట్ కార్డ్',
+                'comprehensive-learning-progress': 'తల్లిదండ్రుల కోసం సమగ్ర అభ్యాస పురోగతి నివేదిక',
+                'generated-on': 'రూపొందించబడింది',
+                'select-student': 'విద్యార్థిని ఎంచుకోండి',
+                'generate-report': 'రిపోర్ట్ రూపొందించు',
+                'download-report': 'రిపోర్ట్ డౌన్‌లోడ్ చేయండి',
+                'no-student-selected-msg': 'వారి రిపోర్ట్ కార్డ్ రూపొందించడానికి పైన ఉన్న డ్రాప్‌డౌన్ నుండి విద్యార్థిని ఎంచుకోండి',
+
+                // Teacher Dashboard
+                'total-students': 'మొత్తం విద్యార్థులు',
+                'avg-performance': 'సగటు పనితీరు',
+                'active-sessions': 'క్రియాశీల సెషన్లు',
+                'worksheets-generated': 'వర్క్‌షీట్లు రూపొందించబడ్డాయి',
+                'add-student': 'విద్యార్థిని జోడించు',
+                'export-excel': 'ఎక్సెల్ ఎగుమతి',
+                'class-overview': 'క్లాస్ 8 - విద్యార్థుల అవలోకనం',
+
+                // Common
+                'close': 'మూసివేయి',
+                'save': 'సేవ్ చేయి',
+                'cancel': 'రద్దు చేయి',
+                'submit': 'సమర్పించు',
+                'loading': 'లోడ్ అవుతోంది...',
+                'success': 'విజయం',
+                'error': 'లోపం',
+                'warning': 'హెచ్చరిక',
+                'info': 'సమాచారం'
+            },
+            hi: {
+                // Header and Navigation
+                'ai-education-agent': 'AI शिक्षा एजेंट',
+                'smart-learning-platform': 'स्मार्ट लर्निंग प्लेटफॉर्म',
+                'smart-learning-platform-govt': 'सरकारी स्कूलों के लिए स्मार्ट लर्निंग प्लेटफॉर्म',
+                'choose-role': 'अपनी भूमिका चुनें',
+                'student-dashboard': 'छात्र डैशबोर्ड',
+                'teacher-dashboard': 'शिक्षक डैशबोर्ड',
+                'ai-features': 'AI फीचर्स',
+                'report-card': 'रिपोर्ट कार्ड',
+                'welcome-back': 'वापस स्वागत है!',
+                'logout': 'लॉग आउट',
+                'help': 'सहायता',
+                'close': 'बंद करें',
+                'cancel': 'रद्द करें',
+                'save': 'सेव करें',
+                'add-student': 'छात्र जोड़ें',
+                'export-excel': 'एक्सेल एक्सपोर्ट',
+                'view': 'देखें',
+                'edit': 'संपादित करें',
+                'remove': 'हटाएं',
+                'start-practice': 'अभ्यास शुरू करें',
+                'start-english': 'अंग्रेजी शुरू करें',
+                'tell-story': 'कहानी सुनाएं',
+                'detect-mood': 'मेरा मूड पहचानें',
+                'mood-booster': 'मूड बूस्टर',
+                'download-pdf': 'PDF डाउनलोड',
+                'print': 'प्रिंट',
+
+                // Student Dashboard
+                'student-profile': 'छात्र प्रोफाइल',
+                'current-progress': 'वर्तमान प्रगति',
+                'mathematics': 'गणित',
+                'science': 'विज्ञान',
+                'english': 'अंग्रेजी',
+                'social-studies': 'सामाजिक अध्ययन',
+                'recent-activities': 'हाल की गतिविधियां',
+                'ai-doubt-clearing': 'AI संदेह निवारण',
+                'ask-questions-get-explanations': 'प्रश्न पूछें और व्यक्तिगत स्पष्टीकरण प्राप्त करें',
+                'smart-worksheets': 'स्मार्ट वर्कशीट',
+                'generate-practice-materials': 'व्यक्तिगत अभ्यास सामग्री बनाएं',
+                'learning-sessions': 'लर्निंग सेशन',
+                'start-ai-powered-lessons': 'AI-संचालित व्यक्तिगत पाठ शुरू करें',
+                'voice-learning': 'वॉयस लर्निंग',
+                'talk-to-ai-tutor': 'AI ट्यूटर से बात करें',
+                'emotion-ai': 'इमोशन AI',
+                'mood-based-learning': 'मूड-आधारित सीखना',
+                'ai-games': 'AI गेम्स',
+                'learn-through-play': 'खेल के माध्यम से सीखें',
+                'future-career': 'भविष्य का करियर',
+                'career-guidance-ai': 'करियर मार्गदर्शन AI',
+
+                // AI Features
+                'ask-your-question': 'अपना प्रश्न पूछें',
+                'topic-eg-algebra': 'विषय (जैसे, बीजगणित)',
+                'ai-response': 'AI प्रतिक्रिया',
+                'send': 'भेजें',
+                'generate-worksheet': 'वर्कशीट बनाएं',
+                'start-session': 'सेशन शुरू करें',
+                'ask-ai': 'AI से पूछें',
+
+                // Report Card
+                'student-report-card': 'छात्र रिपोर्ट कार्ड',
+                'comprehensive-learning-progress': 'माता-पिता के लिए व्यापक सीखने की प्रगति रिपोर्ट',
+                'generated-on': 'पर बनाया गया',
+                'select-student': 'छात्र चुनें',
+                'generate-report': 'रिपोर्ट बनाएं',
+                'download-report': 'रिपोर्ट डाउनलोड करें',
+                'no-student-selected-msg': 'उनका रिपोर्ट कार्ड बनाने के लिए ऊपर के ड्रॉपडाउन से एक छात्र चुनें',
+
+                // Teacher Dashboard
+                'total-students': 'कुल छात्र',
+                'avg-performance': 'औसत प्रदर्शन',
+                'active-sessions': 'सक्रिय सेशन',
+                'worksheets-generated': 'वर्कशीट बनाई गई',
+                'add-student': 'छात्र जोड़ें',
+                'export-excel': 'एक्सेल निर्यात',
+                'class-overview': 'कक्षा 8 - छात्र अवलोकन',
+
+                // Common
+                'close': 'बंद करें',
+                'save': 'सेव करें',
+                'cancel': 'रद्द करें',
+                'submit': 'जमा करें',
+                'loading': 'लोड हो रहा है...',
+                'success': 'सफलता',
+                'error': 'त्रुटि',
+                'warning': 'चेतावनी',
+                'info': 'जानकारी'
+            }
+        };
+
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('language-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        function changeLanguage(langCode, displayCode) {
+            const currentLanguage = document.getElementById('current-language');
+            const dropdown = document.getElementById('language-dropdown');
+
+            currentLanguage.textContent = displayCode;
+            dropdown.classList.add('hidden');
+
+            // Store selected language in localStorage
+            localStorage.setItem('selectedLanguage', langCode);
+
+            // Apply translations to the entire portal
+            applyTranslations(langCode);
+
+            const languageNames = {
+                'en': 'English',
+                'te': 'Telugu (తెలుగు)',
+                'hi': 'Hindi (हिंदी)'
+            };
+
+            console.log(`Language changed to: ${languageNames[langCode]}`);
+        }
+
+        function applyTranslations(langCode) {
+            const t = translations[langCode] || translations.en;
+
+            // Update page title
+            document.title = `🎓 ${t['ai-education-agent']} - ${t['smart-learning-platform']}`;
+
+            // Update all elements with data-translate attributes
+            const translatableElements = document.querySelectorAll('[data-translate]');
+            translatableElements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (t[key]) {
+                    element.textContent = t[key];
+                }
+            });
+
+            // Update placeholders for input elements
+            const inputElements = document.querySelectorAll('input[data-translate-placeholder]');
+            inputElements.forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (t[key]) {
+                    element.placeholder = t[key];
+                }
+            });
+
+            // Additional text-based translations for elements without data-translate attributes
+            const textBasedTranslations = [
+                // Common button texts that might be dynamically generated
+                { text: 'Logout', key: 'logout' },
+                { text: 'Help', key: 'help' },
+                { text: 'Send', key: 'send' },
+                { text: 'Close', key: 'close' },
+                { text: 'Save', key: 'save' },
+                { text: 'Cancel', key: 'cancel' },
+                { text: 'Add Student', key: 'add-student' },
+                { text: '+ Add Student', key: 'add-student' },
+                { text: 'Export Excel', key: 'export-excel' },
+                { text: '📊 Export Excel', key: 'export-excel' },
+                { text: 'View', key: 'view' },
+                { text: 'Edit', key: 'edit' },
+                { text: 'Remove', key: 'remove' },
+                { text: 'Start Practice', key: 'start-practice' },
+                { text: 'Start English', key: 'start-english' },
+                { text: 'Tell Story', key: 'tell-story' },
+                { text: 'Detect My Mood', key: 'detect-mood' },
+                { text: '🔍 Detect My Mood', key: 'detect-mood' },
+                { text: 'Mood Booster', key: 'mood-booster' },
+                { text: '⚡ Mood Booster', key: 'mood-booster' },
+                { text: 'Download PDF', key: 'download-pdf' },
+                { text: '📥 Download PDF', key: 'download-pdf' },
+                { text: 'Print', key: 'print' },
+                { text: '🖨️ Print', key: 'print' },
+                { text: 'Submit', key: 'submit' }
+            ];
+
+            // Apply text-based translations
+            textBasedTranslations.forEach(item => {
+                const elements = document.querySelectorAll('button, span, div, p, h1, h2, h3, h4, h5, h6');
+                elements.forEach(element => {
+                    if (element.textContent.trim() === item.text && t[item.key]) {
+                        element.textContent = t[item.key];
+                    }
+                });
+            });
+
+            console.log(`Applied ${langCode} translations to the portal`);
+        }
+
+        // Close language dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const languageToggle = document.getElementById('language-toggle');
+            const languageDropdown = document.getElementById('language-dropdown');
+
+            if (!languageToggle.contains(event.target) && !languageDropdown.contains(event.target)) {
+                languageDropdown.classList.add('hidden');
+            }
+        });
 
         // Dynamic Statistics Management
         function updateStatistics() {
@@ -1613,7 +2065,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button onclick="this.closest('.fixed').remove()" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">Close</button>
+                        <button onclick="this.closest('.fixed').remove()" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600" data-translate="close">Close</button>
                     </div>
                 </div>
             `;
@@ -2070,8 +2522,8 @@
                             <div class="mt-1">⏱️ Estimated time: ${worksheetData.estimated_time_minutes || Math.ceil(questions * 2)} minutes | 📝 Total points: ${questions * 5}</div>
                         </div>
                         <div class="flex space-x-2">
-                            <button onclick="downloadPDF()" class="bg-blue-500 text-white px-3 py-2 rounded-lg text-xs hover:bg-blue-600 transition-colors">📥 Download PDF</button>
-                            <button onclick="printWorksheet()" class="bg-green-500 text-white px-3 py-2 rounded-lg text-xs hover:bg-green-600 transition-colors">🖨️ Print</button>
+                            <button onclick="downloadPDF()" class="bg-blue-500 text-white px-3 py-2 rounded-lg text-xs hover:bg-blue-600 transition-colors" data-translate="download-pdf">📥 Download PDF</button>
+                            <button onclick="printWorksheet()" class="bg-green-500 text-white px-3 py-2 rounded-lg text-xs hover:bg-green-600 transition-colors" data-translate="print">🖨️ Print</button>
                         </div>
                     </div>
                 </div>
@@ -4382,8 +4834,10 @@ For more detailed analytics, please visit the online dashboard.
             showToast(`📥 Report card downloaded for ${studentName}!`, 'success');
         }
 
-        // Initialize theme and statistics on page load
+        // Initialize theme, language and statistics on page load
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize in proper order: language first, then theme, then other features
+            initializeLanguage();
             initializeTheme();
             updateStatistics();
         });
@@ -4526,12 +4980,18 @@ For more detailed analytics, please visit the online dashboard.
             const tabs = document.querySelectorAll('[id^="tab-"]');
 
             if (currentUserRole === 'student') {
-                console.log('Setting up student UI - showing only Student Dashboard');
-                // Student can ONLY see Student Dashboard
+                console.log('Setting up student UI - showing Student Dashboard, AI Features, and Report Card');
+                // Student can see: Student Dashboard, AI Features, Report Card
                 tabs[0].classList.remove('hidden'); // Student Dashboard
-                tabs[1].classList.add('hidden');    // Teacher Dashboard
-                tabs[2].classList.add('hidden');    // AI Features
-                tabs[3].classList.add('hidden');    // Report Card
+
+                // Completely remove Teacher Dashboard tab from DOM for students
+                const teacherTab = tabs[1];
+                if (teacherTab) {
+                    teacherTab.remove();
+                }
+
+                tabs[2].classList.remove('hidden'); // AI Features
+                tabs[3].classList.remove('hidden'); // Report Card
 
                 // Remove student selector from student dashboard
                 const studentSelector = document.getElementById('student-selector');
@@ -4544,10 +5004,39 @@ For more detailed analytics, please visit the online dashboard.
             } else if (currentUserRole === 'teacher') {
                 console.log('Setting up teacher UI - showing only Teacher Dashboard');
                 // Teacher can ONLY see Teacher Dashboard
-                tabs[0].classList.add('hidden');    // Student Dashboard
+
+                // Completely remove Student Dashboard, AI Features, and Report Card tabs from DOM for teachers
+                const studentTab = tabs[0];
+                const aiTab = tabs[2];
+                const reportTab = tabs[3];
+
+                if (studentTab) {
+                    studentTab.remove();
+                }
+                if (aiTab) {
+                    aiTab.remove();
+                }
+                if (reportTab) {
+                    reportTab.remove();
+                }
+
+                // Show only Teacher Dashboard
                 tabs[1].classList.remove('hidden'); // Teacher Dashboard
-                tabs[2].classList.add('hidden');    // AI Features
-                tabs[3].classList.add('hidden');    // Report Card
+
+                // Hide non-teacher content
+                const studentContent = document.getElementById('content-0');
+                const aiContent = document.getElementById('content-2');
+                const reportContent = document.getElementById('content-3');
+
+                if (studentContent) {
+                    studentContent.style.display = 'none';
+                }
+                if (aiContent) {
+                    aiContent.style.display = 'none';
+                }
+                if (reportContent) {
+                    reportContent.style.display = 'none';
+                }
 
                 // Default to Teacher Dashboard for teachers
                 setTimeout(() => {
@@ -4587,6 +5076,26 @@ For more detailed analytics, please visit the online dashboard.
         function showSignup() {
             document.getElementById('login-form').classList.add('hidden');
             document.getElementById('signup-form').classList.remove('hidden');
+        }
+
+        function togglePasswordVisibility(inputId, button) {
+            const passwordInput = document.getElementById(inputId);
+            const eyeIcon = button.querySelector('svg');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                // Change to eye-slash icon (closed eye)
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                `;
+            } else {
+                passwordInput.type = 'password';
+                // Change back to eye icon (open eye)
+                eyeIcon.innerHTML = `
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                `;
+            }
         }
 
         function handleLogin(event) {
