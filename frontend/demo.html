@@ -225,7 +225,7 @@
                 <div class="flex items-center space-x-4">
                     <div class="text-right">
                         <p id="user-welcome" class="text-sm font-medium" data-translate="welcome-back">Welcome back!</p>
-                        <p id="user-role" class="text-xs text-pantone-light" data-translate="student-dashboard">Ready to learn today?</p>
+                        <p id="user-role" class="text-xs text-pantone-light">Ready to learn today?</p>
                     </div>
                     <div class="w-10 h-10 bg-pantone-teal rounded-full flex items-center justify-center">
                         <span id="user-avatar" class="text-lg font-bold">👤</span>
@@ -4965,7 +4965,12 @@ For more detailed analytics, please visit the online dashboard.
 
             // Update user info in header
             document.getElementById('user-welcome').textContent = `Welcome, ${currentUser.name}!`;
-            document.getElementById('user-role').textContent = currentUserRole === 'teacher' ? 'Teacher Dashboard' : 'Student Dashboard';
+
+            // Remove data-translate attribute and set role-specific text
+            const userRoleElement = document.getElementById('user-role');
+            userRoleElement.removeAttribute('data-translate');
+            userRoleElement.textContent = currentUserRole === 'teacher' ? 'Teacher Dashboard' : 'Student Dashboard';
+
             document.getElementById('user-avatar').textContent = currentUserRole === 'teacher' ? '👨‍🏫' : '👨‍🎓';
 
             // Show appropriate tabs based on role
