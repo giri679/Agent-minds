@@ -4,6 +4,13 @@
 
 An intelligent tutoring system designed specifically for government schools that personalizes learning based on students' academic history, generates adaptive worksheets, and provides real-time doubt clearing.
 
+## ✨ Latest Updates (December 2024)
+- **🔐 Role-Based Dashboards**: Separate portals for students and teachers with complete access control
+- **🌍 Multi-Language Support**: Full translations in English, Telugu, and Hindi
+- **🎨 Theme Management**: Dark/light mode with persistent user preferences
+- **🔧 Enhanced Authentication**: Secure role-based login system
+- **📱 Responsive Design**: Optimized for all devices and screen sizes
+
 ## 🌐 **LIVE DEMO - NOW ONLINE!**
 
 The AI Education Agent is fully functional and online! Experience the complete platform:
